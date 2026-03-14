@@ -1,3 +1,21 @@
-// Re-export the base fixture from the package
-// Override or extend test/expect here if needed
-export { test, expect } from "lovable-agent-playwright-config/fixture";
+import { test as base, expect } from "@playwright/test";
+
+/**
+ * Custom Playwright test fixture layer.
+ * Extend this file if shared setup or utilities are required.
+ */
+
+type Fixtures = {
+  // Example:
+  // authToken: string;
+};
+
+export const test = base.extend<Fixtures>({
+  // Example fixture:
+  // authToken: async ({}, use) => {
+  //   const token = "mock-token";
+  //   await use(token);
+  // },
+});
+
+export { expect };
