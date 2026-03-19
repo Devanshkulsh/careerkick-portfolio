@@ -28,32 +28,30 @@ const CaseStudiesSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="py-32 relative">
-      <div className="container mx-auto px-6">
+    <section ref={ref} className="section-shell">
+      <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-20 space-y-4"
+          className="section-heading"
         >
-          <span className="text-xs tracking-[0.3em] uppercase text-primary font-medium">
-            Proof of Impact
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold">
+          <span className="section-kicker">Proof of Impact</span>
+          <h2 className="section-title">
             Transformation <span className="text-primary text-glow">Stories</span>
           </h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="mx-auto grid max-w-6xl gap-4 sm:gap-6 lg:grid-cols-3">
           {cases.map((c, i) => (
             <motion.div
               key={c.college}
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.2 + i * 0.15 }}
-              className="glass rounded-2xl overflow-hidden group hover:neon-glow transition-all duration-500"
+              className="overflow-hidden rounded-2xl transition-all duration-500 glass group hover:neon-glow"
             >
-              <div className="p-8 space-y-6">
+              <div className="space-y-5 p-5 sm:space-y-6 sm:p-8">
                 <h3 className="text-lg font-semibold">{c.college}</h3>
 
                 <div className="space-y-4">

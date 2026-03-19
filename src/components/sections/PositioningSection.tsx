@@ -7,18 +7,16 @@ const PositioningSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="relative py-32 overflow-hidden">
-      <div className="container mx-auto px-6">
+    <section ref={ref} className="section-shell overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto text-center space-y-8"
+          className="mx-auto max-w-4xl space-y-6 text-center sm:space-y-8"
         >
-          <span className="text-xs tracking-[0.3em] uppercase text-primary font-medium">
-            Who We Are
-          </span>
-          <h2 className="text-4xl md:text-6xl font-bold leading-tight">
+          <span className="section-kicker">Who We Are</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight">
             An established organization
             <br />
             <span className="text-muted-foreground font-light">
@@ -26,18 +24,17 @@ const PositioningSection = () => {
               <span className="text-primary text-glow">BAMS admissions</span>
             </span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-light leading-relaxed">
-            We combine strategic marketing, deep domain expertise, and institutional partnerships 
+          <p className="section-copy max-w-2xl mx-auto">
+            We combine strategic marketing, deep domain expertise, and institutional partnerships
             to transform how Ayurveda colleges attract, enroll, and retain students across India.
           </p>
         </motion.div>
 
-        {/* Floating feature pills */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="flex flex-wrap justify-center gap-4 mt-16"
+          className="mt-10 flex flex-wrap justify-center gap-3 sm:mt-16 sm:gap-4"
         >
           {[
             "NEET Funnel Marketing",
@@ -52,7 +49,7 @@ const PositioningSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.4 + i * 0.08 }}
-              className="glass glass-hover rounded-full px-6 py-3 text-sm text-muted-foreground hover:text-foreground transition-colors cursor-default"
+              className="cursor-default rounded-full px-4 py-2.5 text-center text-xs text-muted-foreground transition-colors glass glass-hover hover:text-foreground sm:px-6 sm:py-3 sm:text-sm"
             >
               {item}
             </motion.span>

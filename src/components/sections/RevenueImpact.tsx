@@ -25,42 +25,40 @@ const RevenueImpact = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="py-32 relative">
-      <div className="container mx-auto px-6">
+    <section ref={ref} className="section-shell">
+      <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="max-w-4xl mx-auto text-center mb-20 space-y-4"
+          className="section-heading mx-auto max-w-4xl"
         >
-          <span className="text-xs tracking-[0.3em] uppercase text-primary font-medium">
-            Financial Growth
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold">
+          <span className="section-kicker">Financial Growth</span>
+          <h2 className="section-title">
             Revenue <span className="text-primary text-glow">Impact</span>
           </h2>
-          <p className="text-muted-foreground text-lg font-light">
+          <p className="section-copy">
             Every partnership translates to measurable financial outcomes.
           </p>
         </motion.div>
 
-        <div className="max-w-4xl mx-auto space-y-6">
+        <div className="mx-auto max-w-4xl space-y-4 sm:space-y-6">
           {impacts.map((item, i) => (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, x: -40 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }}
-              className="glass glass-hover rounded-2xl p-6 flex items-center gap-6 group hover:neon-glow transition-all duration-500"
+              className="flex flex-col gap-4 rounded-2xl p-5 transition-all duration-500 glass glass-hover group hover:neon-glow sm:flex-row sm:items-center sm:gap-6 sm:p-6"
             >
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 transition-colors group-hover:bg-primary/20 sm:h-14 sm:w-14">
                 <item.icon className="w-6 h-6 text-primary" />
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-semibold">{item.title}</h3>
                 <p className="text-sm text-muted-foreground font-light">{item.desc}</p>
               </div>
-              <ArrowUpRight className="w-5 h-5 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+              <ArrowUpRight className="hidden w-5 h-5 text-primary opacity-0 transition-opacity group-hover:opacity-100 sm:block" />
             </motion.div>
           ))}
         </div>
