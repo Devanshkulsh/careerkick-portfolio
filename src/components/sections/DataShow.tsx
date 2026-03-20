@@ -61,7 +61,7 @@ export function DataShow() {
             </a>
           }
 
-          src={`/careerkickNeet.png`}
+          src={`/desktop.png`}
           showGradient={true}
         />
       </div>
