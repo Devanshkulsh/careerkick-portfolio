@@ -14,7 +14,7 @@ import { DataShow } from "@/components/sections/DataShow";
 
 const Index = () => {
   return (
-    <div className="bg-background text-foreground overflow-x-hidden">
+    <div className="bg-background text-foreground overflow-x-clip">
       <Navbar />
       <HeroSection />
       <PositioningSection />

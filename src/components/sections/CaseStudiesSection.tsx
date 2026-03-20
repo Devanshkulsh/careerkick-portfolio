@@ -27,18 +27,22 @@ const CaseStudiesSection = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
+  // Custom premium easing curve for smooth animations
+  const customEase = [0.22, 1, 0.36, 1];
+
   return (
     <section ref={ref} className="section-shell">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+          initial={{ opacity: 0, y: 40, scale: 0.95 }}
+          animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+          transition={{ duration: 0.8, ease: customEase }}
           className="section-heading"
         >
           <span className="section-kicker">Proof of Impact</span>
           <h2 className="section-title">
-            Transformation <span className="text-primary text-glow">Stories</span>
+            Transformation{" "}
+            <span className="text-primary text-glow">Stories</span>
           </h2>
         </motion.div>
 
@@ -48,37 +52,90 @@ const CaseStudiesSection = () => {
               key={c.college}
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.2 + i * 0.15 }}
-              className="overflow-hidden rounded-2xl transition-all duration-500 glass group hover:neon-glow"
+              transition={{
+                duration: 0.8,
+                delay: 0.2 + i * 0.15,
+                ease: customEase,
+              }}
+              whileHover={{ y: -8 }}
+              className="relative overflow-hidden rounded-2xl transition-all duration-500 glass group hover:neon-glow"
             >
-              <div className="space-y-5 p-5 sm:space-y-6 sm:p-8">
-                <h3 className="text-lg font-semibold">{c.college}</h3>
+              {/* Subtle hover background highlight gradient */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+              {/* Corner Glow effect on hover */}
+              <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/20 blur-[3rem] transition-opacity duration-700 opacity-0 group-hover:opacity-100" />
+
+              <div className="relative z-10 space-y-5 p-5 sm:space-y-6 sm:p-8">
+                <h3 className="text-lg font-semibold transition-colors duration-300 group-hover:text-primary">
+                  {c.college}
+                </h3>
 
                 <div className="space-y-4">
                   <div className="space-y-2">
                     <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
                       Before
                     </span>
-                    <p className="text-sm text-muted-foreground font-light">{c.before}</p>
+                    <p className="text-sm text-muted-foreground font-light">
+                      {c.before}
+                    </p>
                   </div>
 
+                  {/* Animated connection lines and arrow */}
                   <div className="flex items-center gap-3">
-                    <div className="h-px flex-1 bg-primary/20" />
-                    <ArrowRight className="w-4 h-4 text-primary" />
-                    <div className="h-px flex-1 bg-primary/20" />
+                    <motion.div
+                      initial={{ scaleX: 0, originX: 0 }}
+                      animate={inView ? { scaleX: 1 } : {}}
+                      transition={{
+                        duration: 0.8,
+                        delay: 0.5 + i * 0.15,
+                        ease: "easeInOut",
+                      }}
+                      className="h-px flex-1 bg-primary/20"
+                    />
+
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0, x: -10 }}
+                      animate={inView ? { opacity: 1, scale: 1, x: 0 } : {}}
+                      transition={{
+                        duration: 0.5,
+                        delay: 0.8 + i * 0.15,
+                        type: "spring",
+                        stiffness: 200,
+                      }}
+                    >
+                      <ArrowRight className="w-4 h-4 text-primary transition-transform duration-300 ease-out group-hover:translate-x-1.5 group-hover:scale-110" />
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ scaleX: 0, originX: 0 }}
+                      animate={inView ? { scaleX: 1 } : {}}
+                      transition={{
+                        duration: 0.8,
+                        delay: 0.6 + i * 0.15,
+                        ease: "easeInOut",
+                      }}
+                      className="h-px flex-1 bg-primary/20"
+                    />
                   </div>
 
                   <div className="space-y-2">
-                    <span className="text-xs font-medium tracking-widest uppercase text-primary">
+                    <span className="text-xs font-medium tracking-widest uppercase text-primary drop-shadow-[0_0_8px_rgba(var(--primary),0.3)]">
                       After
                     </span>
-                    <p className="text-sm text-foreground font-medium">{c.after}</p>
+                    <p className="text-sm text-foreground font-medium">
+                      {c.after}
+                    </p>
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-border">
-                  <span className="text-xs text-muted-foreground">Timeline: </span>
-                  <span className="text-xs text-primary font-semibold">{c.timeline}</span>
+                <div className="pt-4 border-t border-border/60">
+                  <span className="text-xs text-muted-foreground">
+                    Timeline:{" "}
+                  </span>
+                  <span className="text-xs text-primary font-semibold">
+                    {c.timeline}
+                  </span>
                 </div>
               </div>
             </motion.div>

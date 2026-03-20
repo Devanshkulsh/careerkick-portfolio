@@ -65,7 +65,11 @@ const Navbar = () => {
               onClick={() => setMenuOpen((open) => !open)}
               className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-foreground transition-colors hover:bg-white/10"
             >
-              {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {menuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
             </button>
           </div>
         </div>
