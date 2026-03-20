@@ -10,7 +10,6 @@ import CaseStudiesSection from "@/components/sections/CaseStudiesSection";
 import AchievementsSection from "@/components/sections/AchievementsSection";
 import ContactSection from "@/components/sections/ContactSection";
 import FooterSection from "@/components/sections/FooterSection";
-import EnhancedCard from "@/components/ui/EnhancedCard";
 
 const Index = () => {
   return (
