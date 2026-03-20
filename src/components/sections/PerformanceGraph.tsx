@@ -20,10 +20,10 @@ import {
 } from "@/components/ui/chart";
 
 const animatedData = [
-  { stage: "Q1", year2022: 18, year2023: 28, year2024: 42 },
-  { stage: "Q2", year2022: 26, year2023: 44, year2024: 63 },
-  { stage: "Q3", year2022: 31, year2023: 57, year2024: 79 },
-  { stage: "Q4", year2022: 35, year2023: 62, year2024: 94 },
+  { stage: "Q1", year2022: 18, year2023: 28, year2024: 42, year2025: 56 },
+  { stage: "Q2", year2022: 26, year2023: 44, year2024: 63, year2025: 74 },
+  { stage: "Q3", year2022: 31, year2023: 57, year2024: 79, year2025: 88 },
+  { stage: "Q4", year2022: 35, year2023: 62, year2024: 89, year2025: 99 },
 ];
 
 const resetData = animatedData.map((point) => ({
@@ -31,12 +31,14 @@ const resetData = animatedData.map((point) => ({
   year2022: 0,
   year2023: 0,
   year2024: 0,
+  year2025: 0,
 }));
 
 const yearSummary = [
   { year: "2022", value: 35, uplift: "+35%" },
   { year: "2023", value: 62, uplift: "+77%" },
   { year: "2024", value: 94, uplift: "+52%" },
+  { year: "2025", value: 98, uplift: "+4%" },
 ];
 
 const chartConfig = {
@@ -52,6 +54,10 @@ const chartConfig = {
     label: "2024",
     color: "hsl(var(--primary))",
   },
+  year2025: {
+    label: "2025",
+    color: "hsl(71 86% 58%)",
+  },
 } as const;
 
 const PerformanceGraph = () => {
@@ -62,7 +68,7 @@ const PerformanceGraph = () => {
 
   return (
     <section ref={ref} id="impact" className="section-shell">
-      <div className="container mx-auto px-4 sm:px-6">
+      <div className="container\ mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
@@ -79,7 +85,7 @@ const PerformanceGraph = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mx-auto max-w-3xl rounded-3xl p-5 glass sm:p-8 lg:p-10"
+          className="mx-auto max-w-5xl rounded-3xl p-5 glass sm:p-8 lg:p-10"
         >
           <div className="mb-6 flex items-start justify-between gap-4">
             <div>
@@ -87,12 +93,12 @@ const PerformanceGraph = () => {
                 Performance Momentum
               </p>
               <p className="mt-2 max-w-md text-sm text-muted-foreground sm:text-base">
-                Three yearly trajectories plotted together so the acceleration is visible at every stage.
+                Four yearly trajectories plotted together so the acceleration is visible at every stage.
               </p>
             </div>
             <div className="hidden rounded-2xl border border-primary/20 bg-primary/10 px-4 py-3 text-right sm:block">
               <p className="text-xs uppercase tracking-[0.22em] text-primary/70">Peak Impact</p>
-              <p className="mt-1 text-2xl font-bold text-primary counter-glow">94%</p>
+              <p className="mt-1 text-2xl font-bold text-primary counter-glow">98%</p>
             </div>
           </div>
 
@@ -162,7 +168,16 @@ const PerformanceGraph = () => {
                   isAnimationActive
                   animationDuration={900}
                   animationEasing="ease-out"
-                />
+                >
+                  <LabelList
+                    dataKey="year2022"
+                    position="top"
+                    offset={10}
+                    className="text-[10px] font-semibold"
+                    style={{ fill: "var(--color-year2022)" }}
+                    formatter={(value: number) => `${value}%`}
+                  />
+                </Line>
                 <Line
                   type="monotone"
                   dataKey="year2023"
@@ -184,7 +199,16 @@ const PerformanceGraph = () => {
                   animationDuration={1200}
                   animationBegin={120}
                   animationEasing="ease-out"
-                />
+                >
+                  <LabelList
+                    dataKey="year2023"
+                    position="top"
+                    offset={10}
+                    className="text-[10px] font-semibold"
+                    style={{ fill: "var(--color-year2023)" }}
+                    formatter={(value: number) => `${value}%`}
+                  />
+                </Line>
                 <Line
                   type="monotone"
                   dataKey="year2024"
@@ -211,7 +235,39 @@ const PerformanceGraph = () => {
                     dataKey="year2024"
                     position="top"
                     offset={12}
-                    className="fill-primary text-xs font-semibold sm:text-sm"
+                    className="text-xs font-semibold sm:text-sm"
+                    style={{ fill: "var(--color-year2024)" }}
+                    formatter={(value: number) => `${value}%`}
+                  />
+                </Line>
+                <Line
+                  type="monotone"
+                  dataKey="year2025"
+                  stroke="var(--color-year2025)"
+                  strokeWidth={4.5}
+                  dot={{
+                    r: 5.5,
+                    fill: "var(--color-year2025)",
+                    stroke: "rgba(255,255,255,0.5)",
+                    strokeWidth: 1.5,
+                  }}
+                  activeDot={{
+                    r: 7.5,
+                    fill: "var(--color-year2025)",
+                    stroke: "rgba(255,255,255,0.9)",
+                    strokeWidth: 2,
+                  }}
+                  isAnimationActive
+                  animationDuration={1600}
+                  animationBegin={360}
+                  animationEasing="ease-out"
+                >
+                  <LabelList
+                    dataKey="year2025"
+                    position="top"
+                    offset={12}
+                    className="text-xs font-semibold sm:text-sm"
+                    style={{ fill: "var(--color-year2025)" }}
                     formatter={(value: number) => `${value}%`}
                   />
                 </Line>
@@ -219,7 +275,7 @@ const PerformanceGraph = () => {
             </ChartContainer>
           </div>
 
-          <div className="mt-6 grid gap-3 sm:mt-8 sm:grid-cols-3">
+          <div className="mt-6 grid gap-3 sm:mt-8 sm:grid-cols-4">
             {yearSummary.map((item, index) => (
               <motion.div
                 key={item.year}
