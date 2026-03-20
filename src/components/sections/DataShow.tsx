@@ -44,12 +44,12 @@ export function DataShow() {
                 </span>
               </h2>
 
-              <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-base sm:text-base text-muted-foreground max-w-2xl mx-auto">
                 A smart Lead Management System designed to streamline student
                 admissions, track inquiries, and boost conversions - all in one place.
               </p>
 
-              <div className="inline-block px-3 py-1 text-xs tracking-widest border border-primary/20 text-primary/80 rounded-full backdrop-blur-md bg-primary/10">
+              <div className="inline-block px-4 py-2 text-base tracking-widest border border-primary/20 text-primary/80 rounded-full backdrop-blur-md bg-primary/10 sm:px-3 sm:py-1 sm:text-xs">
                 LMS - LEADS - AUTOMATION
               </div>
             </div>
