@@ -1,122 +1,273 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Send, MapPin, Phone, Mail } from "lucide-react";
+import { Mail, MapPin, Phone, Send } from "lucide-react";
+import Map from "../Map";
 
 const contactItems = [
-  { icon: MapPin, label: "Visit Us", value: "Lucknow, Uttar Pradesh, India" },
-  { icon: Phone, label: "Call Us", value: "+91 99XX XXX XXX" },
-  { icon: Mail, label: "Email Us", value: "hello@careerkick.in" },
+  {
+    icon: MapPin,
+    label: "Visit Us",
+    value: "117 N 65, Rani Ganj, Kakadeo, Kanpur, 208025",
+    detail: "Serving Ayurveda and medical admission partners across India.",
+    href: "https://maps.app.goo.gl/Ty7ihijGkG6ZdQ2a7",
+  },
+  {
+    icon: Phone,
+    label: "Call Us",
+    value: "+91 7390950914",
+    detail: "Talk to our admissions growth team for a quick qualification call.",
+    href: "tel:+917390950914",
+  },
+  {
+    icon: Mail,
+    label: "Email Us",
+    value: "info@careerkick.in",
+    detail: "Share your institution details and we will respond with the next steps.",
+    href: "mailto:info@careerkick.in",
+  },
 ];
 
+const quickNotes = [
+  "Fast response within one business day",
+  "Built for colleges and institutions",
+  "Strategy, branding, and admissions support",
+];
+
+const cardEase = [0.22, 1, 0.36, 1] as const;
+const OFFICE_CENTER: [number, number] = [80.2894, 26.4783];
+const OFFICE_LOCATION_URL = "https://maps.app.goo.gl/Ty7ihijGkG6ZdQ2a7";
+
 const ContactSection = () => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLElement | null>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <section ref={ref} id="contact" className="section-shell noise-overlay">
-      <div className="absolute inset-0 gradient-mesh opacity-30" />
+    <section ref={ref} id="contact" className="section-shell relative overflow-hidden noise-overlay">
+      <div className="absolute inset-0 gradient-mesh opacity-40" />
+      <div className="absolute left-1/2 top-16 h-52 w-[72%] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+      <div className="absolute -left-16 bottom-10 h-48 w-48 rounded-full bg-cyan-400/10 blur-3xl" />
+
       <div className="container relative z-10 mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.75, ease: cardEase }}
           className="section-heading"
         >
           <span className="section-kicker">Let's Connect</span>
           <h2 className="section-title">
             Start Your <span className="text-primary text-glow">Growth</span> Story
           </h2>
+          <p className="section-copy mx-auto max-w-2xl">
+            Tell us where your institution stands today and we will map the clearest path toward stronger branding, admissions, and revenue momentum.
+          </p>
         </motion.div>
 
-        <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-2 lg:gap-12">
+        <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.08fr_0.92fr] lg:gap-10">
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="space-y-6 rounded-2xl p-5 glass sm:p-8"
+            initial={{ opacity: 0, x: -40, y: 24 }}
+            animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.12, ease: cardEase }}
+            className="relative overflow-hidden rounded-[1.75rem] border border-white/10 p-5 glass sm:p-7 lg:p-8"
           >
-            {submitted ? (
-              <div className="flex h-full flex-col items-center justify-center space-y-4 py-10 sm:py-12">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/20 sm:h-16 sm:w-16">
-                  <Send className="h-6 w-6 text-primary sm:h-7 sm:w-7" />
+            <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+            <div className="pointer-events-none absolute -right-10 top-8 h-40 w-40 rounded-full bg-primary/10 blur-3xl" />
+
+            <div className="relative flex flex-col gap-5 sm:gap-6">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                <div className="space-y-2">
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/80">
+                    Strategic Consultation
+                  </p>
+                  <h3 className="text-2xl font-bold sm:text-3xl">
+                    Let&apos;s plan your next admissions cycle
+                  </h3>
+                  <p className="max-w-xl text-sm font-light leading-relaxed text-muted-foreground sm:text-base">
+                    Share your current challenges and our team will come back with a focused direction on growth opportunities.
+                  </p>
                 </div>
-                <p className="text-xl font-semibold">Thank you!</p>
-                <p className="text-center text-sm text-muted-foreground">
-                  We'll get back to you shortly.
-                </p>
+
+                <div className="inline-flex self-start rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                  Growth-first outreach
+                </div>
               </div>
-            ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setSubmitted(true);
-                }}
-                className="space-y-5"
-              >
-                {[
-                  { name: "name", label: "Your Name", type: "text" },
-                  { name: "college", label: "College / Institution", type: "text" },
-                  { name: "email", label: "Email Address", type: "email" },
-                  { name: "phone", label: "Phone Number", type: "tel" },
-                ].map((field) => (
-                  <div key={field.name}>
-                    <label className="mb-2 block text-xs uppercase tracking-wider text-muted-foreground">
-                      {field.label}
-                    </label>
-                    <input
-                      type={field.type}
-                      required
-                      className="w-full rounded-xl border border-border bg-secondary/50 px-4 py-3 text-sm text-foreground transition-colors placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                    />
-                  </div>
+
+              <div className="flex flex-wrap gap-2.5">
+                {quickNotes.map((note, index) => (
+                  <motion.div
+                    key={note}
+                    initial={{ opacity: 0, scale: 0.92 }}
+                    animate={inView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ duration: 0.45, delay: 0.2 + index * 0.08, ease: cardEase }}
+                    className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-[11px] font-medium uppercase tracking-[0.16em] text-foreground/85 sm:text-xs"
+                  >
+                    {note}
+                  </motion.div>
                 ))}
-                <div>
-                  <label className="mb-2 block text-xs uppercase tracking-wider text-muted-foreground">
-                    Message
-                  </label>
-                  <textarea
-                    rows={4}
-                    className="w-full resize-none rounded-xl border border-border bg-secondary/50 px-4 py-3 text-sm text-foreground transition-colors placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-4 text-sm font-semibold tracking-wide text-primary-foreground transition-shadow duration-300 hover:neon-glow-strong"
+              </div>
+
+              {submitted ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.45, ease: cardEase }}
+                  className="flex min-h-[320px] flex-col items-center justify-center rounded-[1.5rem] border border-primary/20 bg-primary/10 px-6 py-10 text-center sm:min-h-[360px]"
                 >
-                  Send Message
-                  <Send className="h-4 w-4" />
-                </button>
-              </form>
-            )}
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.1, ease: cardEase }}
+                    className="flex h-16 w-16 items-center justify-center rounded-full border border-primary/20 bg-background/50 sm:h-20 sm:w-20"
+                  >
+                    <Send className="h-7 w-7 text-primary sm:h-8 sm:w-8" />
+                  </motion.div>
+                  <p className="mt-5 text-2xl font-semibold sm:text-3xl">Thank you!</p>
+                  <p className="mt-3 max-w-md text-sm font-light leading-relaxed text-muted-foreground sm:text-base">
+                    Your message is with us. We&apos;ll reach out shortly to understand your goals and suggest the next step.
+                  </p>
+                </motion.div>
+              ) : (
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    setSubmitted(true);
+                  }}
+                  className="grid gap-4 sm:gap-5"
+                >
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {[
+                      { name: "name", label: "Your Name", type: "text", placeholder: "Enter your name" },
+                      {
+                        name: "college",
+                        label: "College / Institution",
+                        type: "text",
+                        placeholder: "Institution name",
+                      },
+                      { name: "email", label: "Email Address", type: "email", placeholder: "you@example.com" },
+                      { name: "phone", label: "Phone Number", type: "tel", placeholder: "+91 98XXXXXXX" },
+                    ].map((field, index) => (
+                      <motion.div
+                        key={field.name}
+                        initial={{ opacity: 0, y: 18 }}
+                        animate={inView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ duration: 0.45, delay: 0.18 + index * 0.06, ease: cardEase }}
+                      >
+                        <label className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground sm:text-xs">
+                          {field.label}
+                        </label>
+                        <input
+                          type={field.type}
+                          required
+                          placeholder={field.placeholder}
+                          className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-foreground transition-all duration-300 placeholder:text-muted-foreground focus:border-primary focus:bg-white/[0.08] focus:outline-none focus:ring-2 focus:ring-primary/20 sm:px-5"
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.45, delay: 0.42, ease: cardEase }}
+                  >
+                    <label className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground sm:text-xs">
+                      Message
+                    </label>
+                    <textarea
+                      rows={5}
+                      placeholder="Tell us about your institution, current admissions challenge, and what kind of support you are looking for."
+                      className="w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-foreground transition-all duration-300 placeholder:text-muted-foreground focus:border-primary focus:bg-white/[0.08] focus:outline-none focus:ring-2 focus:ring-primary/20 sm:px-5"
+                    />
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.45, delay: 0.5, ease: cardEase }}
+                    className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center sm:justify-between"
+                  >
+                    <p className="text-sm font-light leading-relaxed text-muted-foreground">
+                      Prefer a quick call? Drop your details and we&apos;ll connect with the right person.
+                    </p>
+                    <button
+                      type="submit"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-4 text-sm font-semibold tracking-wide text-primary-foreground transition-all duration-300 hover:scale-[1.01] hover:neon-glow-strong sm:w-auto sm:min-w-[190px]"
+                    >
+                      Send Message
+                      <Send className="h-4 w-4" />
+                    </button>
+                  </motion.div>
+                </form>
+              )}
+            </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="flex flex-col justify-center space-y-6 sm:space-y-8"
+            initial={{ opacity: 0, x: 40, y: 24 }}
+            animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2, ease: cardEase }}
+            className="flex flex-col gap-5 sm:gap-6"
           >
-            {contactItems.map((item) => (
-              <div key={item.label} className="flex items-start gap-4 sm:gap-5">
-                <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 sm:h-12 sm:w-12">
-                  <item.icon className="h-5 w-5 text-primary" />
-                </div>
-                <div className="min-w-0">
-                  <p className="mb-1 text-xs uppercase tracking-wider text-muted-foreground">
-                    {item.label}
-                  </p>
-                  <p className="break-words font-medium text-foreground">{item.value}</p>
-                </div>
-              </div>
-            ))}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98, y: 18 }}
+              animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.28, ease: cardEase }}
+            >
+              <Map
+                center={OFFICE_CENTER}
+                title="CareerKick Office"
+                address={contactItems[0].value}
+                locationUrl={OFFICE_LOCATION_URL}
+                className="h-56 sm:h-64"
+              />
+            </motion.div>
 
-            <div className="mt-2 rounded-2xl p-5 glass sm:mt-4 sm:p-6">
-              <p className="text-sm font-light leading-relaxed text-muted-foreground">
-                "If your college isn't growing, it's falling behind. Let's change that together."
-              </p>
-              <p className="mt-3 text-sm font-semibold text-primary">- CareerKick Services</p>
+            <div className="grid gap-4 sm:gap-5">
+              {contactItems.map((item, index) => (
+                <motion.div
+                  key={item.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1, ease: cardEase }}
+                  className="group rounded-[1.5rem] border border-white/10 p-4 transition-all duration-500 glass hover:-translate-y-1 hover:neon-glow sm:p-5"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 transition-colors duration-300 group-hover:bg-primary/15">
+                      <item.icon className="h-5 w-5 text-primary" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground sm:text-xs">
+                        {item.label}
+                      </p>
+                      <a
+                        href={item.href}
+                        target={item.href.startsWith("http") ? "_blank" : undefined}
+                        rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                        className="mt-1 block break-words text-base font-semibold text-foreground transition-colors duration-300 hover:text-primary sm:text-lg"
+                      >
+                        {item.value}
+                      </a>
+                      <p className="mt-2 text-sm font-light leading-relaxed text-muted-foreground">
+                        {item.detail}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.55, delay: 0.55, ease: cardEase }}
+              className="rounded-[1.75rem] border border-white/10 p-5 glass sm:p-6"
+            >
+              <p className="text-sm font-light leading-relaxed text-muted-foreground sm:text-base">
+                &quot;If your college isn&apos;t growing, it&apos;s falling behind. Let&apos;s build a stronger admissions engine together.&quot;
+              </p>
+              <p className="mt-3 text-sm font-semibold text-primary">CareerKick Services</p>
+            </motion.div>
           </motion.div>
         </div>
       </div>
