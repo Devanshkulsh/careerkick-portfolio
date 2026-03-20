@@ -7,27 +7,70 @@ type College = {
 };
 
 const colleges: College[] = [
-  { name: "Naiminath Ayurvedic Medical College, Hospital and Research Centre", logo: "/logos/NAMC.png" },
+  {
+    name: "Naiminath Ayurvedic Medical College, Hospital and Research Centre",
+    logo: "/logos/naiminath-ayurvedic.png",
+  },
   { name: "Major SD Singh University, Farrukhabad", logo: "/logos/uni-sd.png" },
-  { name: "Major S.D. Singh Ayurvedic Medical College", logo: "/logos/MajorSD.png" },
-  { name: "Maharana Pratap College of Ayurveda and Medical, Bithoor & Mandhana", logo: "/logos/maharana-pratap-college.png" },
+  {
+    name: "Major S.D. Singh Ayurvedic Medical College",
+    logo: "/logos/MajorSD.png",
+  },
+  {
+    name: "Krishna Ayurvedic Medical College & Hospital",
+    logo: "/logos/Krishna.png",
+  },
+  {
+    name: "Maharana Pratap College of Ayurveda and Medical, Bithoor & Mandhana",
+    logo: "/logos/maharana-pratap.png",
+  },
   { name: "MD Ayurvedic College", logo: "/logos/MD.png" },
   { name: "Mangalayatan University", logo: "/logos/Managalayatan.png" },
-  { name: "Bapu Ayurvedic Medical College and Hospital", logo: "/logos/Babu.png" },
-  { name: "Sarvdev Ayurvedic Medical College, Azamgarh", logo: "/logos/" },
-  { name: "Dr. Shakuntala Ayurvedic Medical College", logo: "/logos/" },
-  { name: "SAS Ayurvedic Medical College and Hospital", logo: "/logos/" },
+  {
+    name: "Bapu Ayurvedic Medical College and Hospital",
+    logo: "/logos/bapu-ayurvedic.png",
+  },
+  {
+    name: "Sarvdev Ayurvedic Medical College, Azamgarh",
+    logo: "/logos/sarvdev.png",
+  },
+  {
+    name: "Dr. Shakuntala Ayurvedic Medical College",
+    logo: "/logos/shakuntala.png",
+  },
+  {
+    name: "SAS Ayurvedic Medical College and Hospital",
+    logo: "/logos/sas.png",
+  },
   { name: "RK Ayurvedic Medical College & Hospital", logo: "/logos/RK.png" },
   { name: "Naiminath Homeopathy Medical College", logo: "/logos/NHMC.png" },
-  { name: "Dr. Vijay Ayurvedic Medical College & Hospital", logo: "/logos/Vijay.png" },
+  {
+    name: "Dr. Vijay Ayurvedic Medical College & Hospital",
+    logo: "/logos/Vijay.png",
+  },
   { name: "Dental College, Azamgarh", logo: "/logos/Dental.png" },
-  { name: "Bharat Ayurved Medical College, Hospital & Research Centre, Muzaffarnagar", logo: "/logos/Bharat.png" },
+  {
+    name: "Bharat Ayurved Medical College, Hospital & Research Centre, Muzaffarnagar",
+    logo: "/logos/bharat-ayurvedic.png",
+  },
   { name: "Shree Om University", logo: "/logos/om.png" },
-  { name: "Baba Vishwanath Ayurvedic Medical College", logo: "/logos/baba-vishwanath.png" },
-  { name: "Shri Dhanvantari P.G. Ayurved Medical College", logo: "/logos/Dhanvantri.png" },
-  { name: "Vimla Group- Ayurvedic Medical College & Hospital", logo: "/logos/Vimla.png" },
-  { name: "Maharana Pratap Ayurvedic Medical College & Hospital", logo: "/logos/MPGI.png" },
-  { name: "BABU YUGRAJ SINGH AYURVEDIC MEDICL COLLEGE & HOSPITAL", logo: "/logos/babu-yograj.png" },
+  {
+    name: "Baba Vishwanath Ayurvedic Medical College",
+    logo: "/logos/baba-vishwanath.png",
+  },
+  {
+    name: "Shri Dhanvantari P.G. Ayurved Medical College",
+    logo: "/logos/Dhanvantri.png",
+  },
+  {
+    name: "Vimla Group- Ayurvedic Medical College & Hospital",
+    logo: "/logos/Vimla.png",
+  },
+  {
+    name: "Babu Yugraj Singh Ayurvedic Medical College & Hospital",
+    logo: "/logos/babu-yugraj.png",
+  },
+  { name: "ITM Ayurvedic Medical College & Hospital", logo: "/logos/itm.png" },
 ];
 
 const rows = [colleges.slice(0, 12), colleges.slice(12, 24)];
@@ -42,7 +85,10 @@ const PartnerMarquee = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
+    <section
+      ref={ref}
+      className="relative overflow-hidden py-16 sm:py-20 lg:py-24"
+    >
       <div className="container mx-auto mb-10 px-4 sm:mb-12 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -109,14 +155,16 @@ const PartnerMarquee = () => {
                       <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 via-transparent to-primary/10 opacity-70" />
                       <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
                       <div
-                        className="relative flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/5 p-3 sm:h-24 sm:w-24"
+                        className="relative flex h-20 w-20 items-center justify-center rounded-full border border-white/15 bg-white/10 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_10px_24px_rgba(0,0,0,0.18)] sm:h-24 sm:w-24"
                         style={{ transform: "translateZ(30px)" }}
                       >
-                        <img
-                          src={college.logo}
-                          alt={`${college.name} logo`}
-                          className="h-full w-full rounded-full object-contain opacity-95"
-                        />
+                        <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-white/95 p-2">
+                          <img
+                            src={college.logo}
+                            alt={`${college.name} logo`}
+                            className="h-full w-full rounded-full object-cover object-center opacity-100"
+                          />
+                        </div>
                       </div>
                       <span
                         className="relative block text-[11px] font-medium leading-snug text-muted-foreground sm:text-sm"

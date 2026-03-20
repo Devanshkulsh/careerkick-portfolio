@@ -1,4 +1,4 @@
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView, useScroll, useSpring, useTransform } from "framer-motion";
 import {
   ArrowUpRight,
   BarChart3,
@@ -87,9 +87,10 @@ const cards: CardData[] = [
   },
 ];
 
-const STORY_SCROLL_SCREENS = cards.length + 0.35;
-const REVEAL_START = 0.18;
-const REVEAL_END = 0.7;
+const STORY_SCROLL_SCREENS = cards.length + 1.1;
+const TITLE_REVEAL_END = 0.16;
+const REVEAL_START = 0.22;
+const REVEAL_END = 0.74;
 
 type StoryCardProps = {
   data: CardData;
@@ -177,14 +178,22 @@ const BenefitsSection = () => {
     offset: ["start start", "end end"],
   });
 
-  const baseCardScale = useTransform(scrollYProgress, [0, REVEAL_END, 1], [1, 0.965, 0.95]);
-  const baseCardOpacity = useTransform(scrollYProgress, [0, REVEAL_END, 1], [1, 0.96, 0.92]);
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 140,
+    damping: 28,
+    mass: 0.22,
+  });
+
+  const titleOpacity = useTransform(smoothProgress, [0, TITLE_REVEAL_END], [0, 1]);
+  const titleY = useTransform(smoothProgress, [0, TITLE_REVEAL_END], [28, 0]);
+  const baseCardOpacity = useTransform(smoothProgress, [0, REVEAL_END, 1], [1, 1, 0.98]);
   const overlayY = useTransform(
-    scrollYProgress,
+    smoothProgress,
     [0, REVEAL_START, REVEAL_END, 1],
-    ["0%", "0%", "-100%", "-100%"],
+    ["4%", "4%", "-100%", "-100%"],
   );
-  const overlayScale = useTransform(scrollYProgress, [0, REVEAL_START, REVEAL_END], [0.985, 0.985, 1]);
+  const overlayScale = useTransform(smoothProgress, [0, REVEAL_START, REVEAL_END], [0.992, 0.992, 1]);
+  const overlayOpacity = useTransform(smoothProgress, [0, REVEAL_START, REVEAL_END], [0.88, 0.88, 1]);
 
   return (
     <section ref={sectionRef} className="section-shell">
@@ -221,18 +230,6 @@ const BenefitsSection = () => {
         </div>
 
         <div className="mx-auto mt-10 max-w-6xl sm:mt-14">
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.75 }}
-            className="mb-8 text-center"
-          >
-            <span className="section-kicker">Transformation Journey</span>
-            <h3 className="mt-3 text-2xl font-bold sm:text-3xl">
-              Taking colleges from a quiet start to <span className="text-primary text-glow">credible growth</span>
-            </h3>
-          </motion.div>
-
           <div
             ref={storyRef}
             className="relative"
@@ -242,23 +239,35 @@ const BenefitsSection = () => {
             }}
           >
             <div
-              className="sticky top-0 flex w-full items-center overflow-hidden py-4 sm:py-8"
+              className="sticky top-0 flex w-full items-center py-4 sm:py-8"
               style={{ height: "100vh", minHeight: "100svh" }}
             >
-              <div className="relative h-[72vh] min-h-[520px] w-full overflow-hidden sm:h-[76vh] sm:min-h-[620px] lg:h-[78vh]">
+              <div className="flex w-full flex-col justify-center gap-6 pt-10 sm:gap-8 sm:pt-14 lg:pt-16">
                 <motion.div
-                  style={{ scale: baseCardScale, opacity: baseCardOpacity }}
-                  className="absolute inset-0 z-10 will-change-transform"
+                  style={{ opacity: titleOpacity, y: titleY }}
+                  className="px-2 text-center will-change-transform sm:px-4"
                 >
-                  <StoryCard data={cards[0]} />
+                  <span className="section-kicker">Transformation Journey</span>
+                  <h3 className="mt-3 text-2xl font-bold sm:text-3xl">
+                    Taking colleges from a quiet start to <span className="text-primary text-glow">credible growth</span>
+                  </h3>
                 </motion.div>
 
-                <motion.div
-                  style={{ y: overlayY, scale: overlayScale }}
-                  className="absolute inset-x-0 top-full z-20 h-full shadow-[0_-30px_60px_rgba(0,0,0,0.5)] will-change-transform"
-                >
-                  <StoryCard data={cards[1]} showAccent />
-                </motion.div>
+                <div className="relative h-[56vh] min-h-[420px] w-full overflow-hidden sm:h-[62vh] sm:min-h-[520px] lg:h-[70vh]">
+                  <motion.div
+                    style={{ opacity: baseCardOpacity }}
+                    className="absolute inset-0 z-10 will-change-transform"
+                  >
+                    <StoryCard data={cards[0]} />
+                  </motion.div>
+
+                  <motion.div
+                    style={{ y: overlayY, scale: overlayScale, opacity: overlayOpacity }}
+                    className="absolute inset-x-0 top-full z-20 h-full shadow-[0_-30px_60px_rgba(0,0,0,0.5)] will-change-transform"
+                  >
+                    <StoryCard data={cards[1]} showAccent />
+                  </motion.div>
+                </div>
               </div>
             </div>
           </div>

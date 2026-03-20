@@ -13,7 +13,7 @@ import FooterSection from "@/components/sections/FooterSection";
 
 const Index = () => {
   return (
-    <div className="bg-background text-foreground overflow-x-hidden">
+    <div className="bg-background text-foreground overflow-x-clip">
       <Navbar />
       <HeroSection />
       <PositioningSection />
