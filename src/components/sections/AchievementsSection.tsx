@@ -97,7 +97,7 @@ const AnimatedCounter = ({
 
 const AchievementsSection = () => {
   const ref = useRef<HTMLElement | null>(null);
-  const inView = useInView(ref, { amount: 0.35, margin: "-60px 0px -60px 0px" });
+  const inView = useInView(ref, { amount: 0.08 });
 
   return (
     <section

@@ -1,5 +1,11 @@
 import { motion, useInView } from "framer-motion";
-import { ArrowUpRight, BarChart3, DollarSign, TrendingUp, Users } from "lucide-react";
+import {
+  ArrowUpRight,
+  BarChart3,
+  DollarSign,
+  TrendingUp,
+  Users,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Bar, BarChart, CartesianGrid, Cell, LabelList, XAxis, YAxis } from "recharts";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
@@ -63,7 +69,10 @@ const RevenueImpact = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const chartRef = useRef<HTMLDivElement | null>(null);
   const inView = useInView(sectionRef, { margin: "-100px" });
-  const chartInView = useInView(chartRef, { amount: 0.45, margin: "-60px 0px -60px 0px" });
+  const chartInView = useInView(chartRef, {
+    amount: 0.45,
+    margin: "-60px 0px -60px 0px",
+  });
   const [chartRun, setChartRun] = useState(0);
 
   useEffect(() => {
@@ -73,7 +82,10 @@ const RevenueImpact = () => {
   }, [chartInView]);
 
   return (
-    <section ref={sectionRef} className="section-shell relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="section-shell relative overflow-hidden"
+    >
       <div className="absolute left-1/2 top-16 h-48 w-[70%] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
       <div className="absolute right-10 top-1/3 h-40 w-40 rounded-full bg-cyan-400/8 blur-3xl" />
 
@@ -92,7 +104,7 @@ const RevenueImpact = () => {
               </h2>
               <p className="section-copy mx-auto max-w-md ">
                 Every counselling push translates into stronger BAMS seat conversion, healthier fee visibility, and more dependable admission-season cashflow.
-              </p>
+               </p>
             </motion.div>
 
             <motion.div
@@ -102,7 +114,9 @@ const RevenueImpact = () => {
               className="inline-flex items-center self-center gap-3 rounded-full border border-primary/15 bg-primary/10 px-4 py-2 text-sm text-primary -mt-10 md:-mt-4 "
             >
               <TrendingUp className="h-4 w-4 shrink-0" />
-              <span className="font-medium">NEET-to-BAMS counselling compounding</span>
+              <span className="font-medium">
+                NEET-to-BAMS counselling compounding
+              </span>
             </motion.div>
 
             <div className="flex flex-col gap-4 sm:gap-5">
@@ -110,7 +124,9 @@ const RevenueImpact = () => {
                 <motion.div
                   key={item.title}
                   initial={{ opacity: 0, x: -40 }}
-                  animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -24 }}
+                  animate={
+                    inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -24 }
+                  }
                   transition={{ duration: 0.6, delay: 0.18 + index * 0.12 }}
                   className="group relative overflow-hidden rounded-[1.75rem] border border-white/10 p-5 transition-all duration-500 glass glass-hover hover:-translate-y-1 hover:neon-glow sm:p-3"
                 >
@@ -180,8 +196,15 @@ const RevenueImpact = () => {
                 }}
                 className="relative h-[250px] w-full sm:h-[250px]"
               >
-                <BarChart data={revenueBars} margin={{ top: 16, right: 8, left: -12, bottom: 0 }} barCategoryGap="20%">
-                  <CartesianGrid vertical={false} stroke="rgba(255,255,255,0.08)" />
+                <BarChart
+                  data={revenueBars}
+                  margin={{ top: 16, right: 8, left: -12, bottom: 0 }}
+                  barCategoryGap="20%"
+                >
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="rgba(255,255,255,0.08)"
+                  />
                   <XAxis
                     dataKey="label"
                     tickLine={false}
@@ -204,8 +227,12 @@ const RevenueImpact = () => {
                         indicator="dot"
                         formatter={(value, _, item) => (
                           <div className="flex min-w-[8rem] items-center justify-between gap-4 sm:min-w-[10rem]">
-                            <span className="text-slate-600">{item.payload.caption}</span>
-                            <span className="font-mono font-semibold text-slate-950">{value}%</span>
+                            <span className="text-slate-600">
+                              {item.payload.caption}
+                            </span>
+                            <span className="font-mono font-semibold text-slate-950">
+                              {value}%
+                            </span>
                           </div>
                         )}
                       />
@@ -233,7 +260,10 @@ const RevenueImpact = () => {
 
               <div className="mt-5 grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4">
                 {revenueBars.map((bar) => (
-                  <div key={bar.label} className="flex flex-col justify-center rounded-2xl border border-white/8 bg-white/[0.04] px-2 py-3 text-center sm:px-3">
+                  <div
+                    key={bar.label}
+                    className="flex flex-col justify-center rounded-2xl border border-white/8 bg-white/[0.04] px-2 py-3 text-center sm:px-3"
+                  >
                     <p className="text-sm font-semibold">{bar.label}</p>
                     <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.15em] text-muted-foreground sm:text-[11px] sm:tracking-[0.2em]">
                       {bar.caption}
@@ -248,12 +278,18 @@ const RevenueImpact = () => {
                 <motion.div
                   key={item.label}
                   initial={{ opacity: 0, y: 18 }}
-                  animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
+                  animate={
+                    inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }
+                  }
                   transition={{ duration: 0.45, delay: 0.45 + index * 0.08 }}
                   className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 sm:py-3"
                 >
-                  <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground sm:text-xs sm:tracking-[0.22em]">{item.label}</p>
-                  <p className="mt-1.5 text-xl font-semibold text-primary sm:mt-2 sm:text-2xl">{item.value}</p>
+                  <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground sm:text-xs sm:tracking-[0.22em]">
+                    {item.label}
+                  </p>
+                  <p className="mt-1.5 text-xl font-semibold text-primary sm:mt-2 sm:text-2xl">
+                    {item.value}
+                  </p>
                 </motion.div>
               ))}
             </div>
@@ -265,4 +301,3 @@ const RevenueImpact = () => {
 };
 
 export default RevenueImpact;
-
