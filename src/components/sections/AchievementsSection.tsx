@@ -102,7 +102,7 @@ const AchievementsSection = () => {
   return (
     <section
       ref={ref}
-      id="achievements"
+      id="our-scale"
       className="relative overflow-hidden py-20"
       style={{
         color: "#0f172a",

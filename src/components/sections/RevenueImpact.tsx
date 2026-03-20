@@ -84,6 +84,7 @@ const RevenueImpact = () => {
   return (
     <section
       ref={sectionRef}
+      id="growth"
       className="section-shell relative overflow-hidden"
     >
       <div className="absolute left-1/2 top-16 h-48 w-[70%] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />

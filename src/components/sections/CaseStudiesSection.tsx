@@ -33,19 +33,8 @@ const CaseStudiesSection = () => {
   const customEase = [0.22, 1, 0.36, 1];
 
   return (
-    <section ref={ref} className="section-shell relative z-0 overflow-hidden">
-      <div
-        className={cn(
-          "pointer-events-none absolute inset-0 z-0 [background-size:40px_40px] select-none",
-          "[background-image:linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)]"
-        )}
-      />
-            {/* Spotlight Effects */}
-            <Spotlight
-              className="-top-40 left-0 md:-top-20 md:left-60"
-              fill="hsl(var(--primary))"
-            />
-      <div className="container relative z-10 mx-auto px-4 sm:px-6">
+    <section ref={ref} id="our-transformation" className="section-shell">
+      <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 40, scale: 0.95 }}
           animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}

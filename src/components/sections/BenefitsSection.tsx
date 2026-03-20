@@ -245,7 +245,7 @@ const BenefitsSection = () => {
   );
 
   return (
-    <section ref={sectionRef} className="section-shell">
+    <section ref={sectionRef} id="why-choose-us" className="section-shell">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}

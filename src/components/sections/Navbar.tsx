@@ -2,7 +2,17 @@ import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 
-const links = ["About", "Impact", "Process", "Contact"];
+const links = [
+  { label: "About", id: "about" },
+  { label: "Impact", id: "impact" },
+  { label: "Clients", id: "clients" },
+  { label: "Process", id: "process" },
+  { label: "Why Choose Us", id: "why-choose-us" },
+  { label: "Growth", id: "growth" },
+  { label: "Our Transformation", id: "our-transformation" },
+  { label: "Our Scale", id: "our-scale" },
+  { label: "Contact", id: "contact" },
+];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -42,11 +52,11 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-8">
             {links.map((link) => (
               <a
-                key={link}
-                href={`#${link.toLowerCase()}`}
+                key={link.id}
+                href={`#${link.id}`}
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors font-medium"
               >
-                {link}
+                {link.label}
               </a>
             ))}
           </div>
@@ -79,12 +89,12 @@ const Navbar = () => {
             <div className="flex flex-col gap-1">
               {links.map((link) => (
                 <a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
+                  key={link.id}
+                  href={`#${link.id}`}
                   onClick={() => setMenuOpen(false)}
                   className="rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground"
                 >
-                  {link}
+                  {link.label}
                 </a>
               ))}
               <a
