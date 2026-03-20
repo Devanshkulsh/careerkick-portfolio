@@ -21,7 +21,11 @@ const DETAILED_BUILDINGS_LAYER_ID = "careerkick-detailed-buildings-layer";
 const CITY_BLOCKS_SOURCE_ID = "careerkick-city-blocks-source";
 const CITY_BLOCKS_LAYER_ID = "careerkick-city-blocks-layer";
 
-const toLngLatOffset = (center: [number, number], eastMeters: number, northMeters: number): [number, number] => {
+const toLngLatOffset = (
+  center: [number, number],
+  eastMeters: number,
+  northMeters: number,
+): [number, number] => {
   const [lng, lat] = center;
   const latOffset = northMeters / 111320;
   const lngOffset = eastMeters / (111320 * Math.cos((lat * Math.PI) / 180));
@@ -37,18 +41,37 @@ const createExtrusionPolygon = (
   height: number,
   base = 0,
   color?: string,
-): Feature<Polygon, { height: number; min_height: number; color: string | null }> => {
+): Feature<
+  Polygon,
+  { height: number; min_height: number; color: string | null }
+> => {
   const halfWidth = widthMeters / 2;
   const halfDepth = depthMeters / 2;
-  const topLeft = toLngLatOffset(center, eastMeters - halfWidth, northMeters + halfDepth);
-  const topRight = toLngLatOffset(center, eastMeters + halfWidth, northMeters + halfDepth);
-  const bottomRight = toLngLatOffset(center, eastMeters + halfWidth, northMeters - halfDepth);
-  const bottomLeft = toLngLatOffset(center, eastMeters - halfWidth, northMeters - halfDepth);
+  const topLeft = toLngLatOffset(
+    center,
+    eastMeters - halfWidth,
+    northMeters + halfDepth,
+  );
+  const topRight = toLngLatOffset(
+    center,
+    eastMeters + halfWidth,
+    northMeters + halfDepth,
+  );
+  const bottomRight = toLngLatOffset(
+    center,
+    eastMeters + halfWidth,
+    northMeters - halfDepth,
+  );
+  const bottomLeft = toLngLatOffset(
+    center,
+    eastMeters - halfWidth,
+    northMeters - halfDepth,
+  );
 
   return {
     type: "Feature",
-    properties: { 
-      height, 
+    properties: {
+      height,
       min_height: base,
       color: color || null,
     },
@@ -68,38 +91,72 @@ const createDetailedBuilding = (
   height: number,
   base = 0,
   hasRoofDetail = false,
-): Feature<Polygon, { height: number; min_height: number; color: string | null }>[] => {
-  const building = createExtrusionPolygon(center, eastMeters, northMeters, widthMeters, depthMeters, height, base);
-  
+): Feature<
+  Polygon,
+  { height: number; min_height: number; color: string | null }
+>[] => {
+  const building = createExtrusionPolygon(
+    center,
+    eastMeters,
+    northMeters,
+    widthMeters,
+    depthMeters,
+    height,
+    base,
+  );
+
   if (hasRoofDetail && height > 40) {
     // Add roof structure (smaller extrusion on top)
-    const roofHeight = height + (height * 0.08);
+    const roofHeight = height + height * 0.08;
     const roofWidth = widthMeters * 0.7;
     const roofDepth = depthMeters * 0.7;
-    const roof = createExtrusionPolygon(center, eastMeters, northMeters, roofWidth, roofDepth, roofHeight, height);
+    const roof = createExtrusionPolygon(
+      center,
+      eastMeters,
+      northMeters,
+      roofWidth,
+      roofDepth,
+      roofHeight,
+      height,
+    );
     return [building, roof];
   }
-  
+
   return [building];
 };
 
 const createHighriseCluster = (center: [number, number]) => {
-  const buildings: Feature<Polygon, { height: number; min_height: number; color: string | null }>[] = [];
-  
+  const buildings: Feature<
+    Polygon,
+    { height: number; min_height: number; color: string | null }
+  >[] = [];
+
   // Main central tower cluster (landmark buildings)
-  buildings.push(...createDetailedBuilding(center, -15, 25, 52, 48, 168, 12, true)); // Main tower
-  buildings.push(...createDetailedBuilding(center, 45, -8, 44, 42, 142, 10, true)); // Secondary tower
-  buildings.push(...createDetailedBuilding(center, -72, -12, 48, 46, 156, 12, true)); // Western tower
-  buildings.push(...createDetailedBuilding(center, 28, 78, 42, 38, 134, 10, true)); // Northern tower
-  
+  buildings.push(
+    ...createDetailedBuilding(center, -15, 25, 52, 48, 168, 12, true),
+  ); // Main tower
+  buildings.push(
+    ...createDetailedBuilding(center, 45, -8, 44, 42, 142, 10, true),
+  ); // Secondary tower
+  buildings.push(
+    ...createDetailedBuilding(center, -72, -12, 48, 46, 156, 12, true),
+  ); // Western tower
+  buildings.push(
+    ...createDetailedBuilding(center, 28, 78, 42, 38, 134, 10, true),
+  ); // Northern tower
+
   // High-rise residential towers
   buildings.push(...createDetailedBuilding(center, -45, 95, 38, 36, 98, 6));
-  buildings.push(...createDetailedBuilding(center, 85, 62, 36, 34, 112, 8, true));
+  buildings.push(
+    ...createDetailedBuilding(center, 85, 62, 36, 34, 112, 8, true),
+  );
   buildings.push(...createDetailedBuilding(center, -88, -45, 40, 38, 104, 6));
   buildings.push(...createDetailedBuilding(center, 62, -65, 34, 32, 92, 4));
-  buildings.push(...createDetailedBuilding(center, -32, -88, 44, 40, 118, 8, true));
+  buildings.push(
+    ...createDetailedBuilding(center, -32, -88, 44, 40, 118, 8, true),
+  );
   buildings.push(...createDetailedBuilding(center, 95, -32, 38, 36, 86, 4));
-  
+
   // Medium-rise office buildings
   buildings.push(createExtrusionPolygon(center, -125, 45, 52, 44, 72, 4));
   buildings.push(createExtrusionPolygon(center, -98, 118, 46, 42, 64, 2));
@@ -108,7 +165,7 @@ const createHighriseCluster = (center: [number, number]) => {
   buildings.push(createExtrusionPolygon(center, -55, -135, 44, 40, 56, 0));
   buildings.push(createExtrusionPolygon(center, 135, -55, 40, 38, 82, 4));
   buildings.push(createExtrusionPolygon(center, 105, 95, 38, 36, 74, 2));
-  
+
   return {
     type: "FeatureCollection" as const,
     features: buildings.flat(),
@@ -116,8 +173,11 @@ const createHighriseCluster = (center: [number, number]) => {
 };
 
 const createCityBlocks = (center: [number, number]) => {
-  const blocks: Feature<Polygon, { height: number; min_height: number; color: string | null }>[] = [];
-  
+  const blocks: Feature<
+    Polygon,
+    { height: number; min_height: number; color: string | null }
+  >[] = [];
+
   // Create surrounding city blocks with varied heights
   const blockPositions = [
     // Eastern district
@@ -139,15 +199,26 @@ const createCityBlocks = (center: [number, number]) => {
     { east: 50, north: -195, width: 110, depth: 80, heightRange: [26, 40] },
     { east: 140, north: -195, width: 85, depth: 80, heightRange: [18, 28] },
   ];
-  
+
   blockPositions.forEach((pos) => {
-    const height = Math.floor(Math.random() * (pos.heightRange[1] - pos.heightRange[0]) + pos.heightRange[0]);
+    const height = Math.floor(
+      Math.random() * (pos.heightRange[1] - pos.heightRange[0]) +
+        pos.heightRange[0],
+    );
     const base = Math.floor(Math.random() * 4);
-    blocks.push(createExtrusionPolygon(
-      center, pos.east, pos.north, pos.width, pos.depth, height, base
-    ));
+    blocks.push(
+      createExtrusionPolygon(
+        center,
+        pos.east,
+        pos.north,
+        pos.width,
+        pos.depth,
+        height,
+        base,
+      ),
+    );
   });
-  
+
   // Add smaller residential clusters
   const residentialClusters = [
     { east: -145, north: 165, width: 45, depth: 40, count: 4 },
@@ -157,21 +228,30 @@ const createCityBlocks = (center: [number, number]) => {
     { east: -85, north: 175, width: 55, depth: 50, count: 3 },
     { east: 90, north: 178, width: 52, depth: 48, count: 3 },
   ];
-  
+
   residentialClusters.forEach((cluster) => {
     const offset = cluster.width / 2;
     for (let i = 0; i < cluster.count; i++) {
-      const xOffset = (i % 2 === 0 ? -offset : offset) + (Math.random() * 12 - 6);
-      const yOffset = (Math.floor(i / 2) * 28) - 14 + (Math.random() * 8 - 4);
+      const xOffset =
+        (i % 2 === 0 ? -offset : offset) + (Math.random() * 12 - 6);
+      const yOffset = Math.floor(i / 2) * 28 - 14 + (Math.random() * 8 - 4);
       const height = Math.floor(Math.random() * 28 + 18);
       const width = Math.floor(Math.random() * 14 + 22);
       const depth = Math.floor(Math.random() * 14 + 22);
-      blocks.push(createExtrusionPolygon(
-        center, cluster.east + xOffset, cluster.north + yOffset, width, depth, height, Math.floor(Math.random() * 3)
-      ));
+      blocks.push(
+        createExtrusionPolygon(
+          center,
+          cluster.east + xOffset,
+          cluster.north + yOffset,
+          width,
+          depth,
+          height,
+          Math.floor(Math.random() * 3),
+        ),
+      );
     }
   });
-  
+
   return {
     type: "FeatureCollection" as const,
     features: blocks,
@@ -186,9 +266,14 @@ const add3dBuildings = (map: maplibregl.Map, center: [number, number]) => {
   const findLabelLayer = () => {
     return map
       .getStyle()
-      ?.layers?.find((layer) => layer.type === "symbol" && layer.layout && "text-field" in layer.layout)?.id;
+      ?.layers?.find(
+        (layer) =>
+          layer.type === "symbol" &&
+          layer.layout &&
+          "text-field" in layer.layout,
+      )?.id;
   };
-  
+
   // Add OpenMapTiles buildings if available
   if (!map.getLayer(BUILDINGS_LAYER_ID) && map.getSource("openmaptiles")) {
     const labelLayerId = findLabelLayer();
@@ -222,7 +307,11 @@ const add3dBuildings = (map: maplibregl.Map, center: [number, number]) => {
             14,
             ["*", ["coalesce", ["get", "height"], 16], 1.4],
           ],
-          "fill-extrusion-base": ["*", ["coalesce", ["get", "min_height"], 0], 1.15],
+          "fill-extrusion-base": [
+            "*",
+            ["coalesce", ["get", "min_height"], 0],
+            1.15,
+          ],
           "fill-extrusion-opacity": 0.88,
           "fill-extrusion-vertical-gradient": true,
         },
@@ -230,7 +319,7 @@ const add3dBuildings = (map: maplibregl.Map, center: [number, number]) => {
       labelLayerId,
     );
   }
-  
+
   // Add highrise cluster (main towers)
   if (!map.getSource(HIGHRISE_SOURCE_ID)) {
     map.addSource(HIGHRISE_SOURCE_ID, {
@@ -238,7 +327,7 @@ const add3dBuildings = (map: maplibregl.Map, center: [number, number]) => {
       data: createHighriseCluster(center),
     });
   }
-  
+
   if (!map.getLayer(HIGHRISE_LAYER_ID)) {
     const labelLayerId = findLabelLayer();
     map.addLayer(
@@ -280,7 +369,7 @@ const add3dBuildings = (map: maplibregl.Map, center: [number, number]) => {
       labelLayerId,
     );
   }
-  
+
   // Add detailed medium-rise buildings
   if (!map.getSource(DETAILED_BUILDINGS_SOURCE_ID)) {
     const detailedBuildings: FeatureCollection<
@@ -289,14 +378,14 @@ const add3dBuildings = (map: maplibregl.Map, center: [number, number]) => {
     > = createHighriseCluster(center);
     // Filter to keep only buildings with height between 40-90 for medium-rise
     detailedBuildings.features = detailedBuildings.features.filter(
-      (f) => f.properties.height >= 40 && f.properties.height <= 90
+      (f) => f.properties.height >= 40 && f.properties.height <= 90,
     );
     map.addSource(DETAILED_BUILDINGS_SOURCE_ID, {
       type: "geojson",
       data: detailedBuildings,
     });
   }
-  
+
   if (!map.getLayer(DETAILED_BUILDINGS_LAYER_ID)) {
     const labelLayerId = findLabelLayer();
     map.addLayer(
@@ -316,7 +405,7 @@ const add3dBuildings = (map: maplibregl.Map, center: [number, number]) => {
       labelLayerId,
     );
   }
-  
+
   // Add surrounding city blocks
   if (!map.getSource(CITY_BLOCKS_SOURCE_ID)) {
     map.addSource(CITY_BLOCKS_SOURCE_ID, {
@@ -324,7 +413,7 @@ const add3dBuildings = (map: maplibregl.Map, center: [number, number]) => {
       data: createCityBlocks(center),
     });
   }
-  
+
   if (!map.getLayer(CITY_BLOCKS_LAYER_ID)) {
     const labelLayerId = findLabelLayer();
     map.addLayer(
@@ -358,7 +447,10 @@ const add3dBuildings = (map: maplibregl.Map, center: [number, number]) => {
   }
 };
 
-const buildDefaultLocationUrl = (center: [number, number], address?: string) => {
+const buildDefaultLocationUrl = (
+  center: [number, number],
+  address?: string,
+) => {
   if (address) {
     return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
   }
@@ -433,10 +525,16 @@ export default function Map({
     map.scrollZoom.disable();
     map.dragRotate.disable();
     map.touchZoomRotate.disableRotation();
-    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+    map.addControl(
+      new maplibregl.NavigationControl({ showCompass: false }),
+      "top-right",
+    );
     map.on("load", () => add3dBuildings(map, center));
 
-    const marker = new maplibregl.Marker({ element: markerElement, anchor: "center" })
+    const marker = new maplibregl.Marker({
+      element: markerElement,
+      anchor: "center",
+    })
       .setLngLat(center as LngLatLike)
       .setPopup(
         new maplibregl.Popup({
@@ -495,7 +593,9 @@ export default function Map({
   }, [center]);
 
   return (
-    <div className={`relative overflow-hidden rounded-[1.75rem] border border-white/10 glass ${className}`}>
+    <div
+      className={`relative overflow-hidden rounded-[1.75rem] border border-white/10 glass ${className}`}
+    >
       <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-24 bg-gradient-to-b from-background/65 to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-28 bg-gradient-to-t from-background/80 via-background/35 to-transparent" />
       <div ref={mapContainer} className="h-full w-full" />
@@ -504,8 +604,12 @@ export default function Map({
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary/80">
           Office Location
         </p>
-        <p className="mt-1 text-sm font-medium text-foreground sm:text-base">{title}</p>
-        <p className="mt-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">{address}</p>
+        <p className="mt-1 text-sm font-medium text-foreground sm:text-base">
+          {title}
+        </p>
+        <p className="mt-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+          {address}
+        </p>
       </div>
 
       <a
