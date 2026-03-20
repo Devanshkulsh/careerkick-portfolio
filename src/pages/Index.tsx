@@ -10,6 +10,7 @@ import CaseStudiesSection from "@/components/sections/CaseStudiesSection";
 import AchievementsSection from "@/components/sections/AchievementsSection";
 import ContactSection from "@/components/sections/ContactSection";
 import FooterSection from "@/components/sections/FooterSection";
+import { DataShow } from "@/components/sections/DataShow";
 import CTASection from "@/components/sections/CTASection";
 
 const Index = () => {
@@ -25,6 +26,7 @@ const Index = () => {
       <RevenueImpact />
       <CaseStudiesSection />
       <AchievementsSection />
+      <DataShow/>
       <ContactSection />
       <CTASection />
     </div>
