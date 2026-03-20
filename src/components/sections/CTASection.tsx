@@ -102,7 +102,7 @@ function FacebookIcon({ className }: { className?: string }) {
 
 export default function CTASection() {
   return (
-    <section className="relative w-full overflow-hidden bg-background py-16 sm:py-24">
+    <section className="relative w-full overflow-hidden bg-background py-16 sm:py-10">
       <div className="pointer-events-none absolute inset-0 gradient-mesh opacity-40" />
       <div className="pointer-events-none absolute left-[14%] top-16 h-56 w-56 rounded-full bg-primary/10 blur-3xl" />
       <div className="pointer-events-none absolute right-[10%] bottom-10 h-64 w-64 rounded-full bg-cyan-400/10 blur-3xl" />
