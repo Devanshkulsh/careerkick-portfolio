@@ -31,7 +31,7 @@ const CaseStudiesSection = () => {
   const customEase = [0.22, 1, 0.36, 1];
 
   return (
-    <section ref={ref} className="section-shell">
+    <section ref={ref} id="our-transformation" className="section-shell">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 40, scale: 0.95 }}

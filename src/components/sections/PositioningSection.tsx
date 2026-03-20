@@ -7,7 +7,7 @@ const PositioningSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="section-shell overflow-hidden">
+    <section ref={ref} id="about" className="section-shell overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

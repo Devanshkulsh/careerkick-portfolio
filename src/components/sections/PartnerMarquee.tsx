@@ -87,6 +87,7 @@ const PartnerMarquee = () => {
   return (
     <section
       ref={ref}
+      id="clients"
       className="relative overflow-hidden py-16 sm:py-20 lg:py-24"
     >
       <div className="container mx-auto mb-10 px-4 sm:mb-12 sm:px-6">
