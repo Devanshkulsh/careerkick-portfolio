@@ -52,12 +52,12 @@ export const MacbookScroll = ({
 
   const scaleX = useTransform(
     scrollYProgress,
-    [0, 0.3],
+    [0, 0.6],
     [1.2, isMobile ? 1 : 1.5],
   );
   const scaleY = useTransform(
     scrollYProgress,
-    [0, 0.3],
+    [0, 0.6],
     [0.6, isMobile ? 1 : 1.5],
   );
   const translate = useTransform(scrollYProgress, [0, 1], [0, 1500]);
@@ -68,7 +68,7 @@ export const MacbookScroll = ({
   return (
     <div
       ref={ref}
-      className="flex min-h-[90vh] md:min-h-[150vh] shrink-0 scale-[0.55] transform flex-col items-center justify-start py-0 [perspective:800px] sm:scale-80 md:scale-100 md:py-20"
+      className="flex min-h-[90vh] md:min-h-[190vh] shrink-0 scale-[0.55] transform flex-col items-center justify-start py-0 [perspective:800px] sm:scale-80 md:scale-100 md:py-20"
     >
       <motion.h2
         style={{
@@ -148,9 +148,6 @@ export const Lid = ({
           }}
           className="absolute inset-0 flex items-center justify-center rounded-lg bg-[#010101]"
         >
-          <span className="text-white">
-            <AceternityLogo />
-          </span>
         </div>
       </div>
       <motion.div
