@@ -13,28 +13,74 @@ const HeroSection = () => {
             <span className="relative inline-block px-1 mt-1 lg:mt-0">
               
               {/* Animated 3-Stroke Highlight */}
-              <div className="absolute inset-0 -z-10 h-full w-full">
+              <motion.div
+                className="absolute inset-0 -z-10 h-full w-full"
+                initial="hidden"
+                animate="show"
+              >
                 {/* Stroke 1: Left to Right */}
-                <motion.span 
-                  initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} 
-                  transition={{ duration: 0.4, ease: "linear", delay: 0.2 }}
-                  className="absolute top-[10%] left-0 w-full h-[40%] bg-primary origin-left rounded-md -rotate-1"
+                <motion.span
+                  variants={{
+                    hidden: { scaleX: 0, opacity: 0, y: -2 },
+                    show: {
+                      scaleX: 1,
+                      opacity: 1,
+                      y: 0,
+                      transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: 0.15 }
+                    }
+                  }}
+                  className="absolute top-[8%] left-0 w-[102%] h-[42%] bg-primary origin-left rounded-[10px] -rotate-1"
+                  style={{
+                    backgroundImage:
+                      'linear-gradient(90deg, rgba(0,0,0,0.12), rgba(0,0,0,0) 40%), repeating-linear-gradient(90deg, rgba(255,255,255,0.12) 0 2px, rgba(255,255,255,0) 2px 6px)',
+                    backgroundBlendMode: 'multiply',
+                    filter: 'saturate(1.1)',
+                    boxShadow: '0 6px 16px rgba(0,0,0,0.18)'
+                  }}
                 ></motion.span>
-                
+
                 {/* Stroke 2: Right to Left */}
-                <motion.span 
-                  initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} 
-                  transition={{ duration: 0.4, ease: "linear", delay: 0.45 }}
-                  className="absolute top-[35%] right-0 w-[98%] h-[40%] bg-primary origin-right rounded-md rotate-1"
+                <motion.span
+                  variants={{
+                    hidden: { scaleX: 0, opacity: 0, y: 1 },
+                    show: {
+                      scaleX: 1,
+                      opacity: 1,
+                      y: 0,
+                      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.35 }
+                    }
+                  }}
+                  className="absolute top-[36%] right-0 w-[100%] h-[40%] bg-primary origin-right rounded-[12px] rotate-[0.8deg]"
+                  style={{
+                    backgroundImage:
+                      'linear-gradient(90deg, rgba(0,0,0,0.14), rgba(0,0,0,0) 45%), repeating-linear-gradient(90deg, rgba(255,255,255,0.1) 0 3px, rgba(255,255,255,0) 3px 7px)',
+                    backgroundBlendMode: 'multiply',
+                    filter: 'saturate(1.05)',
+                    boxShadow: '0 6px 14px rgba(0,0,0,0.16)'
+                  }}
                 ></motion.span>
-                
+
                 {/* Stroke 3: Left to Right */}
-                <motion.span 
-                  initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} 
-                  transition={{ duration: 0.4, ease: "linear", delay: 0.7 }}
-                  className="absolute bottom-[5%] left-0 w-[96%] h-[35%] bg-primary origin-left rounded-md -rotate-[0.5deg]"
+                <motion.span
+                  variants={{
+                    hidden: { scaleX: 0, opacity: 0, y: 2 },
+                    show: {
+                      scaleX: 1,
+                      opacity: 1,
+                      y: 0,
+                      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.55 }
+                    }
+                  }}
+                  className="absolute bottom-[4%] left-0 w-[98%] h-[34%] bg-primary origin-left rounded-[10px] -rotate-[0.6deg]"
+                  style={{
+                    backgroundImage:
+                      'linear-gradient(90deg, rgba(0,0,0,0.1), rgba(0,0,0,0) 38%), repeating-linear-gradient(90deg, rgba(255,255,255,0.1) 0 2px, rgba(255,255,255,0) 2px 5px)',
+                    backgroundBlendMode: 'multiply',
+                    filter: 'saturate(1.1)',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.14)'
+                  }}
                 ></motion.span>
-              </div>
+              </motion.div>
 
               <span className="relative text-black">fill seats faster</span>
             </span>{" "}
@@ -57,7 +103,7 @@ const HeroSection = () => {
         </div>
 
         {/* Right Side - Phone Mockup */}
-        <div className="relative flex justify-center items-end h-[520px] md:h-[700px] w-full mt-0 md:mt-20 overflow-hidden">
+        <div className="relative flex justify-center items-end h-[520px] md:h-[700px] w-full md:mt-20 overflow-hidden -mt-10 " >
           <div className="relative w-full h-full max-w-[400px] lg:max-w-[380px] translate-y-16 md:translate-y-28 lg:translate-y-32">
             {/* Your SVG Phone Frame */}
             <div 
@@ -70,12 +116,11 @@ const HeroSection = () => {
               }}
             ></div>
 
-            {/* Screen Content (Chat UI) */}
          {/* Screen Content (Single Image) */}
-<div className="w-full max-w-[250px] lg:max-w-[320px] bg-[#262626] h-[520px] lg:h-[630px] rounded-[35px] lg:rounded-[45px] overflow-hidden shadow-2xl relative z-10 mt-1 md:mt-2 mx-auto">
+<div className="w-full max-w-[250px] lg:max-w-[320px] bg-[#262626] h-[520px] lg:h-[630px] rounded-[35px] lg:rounded-[45px] overflow-hidden shadow-2xl relative z-10 mt-1 md:mt-4 mx-auto">
   
   <img 
-    src="/hero.png" 
+    src="/mobile.png" 
     alt="App Preview"
     className="w-full h-full object-cover"
   />
