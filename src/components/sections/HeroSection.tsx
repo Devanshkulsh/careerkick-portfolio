@@ -71,32 +71,16 @@ const HeroSection = () => {
             ></div>
 
             {/* Screen Content (Chat UI) */}
-            <div className="w-full max-w-[250px] lg:max-w-[320px] bg-[#262626] h-[520px] lg:h-[630px] rounded-[35px] lg:rounded-[45px] overflow-hidden p-5 flex flex-col gap-4 shadow-2xl relative z-10 mt-2 mx-auto">
-            
-            <div className="bg-[#3b3b3b] p-3 rounded-xl rounded-tl-sm text-sm text-gray-200 self-start max-w-[85%] leading-snug">
-              Show me today�s NEET enquiry summary and top sources.
-            </div>
-            
-            <div className="bg-[#3b3b3b] p-3 rounded-xl rounded-tl-sm text-sm text-gray-200 self-start max-w-[85%] leading-snug">
-              Here�s the admission funnel snapshot with high-intent leads and follow-ups.
-            </div>
-            
-            {/* Image Grid */}
-            <div className="grid grid-cols-2 gap-2 mt-2">
-              <div className="h-28 lg:h-32 bg-neutral-800 rounded-lg overflow-hidden">
-                <img src="/careerkickNeet.png" alt="dashboard 1" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
-              </div>
-              <div className="h-28 lg:h-32 bg-neutral-800 rounded-lg overflow-hidden">
-                <img src="/desktop.png" alt="dashboard 2" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
-              </div>
-              <div className="h-28 lg:h-32 bg-neutral-800 rounded-lg overflow-hidden">
-                <img src="/mobile.png" alt="dashboard 3" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
-              </div>
-              <div className="h-28 lg:h-32 bg-neutral-800 rounded-lg overflow-hidden">
-                <img src="/t.png" alt="dashboard 4" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
-              </div>
-            </div>
-            </div>
+         {/* Screen Content (Single Image) */}
+<div className="w-full max-w-[250px] lg:max-w-[320px] bg-[#262626] h-[520px] lg:h-[630px] rounded-[35px] lg:rounded-[45px] overflow-hidden shadow-2xl relative z-10 mt-2 mx-auto">
+  
+  <img 
+    src="/hero.png" 
+    alt="App Preview"
+    className="w-full h-full object-cover"
+  />
+
+</div>
           </div>
         </div>
 
