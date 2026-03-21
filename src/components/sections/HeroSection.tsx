@@ -3,12 +3,12 @@ import { motion } from 'framer-motion';
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen md:h-[90vh] w-full bg-[#171717] text-white flex items-center overflow-hidden px-6 py-20 lg:py-0 lg:px-20">
+    <section className="relative min-h-screen md:h-[90vh] w-full bg-[#171717] text-white flex items-center overflow-hidden px-6 py-0 lg:px-20">
       <div className="max-w-7xl mx-auto w-full flex flex-col lg:grid lg:grid-cols-2 gap-16 lg:gap-12 items-center mt-10 md:mt-20">
         
         {/* Left Content */}
-        <div className="z-10 flex flex-col items-center text-center lg:items-start lg:text-left w-full">
-          <h1 className="text-3xl sm:text-5xl md:text-5xl font-bold leading-tight tracking-tight">
+        <div className="z-10 flex flex-col items-center text-center lg:items-start lg:text-left w-full mt-20 md:mt-0">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tight">
             We help BAMS colleges <br className="hidden sm:block" />
             <span className="relative inline-block px-1 mt-1 lg:mt-0">
               
@@ -17,21 +17,21 @@ const HeroSection = () => {
                 {/* Stroke 1: Left to Right */}
                 <motion.span 
                   initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} 
-                  transition={{ duration: 0.25, ease: "linear", delay: 0.2 }}
-                  className="absolute top-[5%] left-0 w-full h-[40%] bg-primary origin-left rounded-md -rotate-1"
+                  transition={{ duration: 0.4, ease: "linear", delay: 0.2 }}
+                  className="absolute top-[10%] left-0 w-full h-[40%] bg-primary origin-left rounded-md -rotate-1"
                 ></motion.span>
                 
                 {/* Stroke 2: Right to Left */}
                 <motion.span 
                   initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} 
-                  transition={{ duration: 0.25, ease: "linear", delay: 0.45 }}
+                  transition={{ duration: 0.4, ease: "linear", delay: 0.45 }}
                   className="absolute top-[35%] right-0 w-[98%] h-[40%] bg-primary origin-right rounded-md rotate-1"
                 ></motion.span>
                 
                 {/* Stroke 3: Left to Right */}
                 <motion.span 
                   initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} 
-                  transition={{ duration: 0.25, ease: "linear", delay: 0.7 }}
+                  transition={{ duration: 0.4, ease: "linear", delay: 0.7 }}
                   className="absolute bottom-[5%] left-0 w-[96%] h-[35%] bg-primary origin-left rounded-md -rotate-[0.5deg]"
                 ></motion.span>
               </div>
@@ -57,13 +57,13 @@ const HeroSection = () => {
         </div>
 
         {/* Right Side - Phone Mockup */}
-        <div className="relative flex justify-center items-end h-[520px] md:h-[700px] w-full mt-10 md:mt-20 overflow-hidden">
+        <div className="relative flex justify-center items-end h-[520px] md:h-[700px] w-full mt-0 md:mt-20 overflow-hidden">
           <div className="relative w-full h-full max-w-[400px] lg:max-w-[380px] translate-y-16 md:translate-y-28 lg:translate-y-32">
             {/* Your SVG Phone Frame */}
             <div 
               className="absolute inset-0 mx-auto h-full w-full pointer-events-none z-20 invert filter"
               style={{
-              backgroundImage: `url("data:image/svg+xml;base64,IDxzdmcKICAgICAgd2lkdGg9IjQyMSIKICAgICAgaGVpZ2h0PSI4NTIiCiAgICAgIHZpZXdCb3g9IjAgMCA0MjEgODUyIgogICAgICBmaWxsPSJub25lIgogICAgICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgICA+CiAgICAgIDxwYXRoCiAgICAgICAgZmlsbC1ydWxlPSJldmVub2RkIgogICAgICAgIGNsaXAtcnVsZT0iZXZlbm9kZCIKICAgICAgICBkPSJNNzMgMEgzNDhDMzg2LjY2IDAgNDE4IDMxLjM0MDEgNDE4IDcwVjc4MkM0MTggODIwLjY2IDM4Ni42NiA4NTIgMzQ4IDg1Mkg3M0MzNC4zNDAxIDg1MiAzIDgyMC42NiAzIDc4MlY3MEMzIDMxLjM0MDEgMzQuMzQwMSAwIDczIDBaTTM0OCA2SDczQzM3LjY1MzggNiA5IDM0LjY1MzggOSA3MFY3ODJDOSA4MTcuMzQ2IDM3LjY1MzggODQ2IDczIDg0NkgzNDhDMzgzLjM0NiA4NDYgNDEyIDgxNy4zNDYgNDEyIDc4MlY3MEM0MTIgMzQuNjUzOCAzODMuMzQ2IDYgMzQ4IDZaIgogICAgICAgIGZpbGw9ImJsYWNrIgogICAgICAvPgogICAgICA8cmVjdAogICAgICAgIHg9IjMxOCIKICAgICAgICB3aWR0aD0iMTAiCiAgICAgICAgaGVpZ2h0PSI2IgogICAgICAgIGZpbGw9ImJsYWNrIgogICAgICAgIGZpbGwtb3BhY2l0eT0iMC4yIgogICAgICAvPgogICAgICA8cmVjdAogICAgICAgIHg9IjkzIgogICAgICAgIHk9Ijg0NiIKICAgICAgICB3aWR0aD0iMTAiCiAgICAgICAgaGVpZ2h0PSI2IgogICAgICAgIGZpbGw9ImJsYWNrIgogICAgICAgIGZpbGwtb3BhY2l0eT0iMC4yIgogICAgICAvPgogICAgICA8cmVjdAogICAgICAgIHg9IjMiCiAgICAgICAgeT0iOTAiCiAgICAgICAgd2lkdGg9IjYiCiAgICAgICAgaGVpZ2h0PSIxMCIKICAgICAgICBmaWxsPSJibGFjayIKICAgICAgICBmaWxsLW9wYWNpdHk9IjAuMiIKICAgICAgLz4KICAgICAgPHJlY3QKICAgICAgICB4PSI0MTIiCiAgICAgICAgeT0iOTAiCiAgICAgICAgd2lkdGg9IjYiCiAgICAgICAgaGVpZ2h0PSIxMCIKICAgICAgICBmaWxsPSJibGFjayIKICAgICAgICBmaWxsLW9wYWNpdHk9IjAuMiIKICAgICAgLz4KICAgICAgPHJlY3QKICAgICAgICB4PSIzIgogICAgICAgIHk9Ijc1MiIKICAgICAgICB3aWR0aD0iNiIKICAgICAgICBoZWlnaHQ9IjEwIgogICAgICAgIGZpbGw9ImJsYWNrIgogICAgICAgIGZpbGwtb3BhY2l0eT0iMC4yIgogICAgICAvPgogICAgICA8cmVjdAogICAgICAgIHg9IjQxMiIKICAgICAgICB5PSI3NTIiCiAgICAgICAgd2lkdGg9IjYiCiAgICAgICAgaGVpZ2h0PSIxMCIKICAgICAgICBmaWxsPSJibGFjayIKICAgICAgICBmaWxsLW9wYWNpdHk9IjAuMiIKICAgICAgLz4KICAgICAgPHBhdGgKICAgICAgICBmaWxsLXJ1bGU9ImV2ZW5vZGQiCiAgICAgICAgY2xpcC1ydWxlPSJldmVub2RkIgogICAgICAgIGQ9Ik00MTcuOTcxIDI2Nkg0MTguOTgxQzQyMC4wOTYgMjY2IDQyMSAyNjYuODk1IDQyMSAyNjhWMzY0QzQyMSAzNjUuMTA1IDQyMC4wOTYgMzY2IDQxOC45ODEgMzY2SDQxNy45NzFWMjY2WiIKICAgICAgICBmaWxsPSJibGFjayIKICAgICAgLz4KICAgICAgPHBhdGgKICAgICAgICBmaWxsLXJ1bGU9ImV2ZW5vZGQiCiAgICAgICAgY2xpcC1ydWxlPSJldmVub2RkIgogICAgICAgIGQ9Ik0wIDMwMkMwIDMwMC44OTUgMC45MDQwMiAzMDAgMi4wMTkxOCAzMDBIMy4wMjg3OFYzNjNIMi4wMTkxOEMwLjkwNDAyIDM2MyAwIDM2Mi4xMDUgMCAzNjFWMzAyWiIKICAgICAgICBmaWxsPSJibGFjayIKICAgICAgLz4KICAgICAgPHBhdGgKICAgICAgICBmaWxsLXJ1bGU9ImV2ZW5vZGQiCiAgICAgICAgY2xpcC1ydWxlPSJldmVub2RkIgogICAgICAgIGQ9Ik0wIDIyM0MwIDIyMS44OTUgMC45MDQwMiAyMjEgMi4wMTkxOCAyMjFIMy4wMjg3OFYyODRHMi4wMTkxOEMwLjkwNDAyIDI4NCAwIDI4My4xMDUgMCAyODJWMjIzWiIKICAgICAgICBmaWxsPSJibGFjayIKICAgICAgLz4KICAgICAgPHBhdGgKICAgICAgICBmaWxsLXJ1bGU9ImV2ZW5vZGQiCiAgICAgICAgY2xpcC1ydWxlPSJldmVub2RkIgogICAgICAgIGQ9Ik0wIDE2MkMwIDE2MC44OTUgMC45MDQwMiAxNjAgMi4wMTkxOCAxNjBIMy4wMjg3OFYxOTNIMi4wMTkxOEMwLjkwNDAyIDE5MyAwIDE5Mi4xMDUgMCAxOTFWMTYyWiIKICAgICAgICBmaWxsPSJibGFjayIKICAgICAgLz4KICAgICAgPHJlY3QKICAgICAgICB4PSIxNTAiCiAgICAgICAgeT0iMzAiCiAgICAgICAgd2lkdGg9IjEyMCIKICAgICAgICBoZWlnaHQ9IjM1IgogICAgICAgIHJ4PSIxNy41IgogICAgICAgIGZpbGw9ImJsYWNrIgogICAgICAvPgogICAgICA8cmVjdAogICAgICAgIHg9IjI0NCIKICAgICAgICB5PSI0MSIKICAgICAgICB3aWR0aD0iMTMiCiAgICAgICAgaGVpZ2h0PSIxMyIKICAgICAgICByeD0iNi41IgogICAgICAgIGZpbGw9ImJsYWNrIgogICAgICAgIGZpbGwtb3BhY2l0eT0iMC4xIgogICAgICAvPgogICAgPC9zdmc+")`,
+              backgroundImage: `url("data:image/svg+xml;base64,PHN2ZwogICAgICB3aWR0aD0iNDIxIgogICAgICBoZWlnaHQ9Ijg1MiIKICAgICAgdmlld0JveD0iMCAwIDQyMSA4NTIiCiAgICAgIGZpbGw9Im5vbmUiCiAgICAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgID4KICAgICAgPHBhdGgKICAgICAgICBmaWxsLXJ1bGU9ImV2ZW5vZGQiCiAgICAgICAgY2xpcC1ydWxlPSJldmVub2RkIgogICAgICAgIGQ9Ik03MyAwSDM0OEMzODYuNjYgMCA0MTggMzEuMzQwMSA0MTggNzBWNzgyQzQxOCA4MjAuNjYgMzg2LjY2IDg1MiAzNDggODUySDczQzM0LjM0MDEgODUyIDMgODIwLjY2IDMgNzgyVjcwQzMgMzEuMzQwMSAzNC4zNDAxIDAgNzMgMFpNMzQ4IDZINzNDMzcuNjUzOCA2IDkgMzQuNjUzOCA5IDcwVjc4MkM5IDgxNy4zNDYgMzcuNjUzOCA4NDYgNzMgODQ2SDM0OEMzODMuMzQ2IDg0NiA0MTIgODE3LjM0NiA0MTIgNzgyVjcwQzQxMiAzNC42NTM4IDM4My4zNDYgNiAzNDggNloiCiAgICAgICAgZmlsbD0iYmxhY2siCiAgICAgIC8+CiAgICAgIDxyZWN0CiAgICAgICAgeD0iMzE4IgogICAgICAgIHdpZHRoPSIxMCIKICAgICAgICBoZWlnaHQ9IjYiCiAgICAgICAgZmlsbD0iYmxhY2siCiAgICAgICAgZmlsbC1vcGFjaXR5PSIwLjIiCiAgICAgIC8+CiAgICAgIDxyZWN0CiAgICAgICAgeD0iOTMiCiAgICAgICAgeT0iODQ2IgogICAgICAgIHdpZHRoPSIxMCIKICAgICAgICBoZWlnaHQ9IjYiCiAgICAgICAgZmlsbD0iYmxhY2siCiAgICAgICAgZmlsbC1vcGFjaXR5PSIwLjIiCiAgICAgIC8+CiAgICAgIDxyZWN0CiAgICAgICAgeD0iMyIKICAgICAgICB5PSI5MCIKICAgICAgICB3aWR0aD0iNiIKICAgICAgICBoZWlnaHQ9IjEwIgogICAgICAgIGZpbGw9ImJsYWNrIgogICAgICAgIGZpbGwtb3BhY2l0eT0iMC4yIgogICAgICAvPgogICAgICA8cmVjdAogICAgICAgIHg9IjQxMiIKICAgICAgICB5PSI5MCIKICAgICAgICB3aWR0aD0iNiIKICAgICAgICBoZWlnaHQ9IjEwIgogICAgICAgIGZpbGw9ImJsYWNrIgogICAgICAgIGZpbGwtb3BhY2l0eT0iMC4yIgogICAgICAvPgogICAgICA8cmVjdAogICAgICAgIHg9IjMiCiAgICAgICAgeT0iNzUyIgogICAgICAgIHdpZHRoPSI2IgogICAgICAgIGhlaWdodD0iMTAiCiAgICAgICAgZmlsbD0iYmxhY2siCiAgICAgICAgZmlsbC1vcGFjaXR5PSIwLjIiCiAgICAgIC8+CiAgICAgIDxyZWN0CiAgICAgICAgeD0iNDEyIgogICAgICAgIHk9Ijc1MiIKICAgICAgICB3aWR0aD0iNiIKICAgICAgICBoZWlnaHQ9IjEwIgogICAgICAgIGZpbGw9ImJsYWNrIgogICAgICAgIGZpbGwtb3BhY2l0eT0iMC4yIgogICAgICAvPgogICAgICA8cGF0aAogICAgICAgIGZpbGwtcnVsZT0iZXZlbm9kZCIKICAgICAgICBjbGlwLXJ1bGU9ImV2ZW5vZGQiCiAgICAgICAgZD0iTTQxNy45NzEgMjY2SDQxOC45ODFDNDIwLjA5NiAyNjYgNDIxIDI2Ni44OTUgNDIxIDI2OFYzNjRDNDIxIDM2NS4xMDUgNDIwLjA5NiAzNjYgNDE4Ljk4MSAzNjZINDE3Ljk3MVYyNjZaIgogICAgICAgIGZpbGw9ImJsYWNrIgogICAgICAvPgogICAgICA8cGF0aAogICAgICAgIGZpbGwtcnVsZT0iZXZlbm9kZCIKICAgICAgICBjbGlwLXJ1bGU9ImV2ZW5vZGQiCiAgICAgICAgZD0iTTAgMzAyQzAgMzAwLjg5NSAwLjkwNDAyIDMwMCAyLjAxOTE4IDMwMEgzLjAyODc4VjM2M0gyLjAxOTE4QzAuOTA0MDIgMzYzIDAgMzYyLjEwNSAwIDM2MVYzMDJaIgogICAgICAgIGZpbGw9ImJsYWNrIgogICAgICAvPgogICAgICA8cGF0aAogICAgICAgIGZpbGwtcnVsZT0iZXZlbm9kZCIKICAgICAgICBjbGlwLXJ1bGU9ImV2ZW5vZGQiCiAgICAgICAgZD0iTTAgMjIzQzAgMjIxLjg5NSAwLjkwNDAyIDIyMSAyLjAxOTE4IDIyMUgzLjAyODc4VjI4NEcyLjAxOTE4QzAuOTA0MDIgMjg0IDAgMjgzLjEwNSAwIDI4MlYyMjNaIgogICAgICAgIGZpbGw9ImJsYWNrIgogICAgICAvPgogICAgICA8cGF0aAogICAgICAgIGZpbGwtcnVsZT0iZXZlbm9kZCIKICAgICAgICBjbGlwLXJ1bGU9ImV2ZW5vZGQiCiAgICAgICAgZD0iTTAgMTYyQzAgMTYwLjg5NSAwLjkwNDAyIDE2MCAyLjAxOTE4IDE2MEgzLjAyODc4VjE5M0gyLjAxOTE4QzAuOTA0MDIgMTkzIDAgMTkyLjEwNSAwIDE5MVYxNjJaIgogICAgICAgIGZpbGw9ImJsYWNrIgogICAgICAvPgogICAgPC9zdmc+Cg==")`,
                 backgroundSize: 'contain',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat'
@@ -72,7 +72,7 @@ const HeroSection = () => {
 
             {/* Screen Content (Chat UI) */}
          {/* Screen Content (Single Image) */}
-<div className="w-full max-w-[250px] lg:max-w-[320px] bg-[#262626] h-[520px] lg:h-[630px] rounded-[35px] lg:rounded-[45px] overflow-hidden shadow-2xl relative z-10 mt-2 mx-auto">
+<div className="w-full max-w-[250px] lg:max-w-[320px] bg-[#262626] h-[520px] lg:h-[630px] rounded-[35px] lg:rounded-[45px] overflow-hidden shadow-2xl relative z-10 mt-1 md:mt-2 mx-auto">
   
   <img 
     src="/hero.png" 
