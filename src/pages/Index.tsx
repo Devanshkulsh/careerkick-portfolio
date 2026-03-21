@@ -12,6 +12,7 @@ import ContactSection from "@/components/sections/ContactSection";
 import FooterSection from "@/components/sections/FooterSection";
 import { DataShow } from "@/components/sections/DataShow";
 import CTASection from "@/components/sections/CTASection";
+import SocialPresence from "@/components/sections/SocialPresence";
 
 const Index = () => {
   return (
@@ -29,6 +30,7 @@ const Index = () => {
       <DataShow/>
       <ContactSection />
       <CTASection />
+      <SocialPresence />
     </div>
   );
 };
