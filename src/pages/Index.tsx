@@ -13,6 +13,7 @@ import FooterSection from "@/components/sections/FooterSection";
 import { DataShow } from "@/components/sections/DataShow";
 import CTASection from "@/components/sections/CTASection";
 import SocialPresence from "@/components/sections/SocialPresence";
+import TeamsSection from "@/components/sections/TeamsSection";
 
 const Index = () => {
   return (
@@ -31,6 +32,7 @@ const Index = () => {
       <ContactSection />
       <CTASection />
       <SocialPresence />
+      <TeamsSection />
     </div>
   );
 };
