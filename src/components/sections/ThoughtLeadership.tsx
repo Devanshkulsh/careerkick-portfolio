@@ -12,15 +12,15 @@ type VideoItem = {
 
 const videos: VideoItem[] = [
   {
-    youtubeUrl: "https://youtu.be/Ayap3-NGNEA?si=CA1AP8NcueJtj0Rb",
+    youtubeUrl: "https://youtu.be/iK_aVbifdWI?si=jozOECzmjE8MmRVI",
     title: "BAMS College Growth Strategy",
   },
   {
-    youtubeUrl: "https://youtu.be/Ayap3-NGNEA?si=CA1AP8NcueJtj0Rb",
+    youtubeUrl: "https://youtu.be/tJx9GXogEKE?si=9zZveCOmwW8pr50S",
     title: "Admission Funnel Optimization",
   },
   {
-    youtubeUrl: "https://youtu.be/Ayap3-NGNEA?si=CA1AP8NcueJtj0Rb",
+    youtubeUrl: "https://youtu.be/1YioTHDU0UA?si=Genw3FHoU5DeoSbX",
     title: "BAMS Branding and Outreach",
   },
 ];

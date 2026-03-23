@@ -1,5 +1,6 @@
 import { AnimatePresence, motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import AdmissionFunnelCard from "@/components/sections/AdmissionFunnelCard";
 
 const positioningTabs = [
   {
@@ -49,32 +50,40 @@ const positioningTabs = [
 const slideVariants = {
   enter: (direction: number) => ({
     opacity: 0,
-    x: direction > 0 ? 160 : -160,
-    scale: 0.94,
-    rotate: direction > 0 ? 2 : -2,
-    filter: "blur(8px)",
+    x: direction > 0 ? 72 : -72,
+    scale: 0.985,
+    filter: "blur(4px)",
   }),
   center: {
     opacity: 1,
     x: 0,
     scale: 1,
-    rotate: 0,
     filter: "blur(0px)",
   },
   exit: (direction: number) => ({
     opacity: 0,
-    x: direction > 0 ? -140 : 140,
-    scale: 1.05,
-    rotate: direction > 0 ? -1 : 1,
-    filter: "blur(7px)",
+    x: direction > 0 ? -56 : 56,
+    scale: 1.01,
+    filter: "blur(3px)",
   }),
+};
+
+const panelTransition = {
+  duration: 0.62,
+  ease: [0.22, 1, 0.36, 1] as const,
 };
 
 const PositioningSection = () => {
   const ref = useRef(null);
+  const funnelCardRef = useRef<HTMLDivElement | null>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+  const funnelInView = useInView(funnelCardRef, {
+    amount: 0.35,
+    margin: "-60px 0px -60px 0px",
+  });
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [funnelChartRun, setFunnelChartRun] = useState(0);
 
   const activeTab = positioningTabs[activeIndex];
 
@@ -83,6 +92,12 @@ const PositioningSection = () => {
     setDirection(index > activeIndex ? 1 : -1);
     setActiveIndex(index);
   };
+
+  useEffect(() => {
+    if (activeIndex === 0 && funnelInView) {
+      setFunnelChartRun((current) => current + 1);
+    }
+  }, [activeIndex, funnelInView]);
 
   return (
     <section ref={ref} id="about" className="section-shell overflow-hidden">
@@ -157,18 +172,24 @@ const PositioningSection = () => {
           />
 
           <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/30 p-1.5 shadow-[0_25px_80px_rgba(0,0,0,0.6)] sm:rounded-3xl sm:p-3">
-            <div className="relative aspect-[5/6] overflow-hidden rounded-[1rem] sm:aspect-[16/10] sm:rounded-[1.35rem] lg:aspect-[2.2/1]">
+            <div
+              className={`relative overflow-hidden rounded-[1rem] sm:rounded-[1.35rem] ${
+                activeIndex === 0
+                  ? "min-h-fit"
+                  : "aspect-[5/6] sm:aspect-[16/10] lg:aspect-[2.2/1]"
+              }`}
+            >
               <motion.div
                 aria-hidden="true"
                 className="absolute -left-16 top-0 h-40 w-40 rounded-full bg-primary/25 blur-3xl sm:-left-20 sm:h-64 sm:w-64"
                 animate={{ x: [0, 80, 0], y: [0, 20, 0] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
               />
               <motion.div
                 aria-hidden="true"
                 className="absolute -bottom-12 right-0 h-44 w-44 rounded-full bg-cyan-500/20 blur-3xl sm:-bottom-16 sm:h-72 sm:w-72"
                 animate={{ x: [0, -60, 0], y: [0, -24, 0] }}
-                transition={{ duration: 8, delay: 0.4, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ duration: 13, delay: 0.6, repeat: Infinity, ease: "easeInOut" }}
               />
 
               <AnimatePresence mode="wait" custom={direction}>
@@ -179,39 +200,53 @@ const PositioningSection = () => {
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  transition={{
-                    duration: 0.85,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="absolute inset-0"
+                  transition={panelTransition}
+                  className={activeIndex === 0 ? "relative" : "absolute inset-0"}
                 >
-                  <motion.img
-                    src={activeTab.image}
-                    alt={activeTab.heading}
-                    className="h-full w-full object-cover"
-                    initial={{ scale: 1.15 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 1.2, ease: "easeOut" }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent" />
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.16),transparent_35%),radial-gradient(circle_at_80%_75%,rgba(163,230,53,0.16),transparent_40%)]" />
+                  {activeIndex === 0 ? (
+                    <motion.div
+                      ref={funnelCardRef}
+                      className="relative p-3 sm:p-5"
+                      initial={{ opacity: 0, y: 18 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.45, ease: "easeOut" }}
+                    >
+                      <AdmissionFunnelCard
+                        animate={funnelInView}
+                        chartKey={`positioning-funnel-${funnelChartRun}`}
+                      />
+                    </motion.div>
+                  ) : (
+                    <>
+                      <motion.img
+                        src={activeTab.image}
+                        alt={activeTab.heading}
+                        className="h-full w-full object-cover"
+                        initial={{ scale: 1.06 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent" />
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.16),transparent_35%),radial-gradient(circle_at_80%_75%,rgba(163,230,53,0.16),transparent_40%)]" />
 
-                  <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.65, delay: 0.2 }}
-                    className="absolute bottom-0 left-0 w-full p-4 sm:p-8 lg:max-w-3xl"
-                  >
-                    <p className="mb-2 text-[0.6rem] uppercase tracking-[0.24em] text-primary sm:text-xs sm:tracking-[0.3em]">
-                      {activeTab.label}
-                    </p>
-                    <h3 className="text-lg font-semibold leading-tight sm:text-3xl lg:text-4xl">
-                      {activeTab.heading}
-                    </h3>
-                    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/80 sm:mt-4 sm:text-base">
-                      {activeTab.description}
-                    </p>
-                  </motion.div>
+                      <motion.div
+                        initial={{ opacity: 0, y: 24 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.08, ease: "easeOut" }}
+                        className="absolute bottom-0 left-0 w-full p-4 sm:p-8 lg:max-w-3xl"
+                      >
+                        <p className="mb-2 text-[0.6rem] uppercase tracking-[0.24em] text-primary sm:text-xs sm:tracking-[0.3em]">
+                          {activeTab.label}
+                        </p>
+                        <h3 className="text-lg font-semibold leading-tight sm:text-3xl lg:text-4xl">
+                          {activeTab.heading}
+                        </h3>
+                        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/80 sm:mt-4 sm:text-base">
+                          {activeTab.description}
+                        </p>
+                      </motion.div>
+                    </>
+                  )}
                 </motion.div>
               </AnimatePresence>
             </div>

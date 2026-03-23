@@ -36,12 +36,17 @@ const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled || menuOpen ? "glass py-3" : "py-4 sm:py-5"
+        scrolled || menuOpen
+          ? "glass py-3"
+          : "border-b border-white/10 bg-black/30 py-4 backdrop-blur-xl sm:py-5"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between gap-4">
-          <a href="#" className="flex items-center">
+          <a
+            href="#"
+            className="flex items-center rounded-full border border-white/10 bg-black/45 px-3 py-2 shadow-[0_8px_30px_rgba(0,0,0,0.18)] backdrop-blur-md"
+          >
             <img
               src="/logo-bg.png"
               alt="CareerKick"

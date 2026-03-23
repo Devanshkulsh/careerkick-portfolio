@@ -15,6 +15,10 @@ import CTASection from "@/components/sections/CTASection";
 import SocialPresence from "@/components/sections/SocialPresence";
 import TeamsSection from "@/components/sections/TeamsSection";
 import ThoughtLeadership from "@/components/sections/ThoughtLeadership";
+import SmoothManagementSection from "@/components/sections/SmoothManagementSection";
+import ValueAddedServices from "@/components/sections/ValueAddedServices";
+import AdmissionProcessSection from "@/components/sections/AdmissionProcessSection";
+import PromoteCollege from "@/components/sections/PromoteCollege";
 
 const Index = () => {
   return (
@@ -34,7 +38,12 @@ const Index = () => {
       <CTASection />
       <SocialPresence />
       <ThoughtLeadership />
+      <PromoteCollege />
+      <SmoothManagementSection />
+      <ValueAddedServices />
       {/* <TeamsSection /> */}
+      <AdmissionProcessSection />
+      <FooterSection />
     </div>
   );
 };
