@@ -283,9 +283,37 @@ const BenefitsSection = () => {
         </div>
 
         <div className="mx-auto mt-10 max-w-6xl sm:mt-14">
+          <div className="sm:hidden">
+            <div className="px-1 text-center">
+              <span className="section-kicker">Transformation Journey</span>
+              <h3 className="mt-2 text-xl font-bold leading-tight">
+                Taking colleges from a quiet start to{" "}
+                <span className="text-primary text-glow">credible growth</span>
+              </h3>
+            </div>
+
+            <div className="mt-5 space-y-4">
+              <motion.div
+                initial={{ opacity: 0, x: -36 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.55, ease: "easeOut", delay: 0.1 }}
+              >
+                <StoryCard data={cards[0]} />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 36 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.55, ease: "easeOut", delay: 0.2 }}
+              >
+                <StoryCard data={cards[1]} showAccent />
+              </motion.div>
+            </div>
+          </div>
+
           <div
             ref={storyRef}
-            className="relative"
+            className="relative hidden sm:block"
             style={{
               height: `${STORY_SCROLL_SCREENS * 100}vh`,
               minHeight: `${STORY_SCROLL_SCREENS * 100}svh`,

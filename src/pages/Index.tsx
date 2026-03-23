@@ -14,6 +14,7 @@ import { DataShow } from "@/components/sections/DataShow";
 import CTASection from "@/components/sections/CTASection";
 import SocialPresence from "@/components/sections/SocialPresence";
 import TeamsSection from "@/components/sections/TeamsSection";
+import ThoughtLeadership from "@/components/sections/ThoughtLeadership";
 
 const Index = () => {
   return (
@@ -32,7 +33,8 @@ const Index = () => {
       <ContactSection />
       <CTASection />
       <SocialPresence />
-      <TeamsSection />
+      <ThoughtLeadership />
+      {/* <TeamsSection /> */}
     </div>
   );
 };

@@ -60,7 +60,7 @@ const revenueBars = [
 ];
 
 const milestones = [
-  { label: "Seat fill rate", value: "88%" },
+  { label: "Seat fill rate", value: "100%" },
   { label: "Decision cycle", value: "45 days" },
   { label: "Counselling gain", value: "2.4x" },
 ];
