@@ -118,8 +118,8 @@ const PositioningSection = () => {
             </span>
           </h2>
           <p className="section-copy max-w-2xl mx-auto">
-            We combine strategic marketing, deep domain expertise, and institutional partnerships
-            to transform how Ayurveda colleges attract, enroll, and retain students across India.
+            Complete Branding& Marketing Solution Tailor-Made to Achieve 100% Seat Occupancy
+
           </p>
         </motion.div>
 

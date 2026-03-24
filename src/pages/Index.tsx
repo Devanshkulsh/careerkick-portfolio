@@ -19,6 +19,7 @@ import SmoothManagementSection from "@/components/sections/SmoothManagementSecti
 import ValueAddedServices from "@/components/sections/ValueAddedServices";
 import AdmissionProcessSection from "@/components/sections/AdmissionProcessSection";
 import PromoteCollege from "@/components/sections/PromoteCollege";
+import SuccessStories from "@/components/sections/SuccessStories";
 
 const Index = () => {
   return (
@@ -40,9 +41,10 @@ const Index = () => {
       <ThoughtLeadership />
       <PromoteCollege />
       <SmoothManagementSection />
-      <ValueAddedServices />
+      {/* <ValueAddedServices /> */}
       {/* <TeamsSection /> */}
       <AdmissionProcessSection />
+      <SuccessStories />
       <FooterSection />
     </div>
   );

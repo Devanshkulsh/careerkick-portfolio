@@ -43,19 +43,19 @@ const benefits: BenefitItem[] = [
   {
     icon: CheckCircle,
     title: "100% Seat Fulfillment",
-    desc: "Guaranteed full enrollment capacity through our proven funnel system.",
+    desc: "Fill all seats with deserving candidates efficiently.",
     stat: "100%",
   },
   {
     icon: TrendingUp,
     title: "Reputation Growth",
-    desc: "Elevate brand perception among students, parents, and governing bodies.",
+    desc: "Build brand visibility and credibility in the market.",
     stat: "3x",
   },
   {
     icon: Shield,
     title: "Operational Efficiency",
-    desc: "Reduce administrative costs and improve admission cycle time by 60%.",
+    desc: "Simplified and organized admission workflows.",
     stat: "60%",
   },
 ];
@@ -255,7 +255,7 @@ const BenefitsSection = () => {
         >
           <span className="section-kicker">Why CareerKick</span>
           <h2 className="section-title">
-            Measurable <span className="text-primary text-glow">Benefits</span>
+            BENEFITS OF PARTNERING WITH <span className="text-primary text-glow">CAREERKICK</span>
           </h2>
         </motion.div>
 

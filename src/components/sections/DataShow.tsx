@@ -38,19 +38,18 @@ export function DataShow() {
             <div className="text-center space-y-4 pb-10 ">
 
               <h2 className="text-4xl sm:text-3xl md:text-4xl font-semibold text-foreground leading-tight">
-                Powering Admissions with  
+                CAREERKICK NEET
                 <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-                  {" "}CareerKick LMS
+                  {" "}YouTube Channel
                 </span>
               </h2>
 
               <p className="text-base sm:text-base text-muted-foreground max-w-2xl mx-auto">
-                A smart Lead Management System designed to streamline student
-                admissions, track inquiries, and boost conversions - all in one place.
+                We have 100+ BAMS influencers where we publish college video to build a authentic brand
               </p>
 
               <div className="inline-block px-4 py-2 text-base tracking-widest border border-primary/20 text-primary/80 rounded-full backdrop-blur-md bg-primary/10 sm:px-3 sm:py-1 sm:text-xs">
-                LMS - LEADS - AUTOMATION
+                YOUTUBE - GUIDANCE - UPDATES
               </div>
             </div>
           }
@@ -61,7 +60,7 @@ export function DataShow() {
             </a>
           }
 
-          src={`/desktop.png`}
+          src={`/mac.png`}
           showGradient={true}
         />
       </div>

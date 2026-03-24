@@ -68,10 +68,10 @@ export default function SmoothManagementSection(): JSX.Element {
         >
           <span className="section-kicker">Execution Support</span>
           <h2 className="section-title mt-4">
-            We Make Operations <span className="text-primary text-glow">Smooth</span>
+            WE MAKE THINGS VERY <span className="text-primary text-glow">SMOOTH</span>
           </h2>
           <p className="section-copy mx-auto mt-4 max-w-3xl">
-            We appoint 3 to 4 dedicated team members for the full year in every partner college, ensuring day-to-day execution, admission coordination, and brand-building stay consistent throughout the cycle.
+            We Appoint 3 - 4 Team Members (For Complete Year) In Each College We Partner
           </p>
           <p className="mt-5 text-xs font-semibold uppercase tracking-[0.22em] text-primary/80 sm:mt-6 sm:text-base">
             Who Manages

@@ -77,7 +77,7 @@ const PerformanceGraph = () => {
         >
           <span className="section-kicker">Growth Trajectory</span>
           <h2 className="section-title">
-            Exponential <span className="text-primary text-glow">Impact</span>
+            WHAT WE HAVE DONE IN THE <span className="text-primary text-glow">PAST</span>
           </h2>
         </motion.div>
 
@@ -91,9 +91,6 @@ const PerformanceGraph = () => {
             <div>
               <p className="text-xs uppercase tracking-[0.28em] text-primary/80 sm:text-sm">
                 Performance Momentum
-              </p>
-              <p className="mt-2 max-w-md text-sm text-muted-foreground sm:text-base">
-                Four yearly trajectories plotted together so the acceleration is visible at every stage.
               </p>
             </div>
             <div className="hidden rounded-2xl border border-primary/20 bg-primary/10 px-4 py-3 text-right sm:block">

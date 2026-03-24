@@ -6,17 +6,17 @@ const pillars = [
   {
     icon: Target,
     title: "Strategic Admission Support",
-    desc: "End-to-end NEET student funnel from awareness to enrollment with data-driven targeting.",
+    desc: "Targeted student outreach based on NEET ranks.",
   },
   {
     icon: Megaphone,
     title: "Branding & Marketing",
-    desc: "Building institutional reputation through digital-first storytelling and multi-channel campaigns.",
+    desc: "Positioning colleges as top choices for BAMS aspirants.",
   },
   {
     icon: Settings,
     title: "Process Optimization",
-    desc: "Streamlined operations, CRM deployment, and conversion tracking for measurable outcomes.",
+    desc: "Organizing admission processes for transparency and efficiency.",
   },
 ];
 
