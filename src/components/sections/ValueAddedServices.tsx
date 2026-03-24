@@ -139,7 +139,7 @@ export default function ValueAddedServices(): JSX.Element {
               return (
                 <div key={service.id}>
                   <div
-                    className={`absolute -translate-x-1/2 -translate-y-1/2 transition-transform hover:scale-105 ${pinPositionClasses[service.position]}`}
+                    className={`absolute -translate-x-1/2 -translate-y-[95%] transition-transform hover:scale-105 ${pinPositionClasses[service.position]}`}
                   >
                     <div className="relative flex h-[102px] w-[78px] items-start justify-center rounded-t-[999px] rounded-b-[2.4rem] bg-primary shadow-[0_20px_50px_rgba(196,255,59,0.18)]">
                       <div className="mt-3 flex h-14 w-14 items-center justify-center rounded-full bg-white text-slate-900">
