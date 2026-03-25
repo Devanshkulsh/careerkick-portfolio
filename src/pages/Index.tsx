@@ -38,7 +38,7 @@ const Index = () => {
       <ThoughtLeadership />
       <DataShow/>
       {/* <CaseStudiesSection /> */}
-      <PromoteCollege />
+      {/* <PromoteCollege /> */}
       <ClientGraph />
       <BenefitsSection />
       <AchievementsSection />

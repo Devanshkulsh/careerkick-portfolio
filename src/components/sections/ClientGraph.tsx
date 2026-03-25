@@ -23,7 +23,7 @@ const resetData = clientGrowthData.map((point) => ({
 
 const chartConfig = {
   clients: {
-    label: "No. of clients",
+    label: "No. of admissions",
     color: "hsl(var(--primary))",
   },
 } as const;
@@ -45,9 +45,9 @@ const ClientGraph = () => {
           transition={{ duration: 0.7 }}
           className="section-heading"
         >
-          <span className="section-kicker">Client Growth</span>
+          <span className="section-kicker">Admission Growth</span>
           <h2 className="section-title">
-            YEAR-WISE <span className="text-primary text-glow">CLIENT EXPANSION</span>
+            YEAR-WISE <span className="text-primary text-glow">ADMISSION GROWTH</span>
           </h2>
         </motion.div>
 
@@ -60,7 +60,7 @@ const ClientGraph = () => {
           <div className="mb-4 flex items-start justify-between gap-4 sm:mb-6">
             <div>
               <p className="text-[10px] uppercase tracking-widest text-primary/80 sm:text-sm sm:tracking-[0.28em]">
-                2019 to 2026 trajectory
+                2019 to 2026 admissions trajectory
               </p>
             </div>
           </div>
@@ -108,7 +108,7 @@ const ClientGraph = () => {
                         const label = item.payload?.isExpected ? "7000+ (Expected)" : `${value}`;
                         return (
                           <div className="flex min-w-[9rem] items-center justify-between gap-2 sm:min-w-[11rem] sm:gap-3">
-                            <span className="text-xs text-muted-foreground sm:text-sm">No. of clients</span>
+                            <span className="text-xs text-muted-foreground sm:text-sm">No. of admissions</span>
                             <span className="font-mono text-xs font-semibold text-foreground sm:text-sm">{label}</span>
                           </div>
                         );
@@ -160,7 +160,7 @@ const ClientGraph = () => {
 
           <div className="mt-5 flex items-center justify-center gap-2 text-center text-primary sm:mt-8">
             <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5" />
-            <span className="text-xs font-semibold sm:text-sm">Steady year-on-year client momentum</span>
+            <span className="text-xs font-semibold sm:text-sm">Steady year-on-year admission momentum</span>
           </div>
         </motion.div>
       </div>
