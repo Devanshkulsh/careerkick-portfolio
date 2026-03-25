@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import AdmissionFunnelCard from "@/components/sections/AdmissionFunnelCard";
+import AdmissionFunnel from "@/components/sections/AdmissionFunnelCard";
 
 const positioningTabs = [
   {
@@ -76,6 +76,8 @@ const panelTransition = {
 const PositioningSection = () => {
   const ref = useRef(null);
   const funnelCardRef = useRef<HTMLDivElement | null>(null);
+  const tabsScrollRef = useRef<HTMLDivElement | null>(null);
+  const tabButtonRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const funnelInView = useInView(funnelCardRef, {
     amount: 0.35,
@@ -84,13 +86,42 @@ const PositioningSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [funnelChartRun, setFunnelChartRun] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   const activeTab = positioningTabs[activeIndex];
 
+  const scrollTabsForIndex = (index: number, movingForward: boolean) => {
+    if (!isMobile) return;
+
+    const container = tabsScrollRef.current;
+    const previousButton = tabButtonRefs.current[activeIndex];
+    const targetButton = tabButtonRefs.current[index];
+    if (!container || !previousButton || !targetButton) return;
+
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    if (maxScroll <= 0) return;
+
+    const computedStyle = window.getComputedStyle(container);
+    const gap = Number.parseFloat(computedStyle.columnGap || computedStyle.gap || "0") || 0;
+
+    // Shift the strip by one tab "slot" each step so users discover additional tabs.
+    const step = movingForward
+      ? previousButton.offsetWidth + gap
+      : targetButton.offsetWidth + gap;
+    const nextScrollLeft = container.scrollLeft + (movingForward ? step : -step);
+
+    container.scrollTo({
+      left: Math.max(0, Math.min(nextScrollLeft, maxScroll)),
+      behavior: "smooth",
+    });
+  };
+
   const handleTabClick = (index: number) => {
     if (index === activeIndex) return;
-    setDirection(index > activeIndex ? 1 : -1);
+    const movingForward = index > activeIndex;
+    setDirection(movingForward ? 1 : -1);
     setActiveIndex(index);
+    scrollTabsForIndex(index, movingForward);
   };
 
   useEffect(() => {
@@ -98,6 +129,28 @@ const PositioningSection = () => {
       setFunnelChartRun((current) => current + 1);
     }
   }, [activeIndex, funnelInView]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 639px)");
+    const onChange = (event: MediaQueryListEvent) => {
+      setIsMobile(event.matches);
+    };
+
+    setIsMobile(mediaQuery.matches);
+    mediaQuery.addEventListener("change", onChange);
+
+    return () => mediaQuery.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const container = tabsScrollRef.current;
+    if (!container) return;
+    if (activeIndex !== 0) return;
+
+    container.scrollTo({ left: 0, behavior: "auto" });
+  }, [activeIndex, isMobile]);
 
   return (
     <section ref={ref} id="about" className="section-shell overflow-hidden">
@@ -119,7 +172,6 @@ const PositioningSection = () => {
           </h2>
           <p className="section-copy max-w-2xl mx-auto">
             Complete Branding& Marketing Solution Tailor-Made to Achieve 100% Seat Occupancy
-
           </p>
         </motion.div>
 
@@ -130,12 +182,18 @@ const PositioningSection = () => {
           className="mt-10 sm:mt-16"
         >
           <div className="-mx-3 px-3 sm:mx-0 sm:px-0">
-            <div className="overflow-x-auto overflow-y-visible py-2 sm:py-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            <div
+              ref={tabsScrollRef}
+              className="overflow-x-auto overflow-y-visible py-2 sm:py-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            >
               <div className="mx-auto flex w-max min-w-full snap-x snap-mandatory justify-start gap-2 pr-3 sm:w-auto sm:min-w-0 sm:flex-wrap sm:justify-center sm:gap-4 sm:pr-0">
               {positioningTabs.map((tab, i) => (
                 <motion.button
                   key={tab.label}
                   type="button"
+                  ref={(element) => {
+                    tabButtonRefs.current[i] = element;
+                  }}
                   onClick={() => handleTabClick(i)}
                   initial={{ opacity: 0, y: 20 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -176,7 +234,7 @@ const PositioningSection = () => {
               className={`relative overflow-hidden rounded-[1rem] sm:rounded-[1.35rem] ${
                 activeIndex === 0
                   ? "min-h-fit"
-                  : "aspect-[5/6] sm:aspect-[16/10] lg:aspect-[2.2/1]"
+                  : "min-h-fit"
               }`}
             >
               <motion.div
@@ -201,17 +259,17 @@ const PositioningSection = () => {
                   animate="center"
                   exit="exit"
                   transition={panelTransition}
-                  className={activeIndex === 0 ? "relative" : "absolute inset-0"}
+                  className="relative"
                 >
                   {activeIndex === 0 ? (
                     <motion.div
                       ref={funnelCardRef}
-                      className="relative p-3 sm:p-5"
+                      className="relative mx-auto flex w-full items-center justify-center p-3 sm:p-5"
                       initial={{ opacity: 0, y: 18 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.45, ease: "easeOut" }}
                     >
-                      <AdmissionFunnelCard
+                      <AdmissionFunnel
                         animate={funnelInView}
                         chartKey={`positioning-funnel-${funnelChartRun}`}
                       />
@@ -221,30 +279,11 @@ const PositioningSection = () => {
                       <motion.img
                         src={activeTab.image}
                         alt={activeTab.heading}
-                        className="h-full w-full object-cover"
+                        className="block h-auto w-full bg-black/30 object-contain"
                         initial={{ scale: 1.06 }}
                         animate={{ scale: 1 }}
                         transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent" />
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.16),transparent_35%),radial-gradient(circle_at_80%_75%,rgba(163,230,53,0.16),transparent_40%)]" />
-
-                      <motion.div
-                        initial={{ opacity: 0, y: 24 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.08, ease: "easeOut" }}
-                        className="absolute bottom-0 left-0 w-full p-4 sm:p-8 lg:max-w-3xl"
-                      >
-                        <p className="mb-2 text-[0.6rem] uppercase tracking-[0.24em] text-primary sm:text-xs sm:tracking-[0.3em]">
-                          {activeTab.label}
-                        </p>
-                        <h3 className="text-lg font-semibold leading-tight sm:text-3xl lg:text-4xl">
-                          {activeTab.heading}
-                        </h3>
-                        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/80 sm:mt-4 sm:text-base">
-                          {activeTab.description}
-                        </p>
-                      </motion.div>
                     </>
                   )}
                 </motion.div>

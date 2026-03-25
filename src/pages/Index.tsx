@@ -20,6 +20,7 @@ import ValueAddedServices from "@/components/sections/ValueAddedServices";
 import AdmissionProcessSection from "@/components/sections/AdmissionProcessSection";
 import PromoteCollege from "@/components/sections/PromoteCollege";
 import SuccessStories from "@/components/sections/SuccessStories";
+import ClientGraph from "@/components/sections/ClientGraph";
 
 const Index = () => {
   return (
@@ -45,6 +46,7 @@ const Index = () => {
       {/* <TeamsSection /> */}
       <AdmissionProcessSection />
       <SuccessStories />
+      <ClientGraph />
       <FooterSection />
     </div>
   );

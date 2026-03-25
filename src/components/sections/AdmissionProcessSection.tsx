@@ -99,8 +99,8 @@ export default function AdmissionProcessSection(): JSX.Element {
           </h2>
         </motion.div>
 
-        <div className="mx-auto mt-12 grid max-w-7xl items-center gap-10 xl:grid-cols-[minmax(0,1.25fr)_minmax(360px,0.75fr)] xl:gap-14">
-          <div className="space-y-5">
+        <div className="mx-auto mt-10 grid max-w-7xl items-center gap-8 sm:mt-12 sm:gap-10 xl:grid-cols-[minmax(0,1.25fr)_minmax(360px,0.75fr)] xl:gap-14">
+          <div className="order-2 space-y-4 sm:space-y-5 xl:order-1">
             {processSteps.map((step, index) => (
               <motion.div
                 key={step.title}
@@ -114,16 +114,16 @@ export default function AdmissionProcessSection(): JSX.Element {
                 className="group"
               >
                 <div className="inline-flex max-w-full items-center rounded-full border border-slate-200 bg-white/95 p-1 shadow-[0_14px_28px_rgba(15,23,42,0.12)] backdrop-blur-sm">
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/15 text-primary">
-                    <Check className="h-4 w-4" strokeWidth={2.8} />
+                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/15 text-primary sm:h-10 sm:w-10">
+                    <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={2.8} />
                   </div>
-                  <p className="px-4 pr-5 text-sm font-bold uppercase tracking-[0.08em] text-slate-950 sm:text-base">
+                  <p className="px-3 pr-4 text-[11px] font-bold uppercase tracking-[0.08em] text-slate-950 sm:px-4 sm:pr-5 sm:text-base">
                     {step.title}
                   </p>
                 </div>
 
-                <div className="mt-2.5 rounded-full border border-slate-200 bg-white/92 px-5 py-4 shadow-[0_14px_28px_rgba(15,23,42,0.1),inset_0_1px_0_rgba(255,255,255,0.96)] transition-transform duration-300 group-hover:translate-x-1 sm:px-6">
-                  <p className="text-sm font-medium leading-relaxed text-slate-800 sm:text-[1.05rem]">
+                <div className="mt-2.5 rounded-[1.25rem] border border-slate-200 bg-white/92 px-4 py-3.5 shadow-[0_14px_28px_rgba(15,23,42,0.1),inset_0_1px_0_rgba(255,255,255,0.96)] transition-transform duration-300 group-hover:translate-x-1 sm:rounded-full sm:px-6 sm:py-4">
+                  <p className="text-[13px] font-medium leading-relaxed text-slate-800 sm:text-[1.05rem]">
                     {step.description}
                   </p>
                 </div>
@@ -135,10 +135,10 @@ export default function AdmissionProcessSection(): JSX.Element {
             initial={{ opacity: 0, x: 36 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative mx-auto w-full max-w-[430px]"
+            className="order-1 relative mx-auto w-full max-w-[430px] xl:order-2"
           >
             <div
-              className="relative min-h-[500px] rounded-[2.25rem] border border-white/85 p-6 shadow-[0_30px_80px_rgba(15,23,42,0.18),inset_0_1px_0_rgba(255,255,255,0.96)]"
+              className="relative min-h-[380px] overflow-hidden rounded-[2rem] border border-white/85 p-4 shadow-[0_30px_80px_rgba(15,23,42,0.18),inset_0_1px_0_rgba(255,255,255,0.96)] sm:min-h-[500px] sm:overflow-visible sm:rounded-[2.25rem] sm:p-6"
               style={{
                 background:
                   "linear-gradient(180deg, rgba(255,255,255,0.84) 0%, rgba(255,255,255,0.62) 100%)",
@@ -148,31 +148,35 @@ export default function AdmissionProcessSection(): JSX.Element {
               <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[#5e7f00]/50 to-transparent" />
               <div className="pointer-events-none absolute right-6 top-6 h-28 w-28 rounded-full bg-sky-100/70 blur-3xl" />
               <div className="pointer-events-none absolute bottom-8 left-6 h-24 w-24 rounded-full bg-emerald-100/60 blur-3xl" />
-              <div className="absolute left-5 top-10 text-primary">
-                <Sparkles className="h-7 w-7" strokeWidth={2.8} />
+              
+              {/* Decorative Icons - Scaled for Mobile */}
+              <div className="absolute left-4 top-6 text-primary sm:left-5 sm:top-10">
+                <Sparkles className="h-5 w-5 sm:h-7 sm:w-7" strokeWidth={2.8} />
               </div>
-              <div className="absolute right-8 top-10 flex items-center gap-3 text-primary">
-                <ArrowRight className="h-10 w-10 text-slate-900" strokeWidth={1.8} />
-                <div className="h-5 w-5 rounded-full bg-primary" />
+              <div className="absolute right-4 top-6 flex items-center gap-1.5 text-primary sm:right-8 sm:top-10 sm:gap-3">
+                <ArrowRight className="h-6 w-6 text-slate-900 sm:h-10 sm:w-10" strokeWidth={1.8} />
+                <div className="h-2.5 w-2.5 rounded-full bg-primary sm:h-5 sm:w-5" />
               </div>
-              <div className="absolute right-4 top-28 flex flex-col items-end gap-3 text-primary">
-                <ArrowDown className="h-10 w-10 text-slate-900" strokeWidth={1.8} />
-                <div className="h-4 w-4 rounded-md bg-primary/80" />
+              <div className="absolute right-3 top-20 flex flex-col items-end gap-1.5 text-primary sm:right-4 sm:top-28 sm:gap-3">
+                <ArrowDown className="h-6 w-6 text-slate-900 sm:h-10 sm:w-10" strokeWidth={1.8} />
+                <div className="h-2.5 w-2.5 rounded-md bg-primary/80 sm:h-4 sm:w-4" />
               </div>
-              <div className="absolute left-4 top-28 text-slate-900">
-                <ArrowDown className="h-10 w-10 rotate-180" strokeWidth={1.8} />
+              <div className="absolute left-3 top-20 text-slate-900 sm:left-4 sm:top-28">
+                <ArrowDown className="h-6 w-6 rotate-180 sm:h-10 sm:w-10" strokeWidth={1.8} />
               </div>
 
-              <div className="mx-auto mt-12 flex h-40 w-32 flex-col items-center justify-center rounded-[1.35rem] border border-slate-200 bg-white text-slate-950 shadow-[0_18px_36px_rgba(15,23,42,0.16)] sm:h-44 sm:w-36">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/15 text-primary">
-                  <BriefcaseBusiness className="h-9 w-9" strokeWidth={2.4} />
+              {/* Central Box - Scaled for Mobile */}
+              <div className="mx-auto mt-8 flex h-28 w-24 flex-col items-center justify-center rounded-[1rem] border border-slate-200 bg-white text-slate-950 shadow-[0_18px_36px_rgba(15,23,42,0.16)] sm:mt-12 sm:h-44 sm:w-36 sm:rounded-[1.35rem]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary sm:h-14 sm:w-14 sm:rounded-2xl">
+                  <BriefcaseBusiness className="h-6 w-6 sm:h-9 sm:w-9" strokeWidth={2.4} />
                 </div>
-                <p className="mt-3 text-center text-sm font-semibold uppercase tracking-[0.14em] text-slate-900">
+                <p className="mt-2 text-center text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-900 sm:mt-3 sm:text-sm">
                   Plan
                 </p>
               </div>
 
-              <div className="relative mt-8 flex items-end justify-center gap-8">
+              {/* People Figures - Scaled natively via Tailwind Origin/Scale */}
+              <div className="relative -mt-10 flex origin-bottom scale-[0.65] items-end justify-center gap-3 pb-2 sm:mt-8 sm:scale-100 sm:gap-8 sm:pb-0">
                 <PersonFigure variant="left" />
                 <PersonFigure variant="right" />
               </div>

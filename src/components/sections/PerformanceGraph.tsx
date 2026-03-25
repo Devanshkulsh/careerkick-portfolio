@@ -44,19 +44,19 @@ const yearSummary = [
 const chartConfig = {
   year2022: {
     label: "2022",
-    color: "hsl(71 62% 38%)",
+    color: "#97B80A",
   },
   year2023: {
     label: "2023",
-    color: "hsl(71 78% 48%)",
+    color: "#C4FF3B",
   },
   year2024: {
     label: "2024",
-    color: "hsl(var(--primary))",
+    color: "#7DD3FC",
   },
   year2025: {
     label: "2025",
-    color: "hsl(71 86% 58%)",
+    color: "#34D399",
   },
 } as const;
 
@@ -68,7 +68,7 @@ const PerformanceGraph = () => {
 
   return (
     <section ref={ref} id="impact" className="section-shell">
-      <div className="container\ mx-auto px-4 sm:px-6">
+      <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
@@ -85,11 +85,11 @@ const PerformanceGraph = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mx-auto max-w-5xl rounded-3xl p-5 glass sm:p-8 lg:p-10"
+          className="mx-auto max-w-5xl rounded-3xl p-4 glass sm:p-8 lg:p-10"
         >
-          <div className="mb-6 flex items-start justify-between gap-4">
+          <div className="mb-4 flex items-start justify-between gap-4 sm:mb-6">
             <div>
-              <p className="text-xs uppercase tracking-[0.28em] text-primary/80 sm:text-sm">
+              <p className="text-[10px] uppercase tracking-widest text-primary/80 sm:text-sm sm:tracking-[0.28em]">
                 Performance Momentum
               </p>
             </div>
@@ -99,30 +99,33 @@ const PerformanceGraph = () => {
             </div>
           </div>
 
-          <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-black/10 px-3 py-4 sm:px-5 sm:py-6">
+          <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-black/10 px-2 py-4 sm:px-5 sm:py-6">
             <div className="pointer-events-none absolute inset-x-8 top-0 h-32 rounded-full bg-primary/15 blur-3xl" />
 
             <ChartContainer config={chartConfig} className="h-[260px] w-full sm:h-[320px]">
               <LineChart
                 key={inView ? "chart-active" : "chart-reset"}
                 data={chartData}
-                margin={{ top: 24, right: 18, left: -18, bottom: 0 }}
+                margin={{ top: 24, right: 14, left: -14, bottom: 0 }}
               >
                 <CartesianGrid vertical={false} strokeDasharray="4 8" />
                 <XAxis
                   dataKey="stage"
                   axisLine={false}
                   tickLine={false}
-                  tickMargin={14}
-                  tick={{ fontSize: 12 }}
+                  tickMargin={10}
+                  minTickGap={15}
+                  tick={{ fontSize: 11 }}
                 />
                 <YAxis
                   axisLine={false}
                   tickLine={false}
-                  tickMargin={12}
+                  tickMargin={8}
+                  width={40}
                   tickFormatter={(value) => `${value}%`}
                   domain={[0, 100]}
                   ticks={[0, 25, 50, 75, 100]}
+                  tick={{ fontSize: 11 }}
                 />
                 <ReferenceLine y={0} stroke="hsl(var(--border))" strokeOpacity={0.6} />
                 <ChartTooltip
@@ -135,9 +138,9 @@ const PerformanceGraph = () => {
                     <ChartTooltipContent
                       indicator="line"
                       formatter={(value, name) => (
-                        <div className="flex min-w-[8rem] items-center justify-between gap-3">
-                          <span className="text-muted-foreground">{name}</span>
-                          <span className="font-mono font-semibold text-foreground">{value}%</span>
+                        <div className="flex min-w-[7rem] items-center justify-between gap-3 sm:min-w-[8rem]">
+                          <span className="text-xs text-muted-foreground sm:text-sm">{name}</span>
+                          <span className="font-mono text-xs font-semibold text-foreground sm:text-sm">{value}%</span>
                         </div>
                       )}
                     />
@@ -170,7 +173,7 @@ const PerformanceGraph = () => {
                     dataKey="year2022"
                     position="top"
                     offset={10}
-                    className="text-[10px] font-semibold"
+                    className="text-[9px] font-semibold sm:text-[10px]"
                     style={{ fill: "var(--color-year2022)" }}
                     formatter={(value: number) => `${value}%`}
                   />
@@ -201,7 +204,7 @@ const PerformanceGraph = () => {
                     dataKey="year2023"
                     position="top"
                     offset={10}
-                    className="text-[10px] font-semibold"
+                    className="text-[9px] font-semibold sm:text-[10px]"
                     style={{ fill: "var(--color-year2023)" }}
                     formatter={(value: number) => `${value}%`}
                   />
@@ -230,9 +233,9 @@ const PerformanceGraph = () => {
                 >
                   <LabelList
                     dataKey="year2024"
-                    position="top"
-                    offset={12}
-                    className="text-xs font-semibold sm:text-sm"
+                    position="bottom"
+                    offset={8}
+                    className="text-[10px] font-semibold sm:text-xs"
                     style={{ fill: "var(--color-year2024)" }}
                     formatter={(value: number) => `${value}%`}
                   />
@@ -262,8 +265,8 @@ const PerformanceGraph = () => {
                   <LabelList
                     dataKey="year2025"
                     position="top"
-                    offset={12}
-                    className="text-xs font-semibold sm:text-sm"
+                    offset={18}
+                    className="text-[10px] font-semibold sm:text-xs"
                     style={{ fill: "var(--color-year2025)" }}
                     formatter={(value: number) => `${value}%`}
                   />
@@ -272,27 +275,27 @@ const PerformanceGraph = () => {
             </ChartContainer>
           </div>
 
-          <div className="mt-6 grid gap-3 sm:mt-8 sm:grid-cols-4">
+          <div className="mt-5 grid grid-cols-2 gap-3 sm:mt-8 sm:grid-cols-4 sm:gap-4">
             {yearSummary.map((item, index) => (
               <motion.div
                 key={item.year}
                 initial={{ opacity: 0, y: 16 }}
                 animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
                 transition={{ duration: 0.45, delay: 0.45 + index * 0.12 }}
-                className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3"
+                className="rounded-2xl border border-white/10 bg-white/5 px-3 py-3 sm:px-4"
               >
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-sm font-medium text-muted-foreground">{item.year}</span>
-                  <span className="text-xs font-semibold tracking-[0.18em] text-primary/80">{item.uplift}</span>
+                <div className="flex items-center justify-between gap-2 sm:gap-3">
+                  <span className="text-xs font-medium text-muted-foreground sm:text-sm">{item.year}</span>
+                  <span className="text-[10px] font-semibold tracking-[0.18em] text-primary/80 sm:text-xs">{item.uplift}</span>
                 </div>
-                <p className="mt-2 text-2xl font-bold text-primary counter-glow">{item.value}%</p>
+                <p className="mt-1 text-xl font-bold text-primary counter-glow sm:mt-2 sm:text-2xl">{item.value}%</p>
               </motion.div>
             ))}
           </div>
 
-          <div className="mt-6 flex items-center justify-center gap-2 text-center text-primary sm:mt-8">
-            <TrendingUp className="h-5 w-5" />
-            <span className="text-sm font-semibold">168% growth in 2 years</span>
+          <div className="mt-5 flex items-center justify-center gap-2 text-center text-primary sm:mt-8">
+            <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5" />
+            <span className="text-xs font-semibold sm:text-sm">168% growth in 2 years</span>
           </div>
         </motion.div>
       </div>

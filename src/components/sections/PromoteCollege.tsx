@@ -18,13 +18,6 @@ const portals: PortalCard[] = [
     imageAlt: "dirayushupneet.in portal preview",
     url: "https://dirayushupneet.in",
   },
-  {
-    name: "bams-admissions.com",
-    traffic: "25000+ users per day",
-    image: "/bams-admissions.png",
-    imageAlt: "bams-admissions.com portal preview",
-    url: "https://bams-admissions.com",
-  },
 ];
 
 export default function PromoteCollege(): JSX.Element {
@@ -58,7 +51,7 @@ export default function PromoteCollege(): JSX.Element {
           </h2>
         </motion.div>
 
-        <div className="mx-auto mt-12 grid max-w-6xl gap-6 lg:grid-cols-2 lg:gap-8">
+        <div className="mx-auto mt-12 grid max-w-3xl gap-6">
           {portals.map((portal, index) => (
             <motion.article
               key={portal.name}
