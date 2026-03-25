@@ -31,22 +31,22 @@ const Index = () => {
       <PerformanceGraph />
       <PartnerMarquee />
       <WorkModelSection />
-      <BenefitsSection />
       <RevenueImpact />
-      <CaseStudiesSection />
-      <AchievementsSection />
-      <DataShow/>
-      <ContactSection />
-      <CTASection />
-      <SocialPresence />
-      <ThoughtLeadership />
-      <PromoteCollege />
       <SmoothManagementSection />
+      <SuccessStories />
+      <AdmissionProcessSection />
+      <ThoughtLeadership />
+      <DataShow/>
+      {/* <CaseStudiesSection /> */}
+      <PromoteCollege />
+      <ClientGraph />
+      <BenefitsSection />
+      <AchievementsSection />
+      <SocialPresence />
       {/* <ValueAddedServices /> */}
       {/* <TeamsSection /> */}
-      <AdmissionProcessSection />
-      <SuccessStories />
-      <ClientGraph />
+      <ContactSection />
+      <CTASection />
       <FooterSection />
     </div>
   );
