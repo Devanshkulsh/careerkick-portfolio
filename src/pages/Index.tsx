@@ -3,7 +3,7 @@ import HeroSection from "@/components/sections/HeroSection";
 import PositioningSection from "@/components/sections/PositioningSection";
 import PerformanceGraph from "@/components/sections/PerformanceGraph";
 import PartnerMarquee from "@/components/sections/PartnerMarquee";
-import WorkModelSection from "@/components/sections/WorkModelSection";
+import HowWork from "@/components/sections/HowWork";
 import BenefitsSection from "@/components/sections/BenefitsSection";
 import RevenueImpact from "@/components/sections/RevenueImpact";
 import CaseStudiesSection from "@/components/sections/CaseStudiesSection";
@@ -20,7 +20,7 @@ import ValueAddedServices from "@/components/sections/ValueAddedServices";
 import AdmissionProcessSection from "@/components/sections/AdmissionProcessSection";
 import PromoteCollege from "@/components/sections/PromoteCollege";
 import SuccessStories from "@/components/sections/SuccessStories";
-import ClientGraph from "@/components/sections/ClientGraph";
+import AdmissionGraph from "@/components/sections/AdmissionGraph";
 
 const Index = () => {
   return (
@@ -28,9 +28,10 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <PositioningSection />
+      <AdmissionGraph />
       <PerformanceGraph />
       <PartnerMarquee />
-      <WorkModelSection />
+      <HowWork />
       <RevenueImpact />
       <SmoothManagementSection />
       <SuccessStories />
@@ -39,7 +40,6 @@ const Index = () => {
       <DataShow/>
       {/* <CaseStudiesSection /> */}
       {/* <PromoteCollege /> */}
-      <ClientGraph />
       <BenefitsSection />
       <AchievementsSection />
       <SocialPresence />

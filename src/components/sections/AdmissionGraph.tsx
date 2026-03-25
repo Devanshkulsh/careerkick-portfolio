@@ -28,7 +28,7 @@ const chartConfig = {
   },
 } as const;
 
-const ClientGraph = () => {
+const AdmissionGraph = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { margin: "-100px" });
 
@@ -168,4 +168,4 @@ const ClientGraph = () => {
   );
 };
 
-export default ClientGraph;
+export default AdmissionGraph;
