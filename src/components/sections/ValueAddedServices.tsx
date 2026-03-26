@@ -1,19 +1,17 @@
-import {
-  BarChart3,
-  ShoppingCart,
-  Users,
-} from "lucide-react";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { BarChart3, ShoppingCart, Users } from "lucide-react";
+import { useRef } from "react";
 
 type Service = {
   id: number;
   title: string;
   points: string[];
-  position: string;
+  position: "top-left" | "bottom-center" | "top-right";
   icon: typeof BarChart3;
 };
 
 const roadPath =
-  "M -40 24 H 222 C 282 24 332 70 332 132 V 226 C 332 284 372 316 428 316 H 550 C 610 316 654 358 654 418 V 462 C 654 542 714 604 794 604 H 848 C 926 604 986 544 986 466 V 374 C 986 316 1028 282 1088 282 H 1320";
+  "M 0 100 H 222 C 282 100 332 146 332 208 V 302 C 332 360 372 392 428 392 H 550 C 610 392 654 434 654 494 V 538 C 654 618 714 680 794 680 H 848 C 926 680 986 620 986 542 V 450 C 986 392 1028 358 1088 358 H 1440";
 
 const services: Service[] = [
   {
@@ -23,183 +21,198 @@ const services: Service[] = [
       "Strategic rebranding to improve visibility.",
       "Organizing student-centric events and activities.",
     ],
-    position: "left",
+    position: "top-left",
     icon: BarChart3,
   },
   {
     id: 2,
-    title: "Ongoing Support",
-    points: ["Dedicated teams for continuous assistance."],
-    position: "right",
-    icon: ShoppingCart,
+    title: "Admission Team Training",
+    points: ["Equipping colege staff with the best practices"],
+    position: "bottom-center",
+    icon: Users,
   },
   {
     id: 3,
-    title: "Admission Team Training",
-    points: ["Equipping college staff with the best practices."],
-    position: "bottom",
-    icon: Users,
+    title: "Ongoing Support",
+    points: ["Dedicated teams for continuous assistance."],
+    position: "top-right",
+    icon: ShoppingCart,
   },
 ];
 
-// Mathematically aligned to sit exactly on the SVG path coordinates
-const pinPositionClasses: Record<string, string> = {
-  left: "left-[25.2%] top-[31.2%]",
-  right: "left-[84.8%] top-[40.2%]",
-  bottom: "left-[64.2%] top-[82.3%]",
-};
-
-// Balanced beside each pin so icons, titles, and bullet text read as a single unit
-const textPositionClasses: Record<string, string> = {
-  left: "left-[32.4%] top-[31.2%] max-w-[25rem]",
-  right: "left-[56.4%] top-[40.2%] max-w-[23rem]",
-  bottom: "left-[30.4%] top-[82.3%] max-w-[27rem]",
+const pinPositions: Record<string, { left: string; top: string }> = {
+  "top-left": { left: "18%", top: "12.5%" },
+  "bottom-center": { left: "55.5%", top: "85%" },
+  "top-right": { left: "75.5%", top: "45%" },
 };
 
 export default function ValueAddedServices(): JSX.Element {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: scrollRef,
+    offset: ["start start", "end end"],
+  });
+
+  const pathLength = useSpring(scrollYProgress, { stiffness: 45, damping: 25 });
+
   return (
-    <section className="section-shell relative overflow-hidden">
-      <div className="absolute left-1/2 top-16 h-36 w-[90%] -translate-x-1/2 rounded-full bg-primary/8 blur-3xl sm:h-44 sm:w-[76%]" />
-      <div className="absolute left-5 top-6 grid grid-cols-5 gap-2 opacity-15 sm:left-8 sm:top-8">
-        {[...Array(15)].map((_, i) => (
-          <div key={i} className="h-1 w-1 rounded-full bg-primary" />
-        ))}
-      </div>
+    // Changed: h-auto on mobile, h-[400vh] only on desktop (md:)
+    <div ref={scrollRef} className="relative h-auto md:h-[400vh] section-shell">
+      {/* Changed: relative on mobile, sticky only on desktop (md:) */}
+      <section className="relative md:sticky top-0 flex h-auto md:h-screen w-full flex-col overflow-hidden pt-12 md:pt-12">
+        <div className="absolute left-1/2 top-1/2 h-[600px] w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-[140px]" />
 
-      <div className="container relative z-10 mx-auto px-4 sm:px-6">
-        <div className="mx-auto max-w-4xl text-center">
-          <span className="section-kicker">Extra Support That Drives Results</span>
-          <h2 className="section-title mt-4 uppercase">
-            Value-Added <span className="text-primary text-glow">Services</span>
-          </h2>
-        </div>
-
-        <div className="relative mx-auto mt-12 hidden max-w-[1320px] md:block lg:mt-16">
-          <div className="relative h-[760px] overflow-visible">
-            <svg
-              className="absolute inset-0 h-full w-full"
-              viewBox="0 0 1280 760"
-              preserveAspectRatio="none"
-              aria-hidden="true"
+        <div className="container relative z-20 mx-auto px-4 flex flex-col h-full">
+          <div className="relative z-30 mx-auto mb-8 md:mb-12 max-w-4xl text-center shrink-0">
+            <motion.span
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] text-primary/80 mb-2 md:mb-3 block"
             >
-              {/* Main Road */}
-              <path
-                d={roadPath}
-                fill="none"
-                stroke="#9a9a9a"
-                strokeWidth="48"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              {/* Road Dashes */}
-              <path
-                d={roadPath}
-                fill="none"
-                stroke="#f4f4f5"
-                strokeWidth="6"
-                strokeDasharray="28 22"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-
-              {/* Decorative Map Arrows */}
-              <path
-                d="M 576 268 Q 625 281 648 318"
-                fill="none"
-                stroke="rgba(255,255,255,0.28)"
-                strokeWidth="2"
-              />
-              <path
-                d="M 637 300 L 648 318 L 628 309"
-                fill="none"
-                stroke="rgba(255,255,255,0.28)"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M 730 350 Q 748 301 786 283"
-                fill="none"
-                stroke="rgba(255,255,255,0.28)"
-                strokeWidth="2"
-              />
-              <path
-                d="M 772 276 L 786 283 L 776 296"
-                fill="none"
-                stroke="rgba(255,255,255,0.28)"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-
-            {services.map((service) => {
-              const Icon = service.icon;
-
-              return (
-                <div key={service.id}>
-                  <div
-                    className={`absolute -translate-x-1/2 -translate-y-[95%] transition-transform hover:scale-105 ${pinPositionClasses[service.position]}`}
-                  >
-                    <div className="relative flex h-[102px] w-[78px] items-start justify-center rounded-t-[999px] rounded-b-[2.4rem] bg-primary shadow-[0_20px_50px_rgba(196,255,59,0.18)]">
-                      <div className="mt-3 flex h-14 w-14 items-center justify-center rounded-full bg-white text-slate-900">
-                        <Icon className="h-6 w-6" strokeWidth={2.2} />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    className={`absolute -translate-y-1/2 ${textPositionClasses[service.position]}`}
-                  >
-                    <h3 className="text-lg font-bold uppercase leading-tight text-primary xl:text-xl">
-                      {service.title}
-                    </h3>
-                    <ul className="mt-2.5 space-y-1.5 pl-5 text-[15px] font-light leading-relaxed text-white/78 xl:text-base">
-                      {service.points.map((point) => (
-                        <li key={point} className="list-disc">
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              );
-            })}
+              The Journey of Support
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="text-2xl md:text-5xl font-extrabold uppercase tracking-tight leading-tight"
+            >
+              Value-Added{" "}
+              <span className="text-primary text-glow">Services</span>
+            </motion.h2>
           </div>
-        </div>
 
-        <div className="mt-8 grid gap-4 sm:mt-10 sm:gap-5 md:hidden">
-          {services.map((service) => {
-            const Icon = service.icon;
+          <div className="relative z-10 mx-auto hidden md:block w-screen -ml-[calc((100vw-100%)/2)] grow overflow-visible">
+            <div className="relative h-full w-full max-w-[1280px] mx-auto overflow-visible">
+              <svg
+                className="absolute inset-0 h-full w-full overflow-visible"
+                viewBox="0 0 1440 800"
+                preserveAspectRatio="none"
+              >
+                <path
+                  d={roadPath}
+                  fill="none"
+                  stroke="#1e293b"
+                  strokeWidth="54"
+                  strokeLinecap="round"
+                />
+                <motion.path
+                  d={roadPath}
+                  fill="none"
+                  stroke="#334155"
+                  strokeWidth="50"
+                  strokeLinecap="round"
+                  style={{ pathLength }}
+                />
+                <motion.path
+                  d={roadPath}
+                  fill="none"
+                  stroke="#f4f4f5"
+                  strokeWidth="2.5"
+                  strokeDasharray="16 24"
+                  style={{ pathLength }}
+                />
+              </svg>
 
-            return (
+              {services.map((service, index) => {
+                const Icon = service.icon;
+                const start = index * 0.3;
+                const end = start + 0.15;
+
+                const opacity = useTransform(pathLength, [start, end], [0, 1]);
+                const scale = useTransform(pathLength, [start, end], [0.9, 1]);
+                const floatY = useTransform(pathLength, [start, end], [15, 0]);
+
+                const isUpside = service.id === 2;
+                const spacing =
+                  service.id === 2
+                    ? "bottom-[200px]"
+                    : isUpside
+                      ? "bottom-[140px]"
+                      : "top-[140px]";
+
+                return (
+                  <div key={service.id}>
+                    <motion.div
+                      style={{
+                        opacity,
+                        scale,
+                        left: pinPositions[service.position].left,
+                        top: pinPositions[service.position].top,
+                      }}
+                      className="absolute -translate-x-1/2 -translate-y-1/2"
+                    >
+                      <div className="relative flex flex-col items-center group">
+                        <motion.div
+                          style={{ y: floatY }}
+                          className={`absolute w-[280px] rounded-2xl border border-white/10 bg-black/20 p-5 shadow-2xl backdrop-blur-xl transition-all duration-500 group-hover:border-primary/35 z-50 ${spacing}`}
+                        >
+                          <h3 className="text-base font-extrabold uppercase tracking-wide text-foreground mb-2">
+                            {service.title}
+                          </h3>
+                          <ul className="space-y-2">
+                            {service.points.map((point) => (
+                              <li
+                                key={point}
+                                className="flex items-start gap-2 text-[13px] font-medium leading-relaxed text-muted-foreground"
+                              >
+                                <span className="h-1.5 w-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                                {point}
+                              </li>
+                            ))}
+                          </ul>
+                          <div
+                            className={`absolute left-1/2 -translate-x-1/2 w-4 h-4 rotate-45 border-white/10 bg-black/20 ${
+                              isUpside
+                                ? "top-full -mt-2 border-r border-b"
+                                : "bottom-full -mb-2 border-l border-t"
+                            }`}
+                          />
+                        </motion.div>
+
+                        <div className="relative flex h-[76px] w-[56px] flex-col items-center justify-start rounded-t-full rounded-b-2xl bg-primary/14 border border-primary/35 p-1.5 backdrop-blur-sm transition-colors group-hover:bg-primary/25">
+                          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-primary">
+                            <Icon size={18} strokeWidth={2.5} />
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Mobile Layout: Static grid, no sticky scroll */}
+          <div className="mt-2 grid grid-cols-1 gap-4 md:hidden pb-20">
+            {services.map((service, index) => (
               <div
                 key={service.id}
-                className="relative overflow-hidden rounded-[1.5rem] border border-white/10 p-4 glass sm:rounded-[1.75rem] sm:p-5"
+                className="rounded-2xl border border-white/10 bg-black/20 p-5 shadow-lg flex flex-col"
               >
-                <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
-                <div className="flex items-start gap-3.5 sm:gap-4">
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary text-slate-900 sm:h-14 sm:w-14 sm:rounded-2xl">
-                    <Icon className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={2.2} />
+                <div className="flex items-center gap-4 mb-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-slate-950">
+                    <service.icon size={20} strokeWidth={2.5} />
                   </div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="text-base font-semibold uppercase leading-tight text-primary sm:text-lg">
-                      {service.title}
-                    </h3>
-                    <ul className="mt-2.5 space-y-1.5 pl-4 text-sm font-light leading-relaxed text-white/75 sm:mt-3 sm:space-y-2 sm:pl-5">
-                      {service.points.map((point) => (
-                        <li key={point} className="list-disc">
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <h3 className="font-black text-foreground uppercase text-sm tracking-wide leading-tight">
+                    {service.title}
+                  </h3>
+                </div>
+                <div className="space-y-2 pl-1">
+                  {service.points.map((p) => (
+                    <div key={p} className="flex items-start gap-3">
+                      <span className="h-1 w-1 rounded-full bg-primary mt-1.5" />
+                      <p className="text-[11px] font-semibold text-muted-foreground leading-relaxed">
+                        {p}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

@@ -10,21 +10,21 @@ const pillars = [
     icon: Target,
     title: "Strategic Admission Support",
     desc: "Targeted student outreach based on NEET ranks and serious admission intent.",
-    image: "/bams-admissions.png",
+    image: "/admission-support.png",
     label: "Admission Support",
   },
   {
     icon: Megaphone,
     title: "Branding & Marketing",
     desc: "Positioning colleges as top choices for BAMS aspirants through sharper visibility and trust.",
-    image: "/hero1.png",
+    image: "/branding.png",
     label: "Branding & Marketing",
   },
   {
     icon: Settings,
     title: "Process Optimization",
     desc: "Organizing admission processes for transparency, faster follow-ups, and better conversion flow.",
-    image: "/desktop.png",
+    image: "/process-optimization.png",
     label: "Process Optimization",
   },
 ];
@@ -69,7 +69,7 @@ const HowWork = () => {
           className="mx-auto mt-12 grid max-w-6xl gap-8 lg:grid-cols-12 lg:items-start"
         >
           {/* Left Column: Tabs */}
-          <div className="flex flex-col gap-4 lg:col-span-5">
+          <div className="order-2 flex flex-col gap-4 lg:order-1 lg:col-span-5">
             <div className="mb-2 hidden lg:block">
               <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary/80">
                 Growth Model
@@ -149,7 +149,7 @@ const HowWork = () => {
           </div>
 
           {/* Right Column: Image Display */}
-          <div className="lg:col-span-7 lg:sticky lg:top-24">
+          <div className="order-1 lg:order-2 lg:col-span-7 lg:sticky lg:top-24">
             <div className="overflow-hidden rounded-[2.5rem] border border-white/10 bg-black/20 p-2 glass sm:p-4">
               <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-black/40">
                 <AnimatePresence mode="wait">

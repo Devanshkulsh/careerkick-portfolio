@@ -7,7 +7,15 @@ import {
   Users,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Bar, BarChart, CartesianGrid, Cell, LabelList, XAxis, YAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  LabelList,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 import {
   ChartContainer,
@@ -176,7 +184,8 @@ const RevenueImpact = () => {
             <div className="mb-6 flex flex-col items-start justify-between gap-4 sm:flex-row">
               <div>
                 <h3 className="mt-2 text-2xl font-bold sm:text-3xl">
-                  A simple <span className="text-primary">BAMS admission funnel</span>
+                  A simple{" "}
+                  <span className="text-primary">BAMS admission funnel</span>
                 </h3>
                 <p className="mt-3 max-w-md text-sm font-light leading-relaxed text-muted-foreground sm:text-base">
                   This graph shows the usual student journey in a BAMS college:

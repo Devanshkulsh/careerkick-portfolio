@@ -29,21 +29,21 @@ const Index = () => {
       <HeroSection />
       <PositioningSection />
       <AdmissionGraph />
-      <PerformanceGraph />
       <PartnerMarquee />
+      <AchievementsSection />
+      <PerformanceGraph />
       <HowWork />
+      <ThoughtLeadership /> 
       <RevenueImpact />
       <SmoothManagementSection />
       <SuccessStories />
       <AdmissionProcessSection />
-      <ThoughtLeadership />
       <DataShow/>
       {/* <CaseStudiesSection /> */}
       {/* <PromoteCollege /> */}
       <BenefitsSection />
-      <AchievementsSection />
+      <ValueAddedServices />
       <SocialPresence />
-      {/* <ValueAddedServices /> */}
       {/* <TeamsSection /> */}
       <ContactSection />
       <CTASection />

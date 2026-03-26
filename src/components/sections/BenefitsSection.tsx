@@ -14,6 +14,7 @@ import {
   Sparkles,
   TrendingUp,
   Users,
+  Rocket,
 } from "lucide-react";
 import { useRef } from "react";
 
@@ -36,7 +37,7 @@ type CardData = {
   summary: string;
   metrics: CardMetric[];
   highlights: string[];
-  icon: typeof Building2;
+  icon: typeof Building2 | typeof BarChart3 | typeof Rocket;
 };
 
 const benefits: BenefitItem[] = [
@@ -62,129 +63,113 @@ const benefits: BenefitItem[] = [
 
 const cards: CardData[] = [
   {
-    eyebrow: "Starting Point",
-    title: "From limited visibility to a stronger foundation",
+    eyebrow: "Benefit 01",
+    title: "Guaranteed 100% Seat Fulfillment",
     subtitle:
-      "Many colleges begin with good academic intent but low market awareness, inconsistent admissions flow, and weak brand recall.",
+      "Fill all seats with deserving candidates efficiently.",
     summary:
-      "Our work starts by creating clarity in positioning, fixing fragmented outreach, and establishing a more reliable structure for admissions growth.",
+      "Our focus is on efficiency—ensuring that every seat is filled by candidates who align with your institution's academic standards and intent.",
     metrics: [
-      { label: "Awareness", value: "Minimal to Noticeable" },
-      { label: "Lead Quality", value: "Scattered to Aligned" },
-      { label: "Process", value: "Manual to Structured" },
+      { label: "Occupancy", value: "Gap to 100%" },
+      { label: "Candidate Quality", value: "Deserving & Verified" },
+      { label: "Efficiency", value: "High-Speed Allotment" },
     ],
     highlights: [
-      "Sharper positioning",
-      "Better inquiry flow",
-      "Stronger internal process",
+      "Targeted seat allocation",
+      "Deserving candidate matching",
+      "Maximum capacity utilization",
     ],
     icon: Building2,
   },
   {
-    eyebrow: "Transformation",
-    title: "From early-stage presence to trusted market momentum",
+    eyebrow: "Benefit 02",
+    title: "Enhanced College Reputation",
     subtitle:
-      "Once the foundation is set, branding, admission systems, and campaign performance begin working together instead of in silos.",
+      "Build brand visibility and credibility in the market.",
     summary:
-      "The outcome is a college that feels more visible, more credible, and far better prepared to convert interest into sustainable admission results.",
+      "The goal is to create long-term brand equity, ensuring your college becomes a recognized name with a strong recall value in a competitive market.",
     metrics: [
-      { label: "Brand Trust", value: "Unclear to Confident" },
-      { label: "Admissions", value: "Slow to Consistent" },
-      { label: "Growth", value: "Reactive to Scalable" },
+      { label: "Brand Visibility", value: "Local to National" },
+      { label: "Market Trust", value: "Emerging to Established" },
+      { label: "Recall", value: "Strong & Positive" },
     ],
     highlights: [
-      "Professional brand perception",
-      "Higher conversion confidence",
-      "Long-term growth readiness",
+      "Premium brand positioning",
+      "Credibility building",
+      "Market-wide visibility",
     ],
     icon: BarChart3,
   },
+  {
+    eyebrow: "Benefit 03",
+    title: "Operational Streamlining",
+    subtitle:
+      "Simplified and organized admission workflows.",
+    summary:
+      "By organizing admission cycles and communication channels, we ensure your team spends less time on paperwork and more time on quality interactions.",
+    metrics: [
+      { label: "Workflow", value: "Manual to Automated" },
+      { label: "Organization", value: "Fragmented to Unified" },
+      { label: "Team Stress", value: "High to Managed" },
+    ],
+    highlights: [
+      "Simplified admission cycles",
+      "Unified data tracking",
+      "Organized stakeholder flow",
+    ],
+    icon: Rocket,
+  },
 ];
 
-const STORY_SCROLL_SCREENS = cards.length + 1.1;
-const TITLE_REVEAL_END = 0.18;
-const REVEAL_START = 0.2;
-const REVEAL_END = 0.76;
+// Refined Scroll Logic
+const STORY_SCROLL_SCREENS = 4;
+const TITLE_FADE = [0, 0.12];
+const STAGE_1 = [0, 0.35, 0.45]; 
+const STAGE_2 = [0.35, 0.5, 0.75, 0.85];
+const STAGE_3 = [0.75, 0.9, 1];
 
-type StoryCardProps = {
-  data: CardData;
-  showAccent?: boolean;
-};
-
-const StoryCard = ({ data, showAccent = false }: StoryCardProps) => {
+const StoryCard = ({ data, showAccent = false }: { data: CardData; showAccent?: boolean }) => {
   const Icon = data.icon;
-
   return (
-    <div className="relative h-full overflow-y-auto rounded-[1.5rem] border border-white/10 glass sm:overflow-hidden sm:rounded-[2rem]">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-primary/10 to-transparent sm:h-40" />
-      <div className="pointer-events-none absolute -right-10 top-8 h-32 w-32 rounded-full bg-primary/10 blur-3xl sm:h-40 sm:w-40" />
-
-      <div className="relative grid min-h-full gap-5 px-4 py-5 sm:h-full sm:gap-8 sm:px-8 sm:py-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-10 lg:py-10">
+    <div className="relative h-full w-full overflow-hidden rounded-[1.5rem] border border-white/10 glass sm:rounded-[2rem]">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-primary/10 to-transparent" />
+      <div className="relative grid h-full gap-5 px-4 py-5 sm:gap-8 sm:px-10 sm:py-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <div>
-          <span className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-primary sm:text-xs">
+          <span className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-primary">
             {data.eyebrow}
           </span>
-
-          <h3 className="mt-3 text-xl font-bold leading-tight sm:mt-4 sm:text-3xl lg:text-4xl">
+          <h3 className="mt-4 text-2xl font-bold leading-tight sm:text-3xl lg:text-4xl">
             {data.title}
           </h3>
-
-          <p className="mt-3 max-w-2xl text-[13px] font-light leading-relaxed text-muted-foreground sm:mt-4 sm:text-base">
+          <p className="mt-4 text-[14px] font-light leading-relaxed text-muted-foreground sm:text-base">
             {data.subtitle}
           </p>
-
-          <p className="mt-3 max-w-2xl text-[13px] font-light leading-relaxed text-foreground/85 sm:mt-4 sm:text-base">
-            {data.summary}
-          </p>
-
-          <div className="mt-5 grid gap-2.5 sm:mt-6 sm:gap-3 sm:grid-cols-3">
-            {data.metrics.map((metric) => (
-              <div
-                key={metric.label}
-                className="rounded-2xl border border-white/10 bg-white/5 px-3 py-3 sm:px-4 sm:py-4"
-              >
-                <p className="text-[11px] uppercase tracking-[0.22em] text-primary/75">
-                  {metric.label}
-                </p>
-                <p className="mt-1.5 text-sm font-semibold text-foreground sm:mt-2 sm:text-base">
-                  {metric.value}
-                </p>
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            {data.metrics.map((m) => (
+              <div key={m.label} className="rounded-2xl border border-white/5 bg-white/5 p-3 sm:p-4">
+                <p className="text-[10px] uppercase tracking-widest text-primary/70">{m.label}</p>
+                <p className="mt-1 text-sm font-bold sm:text-base">{m.value}</p>
               </div>
             ))}
           </div>
         </div>
-
-        <div className="relative h-auto min-h-0 sm:h-full">
-          <div className="grid h-auto gap-3 sm:h-full sm:gap-4">
-            <div className="rounded-[1.4rem] border border-white/10 bg-black/10 p-4 sm:rounded-[1.75rem] sm:p-6">
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-primary/20 bg-primary/10 sm:h-12 sm:w-12 sm:rounded-2xl">
-                  <Icon className="h-5 w-5 text-primary sm:h-6 sm:w-6" />
+        <div className="hidden lg:block">
+           <div className="rounded-[2rem] border border-white/10 bg-black/20 p-8 shadow-2xl">
+              <div className="flex items-center justify-between">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/20">
+                  <Icon className="h-7 w-7 text-primary" />
                 </div>
-                {showAccent ? (
-                  <Sparkles className="h-5 w-5 text-primary/80" />
-                ) : (
-                  <ArrowUpRight className="h-5 w-5 text-primary/70" />
-                )}
+                {showAccent ? <Sparkles className="text-primary/80" /> : <ArrowUpRight className="text-primary/40" />}
               </div>
-
-              <div className="mt-4 space-y-2.5 sm:mt-6 sm:space-y-3">
-                {data.highlights.map((highlight) => (
-                  <div
-                    key={highlight}
-                    className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-3 py-2.5 sm:px-4 sm:py-3"
-                  >
-                    <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 sm:h-8 sm:w-8">
-                      <Users className="h-3.5 w-3.5 text-primary sm:h-4 sm:w-4" />
-                    </div>
-                    <p className="text-[13px] font-medium leading-snug text-foreground sm:text-sm">
-                      {highlight}
-                    </p>
+              <div className="mt-8 space-y-4">
+                {data.highlights.map((h) => (
+                  <div key={h} className="flex items-center gap-4 rounded-xl bg-white/5 p-4">
+                    <Users className="h-5 w-5 text-primary/60" />
+                    <p className="text-sm font-medium">{h}</p>
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
+           </div>
         </div>
       </div>
     </div>
@@ -202,166 +187,77 @@ const BenefitsSection = () => {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 80,
-    damping: 24,
-    mass: 0.45,
+    stiffness: 100,
+    damping: 30,
+    mass: 0.5,
   });
 
-  const titleOpacity = useTransform(
-    smoothProgress,
-    [0, TITLE_REVEAL_END],
-    [0, 1],
-  );
-  const titleY = useTransform(smoothProgress, [0, TITLE_REVEAL_END], [32, 0]);
-  const baseCardScale = useTransform(
-    smoothProgress,
-    [0, REVEAL_END, 1],
-    [1, 1, 1],
-  );
-  const baseCardOpacity = useTransform(
-    smoothProgress,
-    [0, REVEAL_START, REVEAL_END, 1],
-    [1, 1, 0.12, 0.08],
-  );
-  const overlayY = useTransform(
-    smoothProgress,
-    [0, REVEAL_START, REVEAL_END, 1],
-    ["6%", "6%", "-100%", "-100%"],
-  );
-  const overlayScale = useTransform(
-    smoothProgress,
-    [0, REVEAL_START, REVEAL_END],
-    [0.994, 0.994, 1],
-  );
-  const overlayOpacity = useTransform(
-    smoothProgress,
-    [0, REVEAL_START, REVEAL_END],
-    [0.9, 0.9, 1],
-  );
-  const overlayBackdropOpacity = useTransform(
-    smoothProgress,
-    [0, REVEAL_START, REVEAL_END],
-    [0, 0, 1],
-  );
+  // Title Animations
+  const titleOpacity = useTransform(smoothProgress, TITLE_FADE, [0, 1]);
+  const titleY = useTransform(smoothProgress, TITLE_FADE, [20, 0]);
+
+  // Card 1: Static at start, then blurs
+  const card1Scale = useTransform(smoothProgress, [STAGE_1[1], STAGE_1[2]], [1, 0.95]);
+  const card1Blur = useTransform(smoothProgress, [STAGE_1[1], STAGE_1[2]], ["blur(0px)", "blur(12px)"]);
+  const card1Overlay = useTransform(smoothProgress, [STAGE_1[1], STAGE_1[2]], ["rgba(0,0,0,0)", "rgba(0,0,0,0.4)"]);
+
+  // Card 2: Starts at 150% (hidden), moves to 0% (visible), then blurs
+  const card2Y = useTransform(smoothProgress, [STAGE_2[0], STAGE_2[1]], ["150%", "0%"]);
+  const card2Scale = useTransform(smoothProgress, [STAGE_2[2], STAGE_2[3]], [1, 0.95]);
+  const card2Blur = useTransform(smoothProgress, [STAGE_2[2], STAGE_2[3]], ["blur(0px)", "blur(12px)"]);
+  const card2Overlay = useTransform(smoothProgress, [STAGE_2[2], STAGE_2[3]], ["rgba(0,0,0,0)", "rgba(0,0,0,0.4)"]);
+
+  // Card 3: Starts at 150% (hidden), moves to 0% (visible)
+  const card3Y = useTransform(smoothProgress, [STAGE_3[0], STAGE_3[1]], ["150%", "0%"]);
 
   return (
     <section ref={sectionRef} id="why-choose-us" className="section-shell">
       <div className="container mx-auto px-4 sm:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="section-heading"
-        >
-          <span className="section-kicker">Why CareerKick</span>
-          <h2 className="section-title">
-            BENEFITS OF PARTNERING WITH <span className="text-primary text-glow">CAREERKICK</span>
-          </h2>
-        </motion.div>
-
-        <div className="mx-auto grid max-w-5xl gap-4 sm:gap-6 lg:grid-cols-3 lg:gap-8">
-          {benefits.map((benefit, index) => (
-            <motion.div
-              key={benefit.title}
-              initial={{ opacity: 0, y: 50 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.2 + index * 0.15 }}
-              className="rounded-2xl p-6 text-center transition-all duration-500 glass glass-hover group hover:neon-glow sm:p-8"
-            >
-              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 transition-colors group-hover:bg-primary/20 sm:mb-6 sm:h-16 sm:w-16">
-                <benefit.icon className="h-7 w-7 text-primary" />
-              </div>
-              <p className="counter-glow mb-2 text-3xl font-bold text-primary sm:text-4xl">
-                {benefit.stat}
-              </p>
-              <h3 className="mb-3 text-lg font-semibold">{benefit.title}</h3>
-              <p className="text-sm font-light leading-relaxed text-muted-foreground">
-                {benefit.desc}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="mx-auto mt-10 max-w-6xl sm:mt-14">
-          <div className="sm:hidden">
-            <div className="px-1 text-center">
-              <span className="section-kicker">Transformation Journey</span>
-              <h3 className="mt-2 text-xl font-bold leading-tight">
-                Taking colleges from a quiet start to{" "}
-                <span className="text-primary text-glow">credible growth</span>
-              </h3>
-            </div>
-
-            <div className="mt-5 space-y-4">
-              <motion.div
-                initial={{ opacity: 0, x: -36 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.55, ease: "easeOut", delay: 0.1 }}
-              >
-                <StoryCard data={cards[0]} />
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: 36 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.55, ease: "easeOut", delay: 0.2 }}
-              >
-                <StoryCard data={cards[1]} showAccent />
-              </motion.div>
-            </div>
+        <div className="mx-auto max-w-6xl">
+          {/* Mobile Layout */}
+          <div className="space-y-6 sm:hidden">
+            <h3 className="text-center text-xl font-bold">Benefits Of Partenering With <span className="text-primary">Careerkick</span></h3>
+            {cards.map((c, i) => <StoryCard key={i} data={c} showAccent={i > 0} />)}
           </div>
 
-          <div
-            ref={storyRef}
-            className="relative hidden sm:block"
-            style={{
-              height: `${STORY_SCROLL_SCREENS * 100}vh`,
-              minHeight: `${STORY_SCROLL_SCREENS * 100}svh`,
-            }}
-          >
-            <div
-              className="sticky top-0 flex w-full items-center py-3 sm:py-8"
-              style={{ height: "100vh", minHeight: "100svh" }}
-            >
-              <div className="flex w-full flex-col justify-center gap-4 pt-8 sm:gap-8 sm:pt-16 lg:pt-20">
-                <motion.div
-                  style={{ opacity: titleOpacity, y: titleY }}
-                  className="px-3 text-center will-change-transform sm:px-4"
+          {/* Desktop Sticky Scroll */}
+          <div ref={storyRef} className="relative hidden h-[400vh] sm:block">
+            <div className="sticky top-0 flex h-screen w-full flex-col items-center justify-center overflow-hidden">
+              <motion.div style={{ opacity: titleOpacity, y: titleY }} className="mb-12 text-center">
+                <span className="section-kicker">Why Partner With Careerkick</span>
+                <h3 className="mt-2 text-3xl font-bold">
+                  Benefits Of Partenering With <span className="text-primary">Careerkick</span>
+                </h3>
+              </motion.div>
+
+              <div className="relative h-[60vh] w-full max-w-5xl perspective-1000">
+                
+                {/* Card 1 Layer */}
+                <motion.div 
+                  style={{ scale: card1Scale, filter: card1Blur }} 
+                  className="absolute inset-0 z-10 will-change-transform"
                 >
-                  <span className="section-kicker">Transformation Journey</span>
-                  <h3 className="mt-2 text-xl font-bold leading-tight sm:mt-3 sm:text-3xl">
-                    Taking colleges from a quiet start to{" "}
-                    <span className="text-primary text-glow">
-                      credible growth
-                    </span>
-                  </h3>
+                  <StoryCard data={cards[0]} />
+                  <motion.div style={{ backgroundColor: card1Overlay }} className="pointer-events-none absolute inset-0 z-20 rounded-[2rem]" />
                 </motion.div>
 
-                <div className="relative h-[68vh] min-h-0 w-full overflow-hidden sm:h-[62vh] sm:min-h-[520px] lg:h-[70vh]">
-                  <motion.div
-                    style={{ scale: baseCardScale, opacity: baseCardOpacity }}
-                    className="absolute inset-0 z-10 will-change-transform"
-                  >
-                    <StoryCard data={cards[0]} />
-                  </motion.div>
+                {/* Card 2 Layer */}
+                <motion.div 
+                  style={{ y: card2Y, scale: card2Scale, filter: card2Blur }} 
+                  className="absolute inset-0 z-20 shadow-[0_-30px_60px_rgba(0,0,0,0.6)] will-change-transform"
+                >
+                  <StoryCard data={cards[1]} showAccent />
+                  <motion.div style={{ backgroundColor: card2Overlay }} className="pointer-events-none absolute inset-0 z-30 rounded-[2rem]" />
+                </motion.div>
 
-                  <motion.div
-                    style={{
-                      y: overlayY,
-                      scale: overlayScale,
-                      opacity: overlayOpacity,
-                    }}
-                    className="absolute inset-x-0 top-full z-20 h-full shadow-[0_-30px_60px_rgba(0,0,0,0.5)] will-change-transform"
-                  >
-                    <motion.div
-                      style={{ opacity: overlayBackdropOpacity }}
-                      className="absolute inset-0 rounded-[2rem] bg-background/92 backdrop-blur-md"
-                    />
-                    <div className="relative h-full">
-                      <StoryCard data={cards[1]} showAccent />
-                    </div>
-                  </motion.div>
-                </div>
+                {/* Card 3 Layer */}
+                <motion.div 
+                  style={{ y: card3Y }} 
+                  className="absolute inset-0 z-40 shadow-[0_-30px_60px_rgba(0,0,0,0.7)] will-change-transform"
+                >
+                  <StoryCard data={cards[2]} showAccent />
+                </motion.div>
+
               </div>
             </div>
           </div>

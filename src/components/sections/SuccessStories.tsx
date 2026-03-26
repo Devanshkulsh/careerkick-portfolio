@@ -15,9 +15,9 @@ const stories: StoryItem[] = [
     college: "MAHARANA GROUP OF INSTITUTIONS, KANPUR",
     image: "/maharana.webp",
     problem: "Low seat fill rate and lack of market presence.",
-    solution:
-      "Comprehensive branding, admission support, and counseling.",
-    result: "Achieved 100% admissions within one cycle. Increased their fee from 2 Lakhs To 3 Lakhs",
+    solution: "Comprehensive branding, admission support, and counseling.",
+    result:
+      "Achieved 100% admissions within one cycle. Increased their fee from 2 Lakhs To 3 Lakhs",
   },
   {
     college: "MAJOR SD SINGH AYURVEDIC MEDICAL COLLEGE",
@@ -31,9 +31,9 @@ const stories: StoryItem[] = [
     college: "NAIMINATH AYURVEDIC MEDICAL COLLEGE",
     image: "/naiminath.jpg",
     problem: "Inefficient admission processes.",
-    solution:
-      "Process restructuring and targeted campaigns.",
-    result: "Achieved 100% admissions with high-scoring students within a single cycle. Increased their fee from 2 lakhs to Rs.3 lakhs plus Rs.50K as development fees.",
+    solution: "Process restructuring and targeted campaigns.",
+    result:
+      "Achieved 100% admissions with high-scoring students within a single cycle. Increased their fee from 2 lakhs to Rs.3 lakhs plus Rs.50K as development fees.",
   },
 ];
 

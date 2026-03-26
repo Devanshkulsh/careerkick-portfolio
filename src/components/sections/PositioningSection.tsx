@@ -102,13 +102,15 @@ const PositioningSection = () => {
     if (maxScroll <= 0) return;
 
     const computedStyle = window.getComputedStyle(container);
-    const gap = Number.parseFloat(computedStyle.columnGap || computedStyle.gap || "0") || 0;
+    const gap =
+      Number.parseFloat(computedStyle.columnGap || computedStyle.gap || "0") ||
+      0;
 
-    // Shift the strip by one tab "slot" each step so users discover additional tabs.
     const step = movingForward
       ? previousButton.offsetWidth + gap
       : targetButton.offsetWidth + gap;
-    const nextScrollLeft = container.scrollLeft + (movingForward ? step : -step);
+    const nextScrollLeft =
+      container.scrollLeft + (movingForward ? step : -step);
 
     container.scrollTo({
       left: Math.max(0, Math.min(nextScrollLeft, maxScroll)),
@@ -171,7 +173,8 @@ const PositioningSection = () => {
             </span>
           </h2>
           <p className="section-copy max-w-2xl mx-auto">
-            Complete Branding& Marketing Solution Tailor-Made to Achieve 100% Seat Occupancy
+            Complete Branding& Marketing Solution Tailor-Made to Achieve 100%
+            Seat Occupancy
           </p>
         </motion.div>
 
@@ -187,35 +190,39 @@ const PositioningSection = () => {
               className="overflow-x-auto overflow-y-visible py-2 sm:py-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
             >
               <div className="mx-auto flex w-max min-w-full snap-x snap-mandatory justify-start gap-2 pr-3 sm:w-auto sm:min-w-0 sm:flex-wrap sm:justify-center sm:gap-4 sm:pr-0">
-              {positioningTabs.map((tab, i) => (
-                <motion.button
-                  key={tab.label}
-                  type="button"
-                  ref={(element) => {
-                    tabButtonRefs.current[i] = element;
-                  }}
-                  onClick={() => handleTabClick(i)}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.4 + i * 0.08 }}
-                  whileHover={{ y: -4, scale: 1.02 }}
-                  whileTap={{ scale: 0.97 }}
-                  className={`relative snap-start shrink-0 overflow-hidden whitespace-nowrap rounded-full px-3 py-2 text-center text-[11px] transition-all duration-300 sm:px-6 sm:py-3 sm:text-sm ${
-                    activeIndex === i
-                      ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground"
-                  } glass glass-hover`}
-                >
-                  {activeIndex === i && (
-                    <motion.span
-                      layoutId="active-positioning-tab"
-                      className="absolute inset-0 -z-10 rounded-full bg-primary/20"
-                      transition={{ type: "spring", stiffness: 280, damping: 24 }}
-                    />
-                  )}
-                  {tab.label}
-                </motion.button>
-              ))}
+                {positioningTabs.map((tab, i) => (
+                  <motion.button
+                    key={tab.label}
+                    type="button"
+                    ref={(element) => {
+                      tabButtonRefs.current[i] = element;
+                    }}
+                    onClick={() => handleTabClick(i)}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.4 + i * 0.08 }}
+                    whileHover={{ y: -4, scale: 1.02 }}
+                    whileTap={{ scale: 0.97 }}
+                    className={`relative snap-start shrink-0 overflow-hidden whitespace-nowrap rounded-full px-3 py-2 text-center text-[11px] transition-all duration-300 sm:px-6 sm:py-3 sm:text-sm ${
+                      activeIndex === i
+                        ? "text-foreground"
+                        : "text-muted-foreground hover:text-foreground"
+                    } glass glass-hover`}
+                  >
+                    {activeIndex === i && (
+                      <motion.span
+                        layoutId="active-positioning-tab"
+                        className="absolute inset-0 -z-10 rounded-full bg-primary/20"
+                        transition={{
+                          type: "spring",
+                          stiffness: 280,
+                          damping: 24,
+                        }}
+                      />
+                    )}
+                    {tab.label}
+                  </motion.button>
+                ))}
               </div>
             </div>
           </div>
@@ -230,24 +237,27 @@ const PositioningSection = () => {
           />
 
           <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/30 p-1.5 shadow-[0_25px_80px_rgba(0,0,0,0.6)] sm:rounded-3xl sm:p-3">
-            <div
-              className={`relative overflow-hidden rounded-[1rem] sm:rounded-[1.35rem] ${
-                activeIndex === 0
-                  ? "min-h-fit"
-                  : "min-h-fit"
-              }`}
-            >
+            <div className="relative flex min-h-[400px] w-full items-center justify-center overflow-hidden rounded-[1rem] sm:rounded-[1.35rem]">
               <motion.div
                 aria-hidden="true"
                 className="absolute -left-16 top-0 h-40 w-40 rounded-full bg-primary/25 blur-3xl sm:-left-20 sm:h-64 sm:w-64"
                 animate={{ x: [0, 80, 0], y: [0, 20, 0] }}
-                transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 12,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               />
               <motion.div
                 aria-hidden="true"
                 className="absolute -bottom-12 right-0 h-44 w-44 rounded-full bg-cyan-500/20 blur-3xl sm:-bottom-16 sm:h-72 sm:w-72"
                 animate={{ x: [0, -60, 0], y: [0, -24, 0] }}
-                transition={{ duration: 13, delay: 0.6, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 13,
+                  delay: 0.6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               />
 
               <AnimatePresence mode="wait" custom={direction}>
@@ -259,7 +269,7 @@ const PositioningSection = () => {
                   animate="center"
                   exit="exit"
                   transition={panelTransition}
-                  className="relative"
+                  className="relative flex w-full items-center justify-center"
                 >
                   {activeIndex === 0 ? (
                     <motion.div
@@ -275,16 +285,19 @@ const PositioningSection = () => {
                       />
                     </motion.div>
                   ) : (
-                    <>
+                    <div className="flex w-full items-center justify-center p-4">
                       <motion.img
                         src={activeTab.image}
                         alt={activeTab.heading}
-                        className="block h-auto w-full bg-black/30 object-contain"
+                        className="block h-auto w-full max-w-4xl bg-black/30 object-contain"
                         initial={{ scale: 1.06 }}
                         animate={{ scale: 1 }}
-                        transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{
+                          duration: 0.95,
+                          ease: [0.22, 1, 0.36, 1],
+                        }}
                       />
-                    </>
+                    </div>
                   )}
                 </motion.div>
               </AnimatePresence>
