@@ -80,7 +80,10 @@ const VideoCard = ({ youtubeUrl, title }: VideoCardProps) => {
 
 export default function ThoughtLeadership() {
   return (
-    <section className="w-full bg-gradient-to-r from-teal-400 via-yellow-400 to-orange-400 px-4 py-12 sm:px-6 sm:py-20 lg:px-8">
+    <section
+      className="w-full bg-cover bg-center px-4 py-12 sm:px-6 sm:py-20 lg:px-8"
+      style={{ backgroundImage: "url('/bg.jpg')" }}
+    >
       <div className="mx-auto max-w-7xl rounded-2xl bg-white px-5 py-10 shadow-xl sm:rounded-3xl sm:px-12 sm:py-16 lg:py-20">
         <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-14">
           <span className="section-kicker text-emerald-700">
