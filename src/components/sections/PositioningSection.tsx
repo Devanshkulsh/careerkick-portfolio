@@ -12,35 +12,35 @@ const positioningTabs = [
   },
   {
     label: "College Branding",
-    image: "/desktop.png",
+    image: "/college-branding.webp",
     heading: "Brand Storytelling That Builds Trust",
     description:
       "High-impact brand positioning across creative, communication, and digital touchpoints to improve preference and recall.",
   },
   {
     label: "Admission Strategy",
-    image: "/desktop.png",
+    image: "/admission-strategy.webp",
     heading: "Precision Counseling and Conversion Flow",
     description:
       "Counseling-first frameworks with decision-stage messaging to lift seat occupancy and reduce funnel drop-offs.",
   },
   {
     label: "Institutional Growth",
-    image: "/desktop.png",
+    image: "/institutional-growth.webp",
     heading: "Scalable Growth Built with Leadership Teams",
     description:
       "Institution-first planning and execution models that align marketing outcomes with long-term campus growth goals.",
   },
   {
     label: "Student Counseling",
-    image: "/desktop.png",
+    image: "/student-counseling.webp",
     heading: "Human-Centered Guidance Journeys",
     description:
       "Structured counseling pathways that answer parent and student concerns with clarity, confidence, and speed.",
   },
   {
     label: "Digital Outreach",
-    image: "/desktop.png",
+    image: "/digital-outreach.webp",
     heading: "Always-On Multi-Channel Outreach",
     description:
       "Social, content, and paid channel orchestration engineered to keep your institution visible through the full admission cycle.",
@@ -236,8 +236,8 @@ const PositioningSection = () => {
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
           />
 
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/30 p-1.5 shadow-[0_25px_80px_rgba(0,0,0,0.6)] sm:rounded-3xl sm:p-3">
-            <div className="relative flex min-h-[400px] w-full items-center justify-center overflow-hidden rounded-[1rem] sm:rounded-[1.35rem]">
+            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/30 p-1 shadow-[0_25px_80px_rgba(0,0,0,0.6)] sm:rounded-3xl sm:p-2">
+              <div className="relative flex min-h-[320px] w-full items-center justify-center overflow-hidden rounded-[1rem] sm:min-h-[360px] sm:rounded-[1.35rem]">
               <motion.div
                 aria-hidden="true"
                 className="absolute -left-16 top-0 h-40 w-40 rounded-full bg-primary/25 blur-3xl sm:-left-20 sm:h-64 sm:w-64"
@@ -289,7 +289,7 @@ const PositioningSection = () => {
                       <motion.img
                         src={activeTab.image}
                         alt={activeTab.heading}
-                        className="block h-auto w-full max-w-4xl bg-black/30 object-contain"
+                        className="block h-auto w-full max-w-lg bg-black/30 object-contain sm:max-w-xl lg:max-w-2xl"
                         initial={{ scale: 1.06 }}
                         animate={{ scale: 1 }}
                         transition={{
