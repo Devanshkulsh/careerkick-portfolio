@@ -131,41 +131,69 @@ const STAGE_3 = [0.75, 0.9, 1];
 const StoryCard = ({ data, showAccent = false }: { data: CardData; showAccent?: boolean }) => {
   const Icon = data.icon;
   return (
-    <div className="relative h-full w-full overflow-hidden rounded-[1.5rem] border border-white/10 glass sm:rounded-[2rem]">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-primary/10 to-transparent" />
+    <div className="relative h-full w-full overflow-hidden rounded-[1.5rem] border border-slate-300/90 bg-white/92 shadow-[0_18px_40px_rgba(31,41,55,0.12)] backdrop-blur-xl sm:rounded-[2rem]">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-40"
+        style={{
+          background: "linear-gradient(180deg, rgba(94,127,0,0.08) 0%, rgba(255,255,255,0) 100%)",
+        }}
+      />
       <div className="relative grid h-full gap-5 px-4 py-5 sm:gap-8 sm:px-10 sm:py-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <div>
-          <span className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-primary">
+          <span
+            className="inline-flex items-center rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.28em]"
+            style={{
+              border: "1px solid rgba(94,127,0,0.25)",
+              background: "rgba(94,127,0,0.08)",
+              color: "#4d6b00",
+            }}
+          >
             {data.eyebrow}
           </span>
-          <h3 className="mt-4 text-2xl font-bold leading-tight sm:text-3xl lg:text-4xl">
+          <h3 className="mt-4 text-2xl font-bold leading-tight sm:text-3xl lg:text-4xl" style={{ color: "#0f172a" }}>
             {data.title}
           </h3>
-          <p className="mt-4 text-[14px] font-light leading-relaxed text-muted-foreground sm:text-base">
+          <p
+            className="mt-4 text-[14px] font-light leading-relaxed sm:text-base"
+            style={{ color: "#334155" }}
+          >
             {data.subtitle}
           </p>
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
             {data.metrics.map((m) => (
-              <div key={m.label} className="rounded-2xl border border-white/5 bg-white/5 p-3 sm:p-4">
-                <p className="text-[10px] uppercase tracking-widest text-primary/70">{m.label}</p>
-                <p className="mt-1 text-sm font-bold sm:text-base">{m.value}</p>
+              <div key={m.label} className="rounded-2xl border border-slate-200/70 bg-white/70 p-3 sm:p-4">
+                <p className="text-[10px] uppercase tracking-widest" style={{ color: "#5b7c14" }}>
+                  {m.label}
+                </p>
+                <p className="mt-1 text-sm font-bold sm:text-base" style={{ color: "#0f172a" }}>
+                  {m.value}
+                </p>
               </div>
             ))}
           </div>
         </div>
         <div className="hidden lg:block">
-           <div className="rounded-[2rem] border border-white/10 bg-black/20 p-8 shadow-2xl">
+           <div className="rounded-[2rem] border border-slate-300/90 bg-white/92 p-8 shadow-[0_18px_40px_rgba(31,41,55,0.12)]">
               <div className="flex items-center justify-between">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/20">
-                  <Icon className="h-7 w-7 text-primary" />
+                <div
+                  className="flex h-14 w-14 items-center justify-center rounded-2xl"
+                  style={{ background: "rgba(94,127,0,0.14)" }}
+                >
+                  <Icon className="h-7 w-7" style={{ color: "#5e7f00" }} />
                 </div>
-                {showAccent ? <Sparkles className="text-primary/80" /> : <ArrowUpRight className="text-primary/40" />}
+                {showAccent ? (
+                  <Sparkles style={{ color: "rgba(94,127,0,0.8)" }} />
+                ) : (
+                  <ArrowUpRight style={{ color: "rgba(94,127,0,0.5)" }} />
+                )}
               </div>
               <div className="mt-8 space-y-4">
                 {data.highlights.map((h) => (
-                  <div key={h} className="flex items-center gap-4 rounded-xl bg-white/5 p-4">
-                    <Users className="h-5 w-5 text-primary/60" />
-                    <p className="text-sm font-medium">{h}</p>
+                  <div key={h} className="flex items-center gap-4 rounded-xl bg-white/80 p-4">
+                    <Users className="h-5 w-5" style={{ color: "rgba(94,127,0,0.6)" }} />
+                    <p className="text-sm font-medium" style={{ color: "#0f172a" }}>
+                      {h}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -199,24 +227,43 @@ const BenefitsSection = () => {
   // Card 1: Static at start, then blurs
   const card1Scale = useTransform(smoothProgress, [STAGE_1[1], STAGE_1[2]], [1, 0.95]);
   const card1Blur = useTransform(smoothProgress, [STAGE_1[1], STAGE_1[2]], ["blur(0px)", "blur(12px)"]);
-  const card1Overlay = useTransform(smoothProgress, [STAGE_1[1], STAGE_1[2]], ["rgba(0,0,0,0)", "rgba(0,0,0,0.4)"]);
+  const card1Overlay = useTransform(
+    smoothProgress,
+    [STAGE_1[1], STAGE_1[2]],
+    ["rgba(255,255,255,0)", "rgba(255,255,255,0.55)"]
+  );
 
   // Card 2: Starts at 150% (hidden), moves to 0% (visible), then blurs
   const card2Y = useTransform(smoothProgress, [STAGE_2[0], STAGE_2[1]], ["150%", "0%"]);
   const card2Scale = useTransform(smoothProgress, [STAGE_2[2], STAGE_2[3]], [1, 0.95]);
   const card2Blur = useTransform(smoothProgress, [STAGE_2[2], STAGE_2[3]], ["blur(0px)", "blur(12px)"]);
-  const card2Overlay = useTransform(smoothProgress, [STAGE_2[2], STAGE_2[3]], ["rgba(0,0,0,0)", "rgba(0,0,0,0.4)"]);
+  const card2Overlay = useTransform(
+    smoothProgress,
+    [STAGE_2[2], STAGE_2[3]],
+    ["rgba(255,255,255,0)", "rgba(255,255,255,0.55)"]
+  );
 
   // Card 3: Starts at 150% (hidden), moves to 0% (visible)
   const card3Y = useTransform(smoothProgress, [STAGE_3[0], STAGE_3[1]], ["150%", "0%"]);
 
   return (
-    <section ref={sectionRef} id="why-choose-us" className="section-shell">
+    <section
+      ref={sectionRef}
+      id="why-choose-us"
+      className="section-shell"
+      style={{
+        color: "#0f172a",
+        background:
+          "linear-gradient(180deg, rgba(244,250,252,0.98) 0%, rgba(232,242,247,0.98) 100%), radial-gradient(circle at 14% 18%, rgba(255,255,255,0.95) 0%, transparent 24%), radial-gradient(circle at 78% 16%, rgba(175,229,255,0.42) 0%, transparent 28%), radial-gradient(circle at 26% 78%, rgba(214,255,238,0.42) 0%, transparent 28%), radial-gradient(circle at 82% 82%, rgba(184,212,255,0.25) 0%, transparent 26%)",
+      }}
+    >
       <div className="container mx-auto px-4 sm:px-6">
         <div className="mx-auto max-w-6xl">
           {/* Mobile Layout */}
           <div className="space-y-6 sm:hidden">
-            <h3 className="text-center text-xl font-bold">Benefits Of Partenering With <span className="text-primary">Careerkick</span></h3>
+            <h3 className="text-center text-xl font-bold" style={{ color: "#0f172a" }}>
+              Benefits Of Partenering With <span style={{ color: "#5e7f00" }}>Careerkick</span>
+            </h3>
             {cards.map((c, i) => <StoryCard key={i} data={c} showAccent={i > 0} />)}
           </div>
 
@@ -224,9 +271,11 @@ const BenefitsSection = () => {
           <div ref={storyRef} className="relative hidden h-[400vh] sm:block">
             <div className="sticky top-0 flex h-screen w-full flex-col items-center justify-center overflow-hidden">
               <motion.div style={{ opacity: titleOpacity, y: titleY }} className="mb-12 text-center">
-                <span className="section-kicker">Why Partner With Careerkick</span>
-                <h3 className="mt-2 text-3xl font-bold">
-                  Benefits Of Partenering With <span className="text-primary">Careerkick</span>
+                <span className="section-kicker" style={{ color: "#4d6b00" }}>
+                  Why Partner With Careerkick
+                </span>
+                <h3 className="mt-2 text-3xl font-bold" style={{ color: "#0f172a" }}>
+                  Benefits Of Partenering With <span style={{ color: "#5e7f00" }}>Careerkick</span>
                 </h3>
               </motion.div>
 
@@ -244,7 +293,7 @@ const BenefitsSection = () => {
                 {/* Card 2 Layer */}
                 <motion.div 
                   style={{ y: card2Y, scale: card2Scale, filter: card2Blur }} 
-                  className="absolute inset-0 z-20 shadow-[0_-30px_60px_rgba(0,0,0,0.6)] will-change-transform"
+                  className="absolute inset-0 z-20 shadow-[0_-30px_60px_rgba(15,23,42,0.18)] will-change-transform"
                 >
                   <StoryCard data={cards[1]} showAccent />
                   <motion.div style={{ backgroundColor: card2Overlay }} className="pointer-events-none absolute inset-0 z-30 rounded-[2rem]" />
@@ -253,7 +302,7 @@ const BenefitsSection = () => {
                 {/* Card 3 Layer */}
                 <motion.div 
                   style={{ y: card3Y }} 
-                  className="absolute inset-0 z-40 shadow-[0_-30px_60px_rgba(0,0,0,0.7)] will-change-transform"
+                  className="absolute inset-0 z-40 shadow-[0_-30px_60px_rgba(15,23,42,0.22)] will-change-transform"
                 >
                   <StoryCard data={cards[2]} showAccent />
                 </motion.div>
