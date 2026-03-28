@@ -21,6 +21,10 @@ import AdmissionProcessSection from "@/components/sections/AdmissionProcessSecti
 import PromoteCollege from "@/components/sections/PromoteCollege";
 import SuccessStories from "@/components/sections/SuccessStories";
 import AdmissionGraph from "@/components/sections/AdmissionGraph";
+import TestimonialSection from "@/components/sections/TestimonialSection";
+import ScrollToTop from "@/components/sections/ScrollToTop";
+import EventsSection from "@/components/sections/EventsSection";
+import ExpertTeamPortalSection from "@/components/sections/ExpertTeamPortalSection";
 
 const Index = () => {
   return (
@@ -31,23 +35,27 @@ const Index = () => {
       <AdmissionGraph />
       <PartnerMarquee />
       <AchievementsSection />
-      <PerformanceGraph />
+      {/* <PerformanceGraph /> */}
       <HowWork />
-      <ThoughtLeadership /> 
       <RevenueImpact />
       <SmoothManagementSection />
+      <TestimonialSection />
+      <ExpertTeamPortalSection />
       <SuccessStories />
       <AdmissionProcessSection />
-      <DataShow/>
+      <DataShow />
       {/* <CaseStudiesSection /> */}
       {/* <PromoteCollege /> */}
       <BenefitsSection />
       <ValueAddedServices />
+      <ThoughtLeadership />
+      <EventsSection />
       <SocialPresence />
       {/* <TeamsSection /> */}
       <ContactSection />
       <CTASection />
       <FooterSection />
+      <ScrollToTop />
     </div>
   );
 };

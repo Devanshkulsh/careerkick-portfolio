@@ -11,11 +11,15 @@ type StatItem = {
 
 const formatLac = (value: number) => {
   const lacValue = value / 100000;
-  const formatted = lacValue < 10 ? lacValue.toFixed(1).replace(/\.0$/, "") : lacValue.toFixed(0);
+  const formatted =
+    lacValue < 10
+      ? lacValue.toFixed(1).replace(/\.0$/, "")
+      : lacValue.toFixed(0);
   return `${formatted} Lac+`;
 };
 
-const formatCount = (value: number) => `${Math.round(value).toLocaleString("en-IN")}+`;
+const formatCount = (value: number) =>
+  `${Math.round(value).toLocaleString("en-IN")}+`;
 
 const stats: StatItem[] = [
   {
@@ -106,17 +110,16 @@ const AchievementsSection = () => {
       className="relative overflow-hidden py-20"
       style={{
         color: "#0f172a",
-        background:
-          "linear-gradient(180deg, rgba(244,250,252,0.98) 0%, rgba(232,242,247,0.98) 100%)",
+        background: "#ffffff",
       }}
     >
-      <div
+      {/* <div
         className="absolute inset-0"
         style={{
           background:
             "radial-gradient(circle at 14% 18%, rgba(255,255,255,0.95) 0%, transparent 24%), radial-gradient(circle at 78% 16%, rgba(175,229,255,0.42) 0%, transparent 28%), radial-gradient(circle at 26% 78%, rgba(214,255,238,0.42) 0%, transparent 28%), radial-gradient(circle at 82% 82%, rgba(184,212,255,0.25) 0%, transparent 26%)",
         }}
-      />
+      /> */}
       <div
         className="absolute inset-0 opacity-70"
         style={{
@@ -149,11 +152,18 @@ const AchievementsSection = () => {
             >
               Our Scale
             </span>
-            <h2 className="mt-3 text-3xl font-bold leading-tight sm:text-4xl" style={{ color: "#0f172a" }}>
+            <h2
+              className="mt-3 text-3xl font-bold leading-tight sm:text-4xl"
+              style={{ color: "#0f172a" }}
+            >
               Numbers That <span style={{ color: "#5e7f00" }}>Speak</span>
             </h2>
-            <p className="mt-4 text-sm font-light leading-relaxed sm:text-base" style={{ color: "#334155" }}>
-              Performance markers that show how consistently our campaigns, partnerships, and admission systems create momentum.
+            <p
+              className="mt-4 text-sm font-light leading-relaxed sm:text-base"
+              style={{ color: "#334155" }}
+            >
+              Performance markers that show how consistently our campaigns,
+              partnerships, and admission systems create momentum.
             </p>
           </motion.div>
 
@@ -168,7 +178,7 @@ const AchievementsSection = () => {
               >
                 <div className="pointer-events-none absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent" />
                 <div className="pointer-events-none absolute right-0 top-0 h-24 w-24 rounded-full bg-green-100/50 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
-                
+
                 <div className="relative flex h-full flex-col items-center justify-center pt-2">
                   <span
                     className="text-xs font-medium tracking-widest uppercase"
@@ -178,11 +188,18 @@ const AchievementsSection = () => {
                   </span>
 
                   <div className="mt-4 flex min-h-[4.5rem] items-center justify-center sm:min-h-[5.5rem]">
-                    <AnimatedCounter target={stat.value} inView={inView} format={stat.format} />
+                    <AnimatedCounter
+                      target={stat.value}
+                      inView={inView}
+                      format={stat.format}
+                    />
                   </div>
 
                   <div className="mt-3 flex min-h-[3.5rem] items-center justify-center">
-                    <p className="text-sm font-medium" style={{ color: "#0f172a" }}>
+                    <p
+                      className="text-sm font-medium"
+                      style={{ color: "#0f172a" }}
+                    >
                       {stat.label}
                     </p>
                   </div>
@@ -192,7 +209,10 @@ const AchievementsSection = () => {
                     style={{ color: "#475569" }}
                   >
                     <span>Live Momentum</span>
-                    <ArrowUpRight className="h-4 w-4" style={{ color: "#5e7f00" }} />
+                    <ArrowUpRight
+                      className="h-4 w-4"
+                      style={{ color: "#5e7f00" }}
+                    />
                   </div>
                 </div>
               </motion.div>

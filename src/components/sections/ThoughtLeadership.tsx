@@ -90,11 +90,12 @@ export default function ThoughtLeadership() {
             Thought Leadership
           </span>
           <h2 className="section-title mt-4 text-gray-900">
-            Insights for <span className="text-emerald-700">BAMS Colleges</span>
+            HOW WE MAKE COLLEGE A{" "}
+            <span className="text-emerald-700">BRAND</span>
           </h2>
           <p className="section-copy mx-auto mt-4 max-w-2xl text-gray-600 sm:mt-6">
-            Expert video insights on admissions growth, counseling systems, and brand-building
-            strategies for Ayurveda institutions across India.
+            Expert video insights on admissions growth, counseling systems, and
+            brand-building strategies for Ayurveda institutions across India.
           </p>
         </div>
 

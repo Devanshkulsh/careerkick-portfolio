@@ -27,7 +27,7 @@ const services: Service[] = [
   {
     id: 2,
     title: "Admission Team Training",
-    points: ["Equipping colege staff with the best practices"],
+    points: ["Equipping college staff with the best practices"],
     position: "bottom-center",
     icon: Users,
   },
@@ -57,9 +57,7 @@ export default function ValueAddedServices(): JSX.Element {
   const pathLength = useSpring(scrollYProgress, { stiffness: 45, damping: 25 });
 
   return (
-    // Changed: h-auto on mobile, h-[400vh] only on desktop (md:)
     <div ref={scrollRef} className="relative h-auto md:h-[400vh] section-shell">
-      {/* Changed: relative on mobile, sticky only on desktop (md:) */}
       <section className="relative md:sticky top-0 flex h-auto md:h-screen w-full flex-col overflow-hidden pt-12 md:pt-12">
         <div className="absolute left-1/2 top-1/2 h-[600px] w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-[140px]" />
 
@@ -121,15 +119,27 @@ export default function ValueAddedServices(): JSX.Element {
 
                 const opacity = useTransform(pathLength, [start, end], [0, 1]);
                 const scale = useTransform(pathLength, [start, end], [0.9, 1]);
-                const floatY = useTransform(pathLength, [start, end], [15, 0]);
+                const floatEffect = useTransform(
+                  pathLength,
+                  [start, end],
+                  [15, 0],
+                );
 
-                const isUpside = service.id === 2;
+                // Adjust layout for side-by-side positioning
+                const layoutClass =
+                  service.id === 1
+                    ? "flex-row-reverse items-start pr-10"
+                    : service.id === 3
+                      ? "flex-row items-center pl-10"
+                      : "flex-col items-center";
+
+                // ID 1 (Branding): Positioned to the left, slightly shifted down to meet the road
                 const spacing =
-                  service.id === 2
-                    ? "bottom-[200px]"
-                    : isUpside
-                      ? "bottom-[140px]"
-                      : "top-[140px]";
+                  service.id === 1
+                    ? "right-full mr-6 top-4"
+                    : service.id === 3
+                      ? "left-full ml-6"
+                      : "bottom-[140px]";
 
                 return (
                   <div key={service.id}>
@@ -142,10 +152,16 @@ export default function ValueAddedServices(): JSX.Element {
                       }}
                       className="absolute -translate-x-1/2 -translate-y-1/2"
                     >
-                      <div className="relative flex flex-col items-center group">
+                      <div className={`relative flex group ${layoutClass}`}>
                         <motion.div
-                          style={{ y: floatY }}
-                          className={`absolute w-[280px] rounded-2xl border border-white/10 bg-black/20 p-5 shadow-2xl backdrop-blur-xl transition-all duration-500 group-hover:border-primary/35 z-50 ${spacing}`}
+                          style={{
+                            x:
+                              service.id === 1 || service.id === 3
+                                ? floatEffect
+                                : 0,
+                            y: service.id === 2 ? floatEffect : 0,
+                          }}
+                          className={`absolute w-[280px] rounded-2xl border border-white/10 bg-black/40 p-5 shadow-2xl backdrop-blur-xl transition-all duration-500 group-hover:border-primary/35 z-50 ${spacing}`}
                         >
                           <h3 className="text-base font-extrabold uppercase tracking-wide text-foreground mb-2">
                             {service.title}
@@ -161,15 +177,17 @@ export default function ValueAddedServices(): JSX.Element {
                               </li>
                             ))}
                           </ul>
+
+                          {/* Triangle Arrow positioning */}
                           <div
-                            className={`absolute left-1/2 -translate-x-1/2 w-4 h-4 rotate-45 border-white/10 bg-black/20 ${
-                              isUpside
-                                ? "top-full -mt-2 border-r border-b"
-                                : "bottom-full -mb-2 border-l border-t"
-                            }`}
+                            className={`absolute w-4 h-4 rotate-45 border-white/10 bg-black/40 
+                            ${service.id === 1 ? "left-full -ml-2 top-6 border-t border-r" : ""}
+                            ${service.id === 3 ? "right-full -mr-2 top-1/2 -translate-y-1/2 border-b border-l" : ""}
+                            ${service.id === 2 ? "top-full -mt-2 left-1/2 -translate-x-1/2 border-r border-b" : ""}`}
                           />
                         </motion.div>
 
+                        {/* Icon Pin */}
                         <div className="relative flex h-[76px] w-[56px] flex-col items-center justify-start rounded-t-full rounded-b-2xl bg-primary/14 border border-primary/35 p-1.5 backdrop-blur-sm transition-colors group-hover:bg-primary/25">
                           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-primary">
                             <Icon size={18} strokeWidth={2.5} />
@@ -183,9 +201,9 @@ export default function ValueAddedServices(): JSX.Element {
             </div>
           </div>
 
-          {/* Mobile Layout: Static grid, no sticky scroll */}
+          {/* Mobile Layout */}
           <div className="mt-2 grid grid-cols-1 gap-4 md:hidden pb-20">
-            {services.map((service, index) => (
+            {services.map((service) => (
               <div
                 key={service.id}
                 className="rounded-2xl border border-white/10 bg-black/20 p-5 shadow-lg flex flex-col"

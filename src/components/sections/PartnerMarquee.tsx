@@ -78,7 +78,7 @@ const rows = [colleges.slice(0, 12), colleges.slice(12, 24)];
 const duplicatedRows = rows.map((row) => [...row, ...row]);
 
 const cardClassName =
-  "group relative mx-2 flex h-[170px] w-[156px] flex-shrink-0 cursor-default flex-col items-center justify-between rounded-2xl border border-white/10 px-4 py-4 text-center transition-all duration-500 glass glass-hover hover:neon-glow sm:mx-3 sm:h-[196px] sm:w-[176px] sm:px-5 sm:py-5";
+  "group relative mx-2 flex h-[170px] w-[156px] flex-shrink-0 cursor-default flex-col items-center justify-between rounded-2xl border border-white/10 px-4 py-4 text-center transition-all duration-500 glass glass-hover hover:neon-glow sm:mx-3 sm:h-[210px] sm:w-[190px] sm:px-5 sm:py-5";
 
 const PartnerMarquee = () => {
   const ref = useRef(null);
@@ -99,7 +99,8 @@ const PartnerMarquee = () => {
         >
           <span className="section-kicker">Trusted Network</span>
           <h2 className="text-3xl font-bold sm:text-4xl">
-            Partner <span className="text-primary">Colleges</span>
+            COLLEGES WITH WHICH WE HAVE{" "}
+            <span className="text-primary"> PARTNERED</span>
           </h2>
         </motion.div>
       </div>
@@ -156,10 +157,10 @@ const PartnerMarquee = () => {
                       <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 via-transparent to-primary/10 opacity-70" />
                       <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
                       <div
-                        className="relative flex h-20 w-20 items-center justify-center rounded-full border border-white/15 bg-white/10 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_10px_24px_rgba(0,0,0,0.18)] sm:h-24 sm:w-24"
+                        className="relative flex h-24 w-24 items-center justify-center rounded-full border border-white/15 bg-white/10 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_10px_24px_rgba(0,0,0,0.18)] sm:h-28 sm:w-28"
                         style={{ transform: "translateZ(30px)" }}
                       >
-                        <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-white/95 p-2">
+                        <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-white/95 p-1.5">
                           <img
                             src={college.logo}
                             alt={`${college.name} logo`}

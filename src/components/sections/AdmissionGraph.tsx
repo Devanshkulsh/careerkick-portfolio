@@ -47,7 +47,7 @@ const AdmissionGraph = () => {
         >
           <span className="section-kicker">Admission Growth</span>
           <h2 className="section-title">
-            YEAR-WISE <span className="text-primary text-glow">ADMISSION GROWTH</span>
+            WHAT WE HAVE DONE IN THE <span className="text-primary text-glow">PAST</span>
           </h2>
         </motion.div>
 

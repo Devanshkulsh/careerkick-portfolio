@@ -50,10 +50,10 @@ const HowWork = () => {
           className="section-heading mx-auto max-w-3xl text-center"
         >
           <span className="section-kicker text-primary mb-4 block text-sm font-semibold uppercase tracking-widest">
-            What & How Do We Work?
+            Three Pillars of Growth
           </span>
           <h2 className="section-title mb-6 text-4xl font-bold md:text-5xl">
-            Three Pillars of <span className="text-primary drop-shadow-[0_0_15px_rgba(var(--primary),0.5)]">Growth</span>
+            WHAT & HOW DO WE <span className="text-primary drop-shadow-[0_0_15px_rgba(var(--primary),0.5)]">WORK?</span>
           </h2>
           <p className="section-copy mx-auto max-w-2xl text-lg text-muted-foreground">
             100% seats filling, brand building in the Ayurveda industry, and a
