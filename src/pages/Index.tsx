@@ -39,7 +39,6 @@ const Index = () => {
       <HowWork />
       <RevenueImpact />
       <SmoothManagementSection />
-      <TestimonialSection />
       <ExpertTeamPortalSection />
       <SuccessStories />
       <AdmissionProcessSection />
@@ -49,6 +48,7 @@ const Index = () => {
       <BenefitsSection />
       <ValueAddedServices />
       <ThoughtLeadership />
+      <TestimonialSection />
       <EventsSection />
       <SocialPresence />
       {/* <TeamsSection /> */}

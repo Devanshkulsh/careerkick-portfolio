@@ -3,14 +3,22 @@ import { useRef, useState } from "react";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import Map from "../Map";
 
-const contactItems = [
+const officeLocations = [
   {
-    icon: MapPin,
-    label: "Visit Us",
-    value: "117 N 65, Rani Ganj, Kakadeo, Kanpur, 208025",
-    detail: "Serving Ayurveda and medical admission partners across India.",
-    href: "https://maps.app.goo.gl/Ty7ihijGkG6ZdQ2a7",
+    name: "Careerkick Services",
+    branch: "Kanpur Branch",
+    address: "117 N 65, Rani Ganj, Kakadeo, Kanpur, 208025",
+    href: "https://maps.app.goo.gl/C7fjCr7jsH5zcAPE8",
   },
+  {
+    name: "Careerkick Services",
+    branch: "Greater Noida Branch",
+    address: "2nd floor, AA -007, Block A, Ansal Golf Link -1, Greater Noida, Uttar Pradesh 201315",
+    href: "https://maps.app.goo.gl/j23DFmnco28ps6T29",
+  },
+];
+
+const contactItems = [
   {
     icon: Phone,
     label: "Call Us",
@@ -29,8 +37,6 @@ const contactItems = [
 
 const quickNotes = [
   "Fast response within one business day",
-  "Built for colleges and institutions",
-  "Strategy, branding, and admissions support",
 ];
 
 const cardEase = [0.22, 1, 0.36, 1] as const;
@@ -73,6 +79,8 @@ const ContactSection = () => {
           >
             <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
             <div className="pointer-events-none absolute -right-10 top-8 h-40 w-40 rounded-full bg-primary/10 blur-3xl" />
+            <div className="pointer-events-none absolute -left-12 top-12 h-44 w-44 rounded-full bg-white/12 blur-3xl" />
+            <div className="pointer-events-none absolute left-10 top-20 h-24 w-40 rounded-full bg-white/10 blur-2xl" />
 
             <div className="relative flex flex-col gap-5 sm:gap-6">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
@@ -83,9 +91,6 @@ const ContactSection = () => {
                   <h3 className="text-2xl font-bold sm:text-3xl">
                     Let&apos;s plan your next admissions cycle
                   </h3>
-                  <p className="max-w-xl text-sm font-light leading-relaxed text-muted-foreground sm:text-base">
-                    Share your current challenges and our team will come back with a focused direction on growth opportunities.
-                  </p>
                 </div>
 
                 <div className="inline-flex self-start rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
@@ -128,77 +133,91 @@ const ContactSection = () => {
                   </p>
                 </motion.div>
               ) : (
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    setSubmitted(true);
-                  }}
-                  className="grid gap-4 sm:gap-5"
-                >
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    {[
-                      { name: "name", label: "Your Name", type: "text", placeholder: "Enter your name" },
-                      {
-                        name: "college",
-                        label: "College / Institution",
-                        type: "text",
-                        placeholder: "Institution name",
-                      },
-                      { name: "email", label: "Email Address", type: "email", placeholder: "you@example.com" },
-                      { name: "phone", label: "Phone Number", type: "tel", placeholder: "+91 98XXXXXXX" },
-                    ].map((field, index) => (
-                      <motion.div
-                        key={field.name}
-                        initial={{ opacity: 0, y: 18 }}
-                        animate={inView ? { opacity: 1, y: 0 } : {}}
-                        transition={{ duration: 0.45, delay: 0.18 + index * 0.06, ease: cardEase }}
-                      >
-                        <label className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground sm:text-xs">
-                          {field.label}
-                        </label>
-                        <input
-                          type={field.type}
-                          required
-                          placeholder={field.placeholder}
-                          className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-foreground transition-all duration-300 placeholder:text-muted-foreground focus:border-primary focus:bg-white/[0.08] focus:outline-none focus:ring-2 focus:ring-primary/20 sm:px-5"
-                        />
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.45, delay: 0.42, ease: cardEase }}
+                <div className="grid gap-4 sm:gap-5">
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      setSubmitted(true);
+                    }}
+                    className="grid gap-4 sm:gap-5"
                   >
-                    <label className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground sm:text-xs">
-                      Message
-                    </label>
-                    <textarea
-                      rows={5}
-                      placeholder="Tell us about your institution, current admissions challenge, and what kind of support you are looking for."
-                      className="w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-foreground transition-all duration-300 placeholder:text-muted-foreground focus:border-primary focus:bg-white/[0.08] focus:outline-none focus:ring-2 focus:ring-primary/20 sm:px-5"
-                    />
-                  </motion.div>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      {[
+                        { name: "name", label: "Your Name", type: "text", placeholder: "Enter your name" },
+                        {
+                          name: "college",
+                          label: "College / Institution",
+                          type: "text",
+                          placeholder: "Institution name",
+                        },
+                        { name: "email", label: "Email Address", type: "email", placeholder: "you@example.com" },
+                        { name: "phone", label: "Phone Number", type: "tel", placeholder: "+91 98XXXXXXX" },
+                      ].map((field, index) => (
+                        <motion.div
+                          key={field.name}
+                          initial={{ opacity: 0, y: 18 }}
+                          animate={inView ? { opacity: 1, y: 0 } : {}}
+                          transition={{ duration: 0.45, delay: 0.18 + index * 0.06, ease: cardEase }}
+                        >
+                          <label className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground sm:text-xs">
+                            {field.label}
+                          </label>
+                          <input
+                            type={field.type}
+                            required
+                            placeholder={field.placeholder}
+                            className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-foreground transition-all duration-300 placeholder:text-muted-foreground focus:border-primary focus:bg-white/[0.08] focus:outline-none focus:ring-2 focus:ring-primary/20 sm:px-5"
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
 
-                  <motion.div
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.45, delay: 0.5, ease: cardEase }}
-                    className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center sm:justify-between"
-                  >
-                    <p className="text-sm font-light leading-relaxed text-muted-foreground">
-                      Prefer a quick call? Drop your details and we&apos;ll connect with the right person.
-                    </p>
-                    <button
-                      type="submit"
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-4 text-sm font-semibold tracking-wide text-primary-foreground transition-all duration-300 hover:scale-[1.01] hover:neon-glow-strong sm:w-auto sm:min-w-[190px]"
+                    <motion.div
+                      initial={{ opacity: 0, y: 18 }}
+                      animate={inView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.45, delay: 0.42, ease: cardEase }}
                     >
-                      Send Message
-                      <Send className="h-4 w-4" />
-                    </button>
+                      <label className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground sm:text-xs">
+                        Message
+                      </label>
+                      <textarea
+                        rows={5}
+                        placeholder="Tell us about your institution, current admissions challenge, and what kind of support you are looking for."
+                        className="w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-foreground transition-all duration-300 placeholder:text-muted-foreground focus:border-primary focus:bg-white/[0.08] focus:outline-none focus:ring-2 focus:ring-primary/20 sm:px-5"
+                      />
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 18 }}
+                      animate={inView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.45, delay: 0.5, ease: cardEase }}
+                      className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center sm:justify-between"
+                    >
+                      <p className="text-sm font-light leading-relaxed text-muted-foreground">
+                        Prefer a quick call? Drop your details and we&apos;ll connect with the right person.
+                      </p>
+                      <button
+                        type="submit"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-4 text-sm font-semibold tracking-wide text-primary-foreground transition-all duration-300 hover:scale-[1.01] hover:neon-glow-strong sm:w-auto sm:min-w-[190px]"
+                      >
+                        Send Message
+                        <Send className="h-4 w-4" />
+                      </button>
+                    </motion.div>
+                  </form>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.55, delay: 0.6, ease: cardEase }}
+                    className="rounded-[1.5rem] border border-white/10 p-5 glass sm:p-6"
+                  >
+                    <p className="text-sm font-light leading-relaxed text-muted-foreground sm:text-base">
+                      &quot;If your college isn&apos;t growing, it&apos;s falling behind. Let&apos;s build a stronger admissions engine together.&quot;
+                    </p>
+                    <p className="mt-3 text-sm font-semibold text-primary">CareerKick Services</p>
                   </motion.div>
-                </form>
+                </div>
               )}
             </div>
           </motion.div>
@@ -214,16 +233,44 @@ const ContactSection = () => {
               animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.28, ease: cardEase }}
             >
-              <Map
-                center={OFFICE_CENTER}
-                title="CareerKick Office"
-                address={contactItems[0].value}
-                locationUrl={OFFICE_LOCATION_URL}
-                className="h-56 sm:h-64"
-              />
-            </motion.div>
+                <Map
+                  center={OFFICE_CENTER}
+                  title="CareerKick Office"
+                  address={officeLocations[0].address}
+                  locationUrl={OFFICE_LOCATION_URL}
+                  className="h-56 sm:h-64"
+                />
+              </motion.div>
 
             <div className="grid gap-4 sm:gap-5">
+              <div className="grid gap-4 sm:grid-cols-2">
+                {officeLocations.map((office, index) => (
+                  <motion.a
+                    key={office.name}
+                    href={office.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.3 + index * 0.1, ease: cardEase }}
+                    className="group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/5 p-4 text-left transition-all duration-500 hover:-translate-y-1 hover:neon-glow"
+                  >
+                    <div className="relative z-10 mx-auto flex h-24 w-24 items-center justify-center">
+                      <div className="absolute inset-0 rounded-[1.5rem] bg-primary/20 blur-xl transition-opacity duration-500 group-hover:opacity-90" />
+                      <div className="absolute inset-2 rounded-[1.25rem] bg-gradient-to-br from-primary/40 via-cyan-400/25 to-primary/10 shadow-[0_24px_40px_-24px_rgba(14,165,233,0.8)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-[-4deg]" />
+                      <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/20 bg-background/80 shadow-[0_18px_34px_-14px_rgba(0,0,0,0.7)]">
+                        <MapPin className="h-7 w-7 text-primary" />
+                      </div>
+                    </div>
+                    <p className="mt-3 text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                      Tap to open maps
+                    </p>
+                    <div className="absolute inset-0 z-20 flex items-center justify-center bg-slate-950/70 px-4 text-center text-sm font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                      {office.name} — {office.branch}
+                    </div>
+                  </motion.a>
+                ))}
+              </div>
               {contactItems.map((item, index) => (
                 <motion.div
                   key={item.label}
@@ -257,17 +304,6 @@ const ContactSection = () => {
               ))}
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.55, delay: 0.55, ease: cardEase }}
-              className="rounded-[1.75rem] border border-white/10 p-5 glass sm:p-6"
-            >
-              <p className="text-sm font-light leading-relaxed text-muted-foreground sm:text-base">
-                &quot;If your college isn&apos;t growing, it&apos;s falling behind. Let&apos;s build a stronger admissions engine together.&quot;
-              </p>
-              <p className="mt-3 text-sm font-semibold text-primary">CareerKick Services</p>
-            </motion.div>
           </motion.div>
         </div>
       </div>

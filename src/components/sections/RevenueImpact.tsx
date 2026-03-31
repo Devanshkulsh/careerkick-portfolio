@@ -4,9 +4,8 @@ import {
   BarChart3,
   DollarSign,
   TrendingUp,
-  Users,
 } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 const impacts = [
   {
@@ -31,58 +30,93 @@ const impacts = [
 
 const RevenueImpact = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const inView = useInView(sectionRef, { margin: "-100px" });
+  const inView = useInView(sectionRef, { margin: "-100px", once: true });
 
   return (
     <section
       ref={sectionRef}
       id="growth"
-      className="section-shell relative overflow-hidden"
+      className="section-shell relative overflow-hidden py-20 lg:py-32"
     >
+      {/* Background Decor */}
       <div className="absolute left-1/2 top-16 h-48 w-[70%] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
       <div className="absolute right-10 top-1/3 h-40 w-40 rounded-full bg-cyan-400/8 blur-3xl" />
 
       <div className="container relative z-10 mx-auto px-4 sm:px-6">
-        <div className="mx-auto flex max-w-5xl flex-col items-center gap-12 lg:gap-14">
-          <div className="flex w-full flex-col gap-8 sm:gap-10 lg:justify-center">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-              transition={{ duration: 0.7 }}
-              className="section-heading mx-auto max-w-2xl text-center lg:mb-0"
-            >
-              <span className="section-kicker">BAMS Admission Growth</span>
-              <h2 className="section-title">
-                INCREASED <span className="text-primary text-glow">REVENUE</span> POTENTIAL
-              </h2>
-              <p className="section-copy mx-auto max-w-xl">
-                Every counselling push translates into stronger BAMS seat
-                conversion, healthier fee visibility, and more dependable
-                admission-season cashflow.
-              </p>
-            </motion.div>
+        {/* Header Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ duration: 0.7 }}
+          className="section-heading mx-auto mb-16 max-w-3xl text-center"
+        >
+          <span className="section-kicker">BAMS Admission Growth</span>
+          <h2 className="section-title">
+            INCREASED <span className="text-primary text-glow">REVENUE</span> POTENTIAL
+          </h2>
+          <p className="section-copy mx-auto max-w-2xl">
+            Every counselling push translates into stronger BAMS seat conversion,
+            healthier fee visibility, and more dependable admission-season cashflow.
+          </p>
+        </motion.div>
 
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+          {/* Left Side: Landscape Image Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative lg:col-span-6"
+          >
+            <div className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-900 shadow-2xl">
+              {/* Landscape Aspect Ratio Box */}
+              <div className="w-full overflow-hidden bg-slate-800">
+                <video
+                  src="/revenue2.mp4"
+                  poster="/revenue2.webp"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  aria-label="Revenue growth analysis"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                
+                {/* Subtle Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
+
+                {/* Corner Label */}
+                <div className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 backdrop-blur-md border border-white/10">
+                   <TrendingUp className="h-4 w-4 text-primary" />
+                   <span className="text-xs font-bold uppercase tracking-widest text-white">Market Analysis</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Decorative Glow elements */}
+            <div className="absolute -bottom-6 -right-6 -z-10 h-32 w-32 rounded-3xl bg-primary/20 blur-2xl" />
+            <div className="absolute -top-6 -left-6 -z-10 h-24 w-24 rounded-full bg-cyan-500/10 blur-xl" />
+          </motion.div>
+
+          {/* Right Side: Impact Cards */}
+          <div className="flex flex-col gap-6 lg:col-span-6">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="inline-flex items-center self-center gap-3 rounded-full border border-primary/15 bg-primary/10 px-4 py-2 text-sm text-primary"
+              className="inline-flex w-fit items-center gap-3 rounded-full border border-primary/15 bg-primary/10 px-4 py-2 text-sm text-primary"
             >
               <TrendingUp className="h-4 w-4 shrink-0" />
-              <span className="font-medium">
-                NEET-to-BAMS counselling compounding
-              </span>
+              <span className="font-medium">NEET-to-BAMS counselling compounding</span>
             </motion.div>
 
             <div className="flex flex-col gap-4 sm:gap-5">
               {impacts.map((item, index) => (
                 <motion.div
                   key={item.title}
-                  initial={{ opacity: 0, x: -40 }}
-                  animate={
-                    inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -24 }
-                  }
-                  transition={{ duration: 0.6, delay: 0.18 + index * 0.12 }}
+                  initial={{ opacity: 0, x: 40 }}
+                  animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 24 }}
+                  transition={{ duration: 0.6, delay: 0.2 + index * 0.12 }}
                   className="group relative overflow-hidden rounded-[1.75rem] border border-white/10 p-5 transition-all duration-500 glass glass-hover hover:-translate-y-1 hover:neon-glow sm:p-6"
                 >
                   <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />

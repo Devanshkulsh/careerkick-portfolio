@@ -20,7 +20,7 @@ const events: Event[] = [
   {
     id: 1,
     type: "Seminar",
-    title: "NEET Seminar",
+    title: "NEET Exposition",
     date: "15th April, 2026",
     location: "Greater Noida, India",
     attendees: "500+ Students",
@@ -42,7 +42,7 @@ const events: Event[] = [
     type: "Seminar",
     title: "Shiksha Samagam",
     date: "05th May, 2026",
-    location: "Greater Noida, UP",
+    location: "Kanpur, UP",
     attendees: "700+ Students",
     image: "/shiksha-samagam.webp",
     color: "from-primary/20 to-sky-400/25",

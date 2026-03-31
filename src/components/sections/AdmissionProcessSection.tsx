@@ -1,255 +1,142 @@
 import { motion, useInView } from "framer-motion";
 import {
-  ArrowDown,
-  ArrowRight,
-  BriefcaseBusiness,
   Check,
   Sparkles,
+  Zap,
+  Target,
+  BarChart3,
+  GraduationCap,
 } from "lucide-react";
 import { useRef } from "react";
 
-type ProcessStep = {
-  title: string;
-  description: string;
-};
-
-const processSteps: ProcessStep[] = [
+const processSteps = [
   {
     title: "Initial Consultation",
     description: "Understanding college-specific needs and goals.",
+    icon: <Target className="w-6 h-6" />,
   },
   {
     title: "Strategic Planning",
     description: "Developing customized admission and marketing plans.",
+    icon: <Zap className="w-6 h-6" />,
   },
   {
     title: "Implementation",
     description: "Executing branding campaigns and admission drives.",
+    icon: <GraduationCap className="w-6 h-6" />,
   },
   {
     title: "Continuous Monitoring",
-    description: "Tracking progress, refining efforts, and improving outcomes.",
+    description: "Understanding college-specific needs and goals.",
+    icon: <BarChart3 className="w-6 h-6" />,
   },
   {
     title: "Final Review",
-    description: "Ensuring all seats are filled and stakeholders are satisfied.",
+    description:
+      "Ensuring all seats are filled and stakeholders are satisfied.",
+    icon: <Sparkles className="w-6 h-6" />,
   },
 ];
 
-export default function AdmissionProcessSection(): JSX.Element {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const inView = useInView(sectionRef, { once: true, margin: "-120px" });
+export default function AdmissionProcessSection() {
+  const scrollRef = useRef(null);
+  const isInView = useInView(scrollRef, { once: true, margin: "-10%" });
 
   return (
     <section
-      ref={sectionRef}
-      id="admission-process"
-      className="relative overflow-hidden py-20"
+      ref={scrollRef}
+      className="relative overflow-hidden py-16 sm:py-24 lg:py-28"
       style={{
-        color: "#0f172a",
-        background:
-          "linear-gradient(180deg, rgba(244,250,252,0.98) 0%, rgba(232,242,247,0.98) 100%)",
+        background: "linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%)",
       }}
     >
-      {/* Background Orbs & Gradients - Matched to AchievementsSection */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(circle at 14% 18%, rgba(255,255,255,0.95) 0%, transparent 24%), radial-gradient(circle at 78% 16%, rgba(175,229,255,0.42) 0%, transparent 28%), radial-gradient(circle at 26% 78%, rgba(214,255,238,0.42) 0%, transparent 28%), radial-gradient(circle at 82% 82%, rgba(184,212,255,0.25) 0%, transparent 26%)",
-        }}
-      />
-      <div
-        className="absolute inset-0 opacity-70"
-        style={{
-          background:
-            "linear-gradient(115deg, rgba(255,255,255,0.62) 0%, rgba(255,255,255,0.14) 24%, rgba(173,224,255,0.18) 44%, rgba(255,255,255,0.08) 62%, rgba(255,255,255,0.58) 100%)",
-        }}
-      />
-      <div className="absolute left-[18%] top-16 h-40 w-40 rounded-full bg-white/80 blur-3xl" />
-      <div className="absolute right-[14%] top-24 h-48 w-48 rounded-full bg-sky-200/50 blur-3xl" />
-      <div className="absolute bottom-12 left-1/2 h-44 w-3/5 -translate-x-1/2 rounded-full bg-emerald-100/45 blur-3xl" />
-
-      {/* Grid Decors */}
-      <div className="absolute left-0 top-10 h-40 w-20 opacity-50">
-        <DotGrid />
-      </div>
-      <div className="absolute bottom-0 right-0 h-40 w-20 opacity-50">
-        <DotGrid />
+      {/* Background Decorative Accents */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-40">
+        <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] rounded-full bg-sky-100 blur-[120px]" />
+        <div className="absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] rounded-full bg-emerald-50 blur-[120px]" />
       </div>
 
       <div className="container relative z-10 mx-auto px-4 sm:px-6">
-        <motion.div
-          className="mx-auto max-w-5xl text-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {/* Kicker & Title Colors Matched */}
-          <span className="text-xs font-medium uppercase tracking-widest" style={{ color: "#4d6b00" }}>
-            How We Execute
-          </span>
-          <h2 className="mt-4 text-3xl font-bold leading-tight sm:text-4xl" style={{ color: "#0f172a" }}>
-            OUR PROVEN <span style={{ color: "#5e7f00" }}>ADMISSION PROCESS</span>
-          </h2>
-        </motion.div>
+        <div className="mx-auto mb-16 max-w-3xl text-center">
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            className="text-[#4d6b00] font-extrabold tracking-[0.25em] uppercase text-[0.65rem] sm:text-xs"
+          >
+            The Workflow
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.1 }}
+            className="mt-4 section-title font-black text-slate-950 tracking-tight leading-tight"
+          >
+            OUR PROVEN <span style={{ color: "#5e7f00" }}>ADMISSION</span>{" "}
+            PROCESS
+          </motion.h2>
+        </div>
 
-        <div className="mx-auto mt-10 grid max-w-7xl items-center gap-8 sm:mt-12 sm:gap-10 xl:grid-cols-[minmax(0,1.25fr)_minmax(360px,0.75fr)] xl:gap-14">
-          <div className="order-2 space-y-4 sm:space-y-5 xl:order-1">
-            {processSteps.map((step, index) => (
-              <motion.div
-                key={step.title}
-                initial={{ opacity: 0, x: -32 }}
-                animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                transition={{
-                  duration: 0.55,
-                  delay: 0.1 + index * 0.08,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="group"
+        <div className="relative max-w-6xl mx-auto">
+          {/* Central Line: Left-aligned on mobile, center-aligned on LG */}
+          <div className="absolute left-[27px] lg:left-1/2 top-0 bottom-0 w-px bg-slate-300 -translate-x-1/2 z-0" />
+
+          <div className="space-y-12 lg:space-y-0">
+            {processSteps.map((step, idx) => (
+              <div
+                key={idx}
+                className={`relative flex items-start lg:items-center w-full lg:mb-20 last:mb-0 ${
+                  idx % 2 !== 0 ? "lg:flex-row-reverse" : "lg:flex-row"
+                }`}
               >
-                <div className="inline-flex max-w-full items-center rounded-full border border-slate-300/90 bg-white/95 p-1 shadow-[0_14px_28px_rgba(15,23,42,0.12)] backdrop-blur-sm">
-                  {/* Icon Wrapper Colors Matched */}
-                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-[#5e7f00]/20 bg-[#5e7f00]/15 text-[#5e7f00] sm:h-10 sm:w-10">
-                    <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={2.8} />
-                  </div>
-                  <p
-                    className="px-3 pr-4 text-[11px] font-bold uppercase tracking-[0.08em] sm:px-4 sm:pr-5 sm:text-base"
-                    style={{ color: "#0f172a" }}
+                {/* Text Content Container */}
+                <motion.div
+                  initial={{ opacity: 0, x: idx % 2 === 0 ? -40 : 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    delay: 0.1,
+                    duration: 0.7,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="flex-1 w-full pl-16 lg:pl-0"
+                >
+                  <div
+                    className={`
+                      relative rounded-[1.5rem] sm:rounded-[2rem] border border-slate-200 bg-white p-6 sm:p-10 
+                      shadow-[0_20px_50px_rgba(0,0,0,0.05)] transition-all duration-300 
+                      hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] hover:-translate-y-1
+                      ${idx % 2 !== 0 ? "lg:text-right lg:mr-12" : "lg:text-left lg:ml-12"}
+                    `}
                   >
-                    {step.title}
-                  </p>
+                    <div
+                      className={`
+                      inline-flex p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-[#5e7f00]/10 text-[#5e7f00] mb-4 sm:mb-6
+                      ${idx % 2 !== 0 ? "lg:ml-auto" : ""}
+                    `}
+                    >
+                      {step.icon}
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 sm:text-2xl mb-2 sm:mb-4 leading-tight">
+                      {step.title}
+                    </h3>
+                    <p className="text-sm sm:text-base font-medium leading-relaxed text-slate-700">
+                      {step.description}
+                    </p>
+                  </div>
+                </motion.div>
+
+                {/* Progress Circle: Mobile Left / Desktop Center */}
+                <div className="absolute left-0 lg:left-1/2 lg:-translate-x-1/2 top-6 lg:top-auto z-10 flex items-center justify-center shrink-0 w-14 h-14 rounded-full bg-[#5e7f00] text-white font-bold text-lg shadow-[0_0_20px_rgba(94,127,0,0.3)] ring-8 ring-[#f8fafc]">
+                  {idx + 1}
                 </div>
 
-                <div className="mt-2.5 rounded-[1.25rem] border border-slate-300/90 bg-white/92 px-4 py-3.5 shadow-[0_14px_28px_rgba(15,23,42,0.1),inset_0_1px_0_rgba(255,255,255,0.96)] transition-all duration-300 group-hover:translate-x-1 group-hover:border-green-200 sm:rounded-full sm:px-6 sm:py-4">
-                  <p
-                    className="text-[13px] font-medium leading-relaxed sm:text-[1.05rem]"
-                    style={{ color: "#334155" }}
-                  >
-                    {step.description}
-                  </p>
-                </div>
-              </motion.div>
+                {/* Desktop Spacer: Keeps the grid balanced */}
+                <div className="flex-1 hidden lg:block" />
+              </div>
             ))}
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 36 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="order-1 relative mx-auto w-full max-w-[430px] xl:order-2"
-          >
-            {/* Visual Card Glassmorphism Matched to Achievement Card Background */}
-            <div
-              className="relative min-h-[380px] overflow-hidden rounded-[2rem] border border-white/85 p-4 shadow-[0_30px_80px_rgba(15,23,42,0.18),inset_0_1px_0_rgba(255,255,255,0.96)] sm:min-h-[500px] sm:overflow-visible sm:rounded-[2.25rem] sm:p-6"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(255,255,255,0.56) 0%, rgba(255,255,255,0.28) 100%)",
-                backdropFilter: "blur(14px)",
-              }}
-            >
-              <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[#5e7f00]/50 to-transparent" />
-              <div className="pointer-events-none absolute right-6 top-6 h-28 w-28 rounded-full bg-sky-200/50 blur-3xl" />
-              <div className="pointer-events-none absolute bottom-8 left-6 h-24 w-24 rounded-full bg-emerald-100/45 blur-3xl" />
-              
-              <div className="absolute left-4 top-6 text-[#5e7f00] sm:left-5 sm:top-10">
-                <Sparkles className="h-5 w-5 sm:h-7 sm:w-7" strokeWidth={2.8} />
-              </div>
-              <div className="absolute right-4 top-6 flex items-center gap-1.5 text-[#5e7f00] sm:right-8 sm:top-10 sm:gap-3">
-                <ArrowRight className="h-6 w-6 text-[#0f172a] sm:h-10 sm:w-10" strokeWidth={1.8} />
-                <div className="h-2.5 w-2.5 rounded-full bg-[#5e7f00] sm:h-5 sm:w-5" />
-              </div>
-              <div className="absolute right-3 top-20 flex flex-col items-end gap-1.5 text-[#5e7f00] sm:right-4 sm:top-28 sm:gap-3">
-                <ArrowDown className="h-6 w-6 text-[#0f172a] sm:h-10 sm:w-10" strokeWidth={1.8} />
-                <div className="h-2.5 w-2.5 rounded-md bg-[#5e7f00]/80 sm:h-4 sm:w-4" />
-              </div>
-              <div className="absolute left-3 top-20 text-[#0f172a] sm:left-4 sm:top-28">
-                <ArrowDown className="h-6 w-6 rotate-180 sm:h-10 sm:w-10" strokeWidth={1.8} />
-              </div>
-
-              <div className="mx-auto mt-8 flex h-28 w-24 flex-col items-center justify-center rounded-[1rem] border border-slate-300/90 bg-white/92 text-[#0f172a] shadow-[0_18px_36px_rgba(15,23,42,0.16)] sm:mt-12 sm:h-44 sm:w-36 sm:rounded-[1.35rem]">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#5e7f00]/15 text-[#5e7f00] sm:h-14 sm:w-14 sm:rounded-2xl">
-                  <BriefcaseBusiness className="h-6 w-6 sm:h-9 sm:w-9" strokeWidth={2.4} />
-                </div>
-                <p className="mt-2 text-center text-[10px] font-semibold uppercase tracking-[0.14em] text-[#0f172a] sm:mt-3 sm:text-sm">
-                  Plan
-                </p>
-              </div>
-
-              <div className="relative -mt-10 flex origin-bottom scale-[0.65] items-end justify-center gap-3 pb-2 sm:mt-8 sm:scale-100 sm:gap-8 sm:pb-0">
-                <PersonFigure variant="left" />
-                <PersonFigure variant="right" />
-              </div>
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>
-  );
-}
-
-function DotGrid(): JSX.Element {
-  return (
-    <div className="grid grid-cols-4 gap-2 p-2">
-      {[...Array(32)].map((_, index) => (
-        <span key={index} className="h-1 w-1 rounded-full bg-[#5e7f00]/40" />
-      ))}
-    </div>
-  );
-}
-
-type PersonFigureProps = {
-  variant: "left" | "right";
-};
-
-function PersonFigure({ variant }: PersonFigureProps): JSX.Element {
-  const isLeft = variant === "left";
-  return (
-    <div className={`relative ${isLeft ? "w-[118px]" : "w-[104px]"}`}>
-      <div className={`mx-auto rounded-full ${isLeft ? "h-10 w-10" : "h-9 w-9"} bg-[#0f172a]`} />
-      <div
-        className={`mx-auto mt-1 rounded-t-[2.4rem] ${
-          isLeft
-            ? "h-28 w-20 rounded-b-[0.8rem] bg-[#5e7f00]"
-            : "h-24 w-14 rounded-b-[1.6rem] bg-[#5b7c14]"
-        }`}
-      />
-      <div
-        className={`absolute ${
-          isLeft ? "left-7 top-[5.4rem] h-16 w-4" : "left-0 top-[6rem] h-16 w-5"
-        } rotate-[22deg] rounded-full bg-[#5b7c14]`}
-      />
-      <div
-        className={`absolute ${
-          isLeft ? "right-4 top-[5.1rem] h-14 w-4" : "right-1 top-[5.8rem] h-14 w-4"
-        } ${isLeft ? "-rotate-[25deg]" : "rotate-[28deg]"} rounded-full bg-[#5b7c14]`}
-      />
-      {!isLeft ? (
-        <>
-          <div className="absolute right-1 top-5 h-20 w-5 rounded-full bg-[#0f172a]" />
-          <div className="absolute right-[-2px] top-10 h-16 w-2 rounded-full bg-[#0f172a]" />
-          <div className="absolute right-4 top-11 h-14 w-2 rounded-full bg-[#0f172a]" />
-        </>
-      ) : null}
-      <div
-        className={`mx-auto ${
-          isLeft ? "mt-0 h-36 w-16" : "mt-[-0.4rem] h-40 w-14"
-        } rounded-t-[1.4rem] bg-[#0f172a]`}
-      />
-      <div className={`mx-auto mt-[-0.2rem] flex ${isLeft ? "w-20 gap-3" : "w-14 gap-2"} justify-center`}>
-        <div className={`${isLeft ? "h-4 w-8" : "h-4 w-6"} rounded-t-sm bg-[#0f172a]`} />
-        <div className={`${isLeft ? "h-4 w-8" : "h-4 w-6"} rounded-t-sm bg-[#0f172a]`} />
-      </div>
-      <div
-        className={`absolute ${
-          isLeft ? "left-[1.15rem] top-[17.4rem] h-4 w-6" : "left-[1.45rem] top-[17.6rem] h-4 w-5"
-        } rounded-full bg-[#5b7c14]`}
-      />
-      <div
-        className={`absolute ${
-          isLeft ? "right-[1rem] top-[17.4rem] h-4 w-6" : "right-[0.9rem] top-[17.6rem] h-4 w-5"
-        } rounded-full bg-[#5b7c14]`}
-      />
-    </div>
   );
 }

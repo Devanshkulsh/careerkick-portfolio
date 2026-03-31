@@ -215,9 +215,9 @@ const BenefitsSection = () => {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    mass: 0.5,
+    stiffness: 70,
+    damping: 28,
+    mass: 0.8,
   });
 
   // Title Animations
@@ -293,7 +293,7 @@ const BenefitsSection = () => {
                 {/* Card 2 Layer */}
                 <motion.div 
                   style={{ y: card2Y, scale: card2Scale, filter: card2Blur }} 
-                  className="absolute inset-0 z-20 shadow-[0_-30px_60px_rgba(15,23,42,0.18)] will-change-transform"
+                  className="absolute inset-0 z-20 overflow-hidden rounded-[1.5rem] shadow-[0_-30px_60px_rgba(15,23,42,0.18)] will-change-transform sm:rounded-[2rem]"
                 >
                   <StoryCard data={cards[1]} showAccent />
                   <motion.div style={{ backgroundColor: card2Overlay }} className="pointer-events-none absolute inset-0 z-30 rounded-[2rem]" />
@@ -302,7 +302,7 @@ const BenefitsSection = () => {
                 {/* Card 3 Layer */}
                 <motion.div 
                   style={{ y: card3Y }} 
-                  className="absolute inset-0 z-40 shadow-[0_-30px_60px_rgba(15,23,42,0.22)] will-change-transform"
+                  className="absolute inset-0 z-40 overflow-hidden rounded-[1.5rem] shadow-[0_-30px_60px_rgba(15,23,42,0.22)] will-change-transform sm:rounded-[2rem]"
                 >
                   <StoryCard data={cards[2]} showAccent />
                 </motion.div>
